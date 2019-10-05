@@ -14,10 +14,10 @@
 <li><a href="#Features">3. Features</a>
 <ul class="sectlevel2">
 <li><a href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></li>
-<li><a href="#dispatching-vehicles">3.2. Dispatching Vehicles</a></li>
-<li><a href="#filling-a-new-report-code-fill-code">3.3. Filling a new report: <code>fill</code></a></li>
-<li><a href="#submit-a-report-code-submit-code">3.4. Submit a report: <code>submit</code></a></li>
-<li><a href="#adding-a-person-code-add-code">3.5. Adding a person: <code>add</code></a></li>
+<li><a href="#logging-in-code-login-code">3.2. Logging in: <code>login</code></a></li>
+<li><a href="#create-new-incident-code-new-code">3.3. Create New Incident: <code>new</code></a></li>
+<li><a href="#filling-a-new-report-code-fill-code">3.4. Filling a new report: <code>fill</code></a></li>
+<li><a href="#submit-a-report-code-submit-code">3.5. Submit a report: <code>submit</code></a></li>
 <li><a href="#adding-a-user-code-add-code">3.6. Adding a user: <code>add</code></a></li>
 <li><a href="#listing-all-persons-code-list-code">3.7. Listing all persons : <code>list</code></a></li>
 <li><a href="#editing-a-person-code-edit-code">3.8. Editing a person : <code>edit</code></a></li>
@@ -119,9 +119,16 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </div>
 <div class="sect2">
-<h3 id="dispatching-vehicles"><a class="link" href="#dispatching-vehicles">3.2. Dispatching Vehicles</a></h3>
+<h3 id="logging-in-code-login-code"><a class="link" href="#logging-in-code-login-code">3.2. Logging in: <code>login</code></a></h3>
+<div class="paragraph">
+<p>Registers the user for the active session
+Format: <code>login USERNAME</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="create-new-incident-code-new-code"><a class="link" href="#create-new-incident-code-new-code">3.3. Create New Incident: <code>new</code></a></h3>
 <div class="sect3">
-<h4 id="assumptions"><a class="link" href="#assumptions">3.2.1. Assumptions</a></h4>
+<h4 id="assumptions"><a class="link" href="#assumptions">3.3.1. Assumptions</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -131,7 +138,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </div>
 <div class="sect3">
-<h4 id="description"><a class="link" href="#description">3.2.2. Description</a></h4>
+<h4 id="description"><a class="link" href="#description">3.3.2. Description</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -144,9 +151,9 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </div>
 <div class="sect3">
-<h4 id="usage"><a class="link" href="#usage">3.2.3. Usage</a></h4>
+<h4 id="usage"><a class="link" href="#usage">3.3.3. Usage</a></h4>
 <div class="paragraph">
-<p>Format: <code>POSTAL_CODE [y/ n]</code></p>
+<p>Format: <code>new POSTAL_CODE</code></p>
 </div>
 <div class="paragraph">
 <p>For multi-step:</p>
@@ -171,16 +178,16 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </div>
 <div class="sect2">
-<h3 id="filling-a-new-report-code-fill-code"><a class="link" href="#filling-a-new-report-code-fill-code">3.3. Filling a new report: <code>fill</code></a></h3>
+<h3 id="filling-a-new-report-code-fill-code"><a class="link" href="#filling-a-new-report-code-fill-code">3.4. Filling a new report: <code>fill</code></a></h3>
 <div class="sect3">
-<h4 id="description-2"><a class="link" href="#description-2">3.3.1. Description</a></h4>
+<h4 id="description-2"><a class="link" href="#description-2">3.4.1. Description</a></h4>
 <div class="ulist">
 <ul>
 <li>
 <p>Generates a new report and prompts operator to enter data into report fields.</p>
 </li>
 <li>
-<p>Unique ID automatically bgenerated for report.</p>
+<p>Unique ID automatically generated for report.</p>
 </li>
 <li>
 <p>Date/time, operator name, and operator name are auto-filled.</p>
@@ -189,7 +196,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </div>
 <div class="sect3">
-<h4 id="usage-2"><a class="link" href="#usage-2">3.3.2. Usage</a></h4>
+<h4 id="usage-2"><a class="link" href="#usage-2">3.4.2. Usage</a></h4>
 <div class="paragraph">
 <p>Format: <code>fill [n/CALLER_NAME d/INCIDENT_DESCRIPTION]</code></p>
 </div>
@@ -209,9 +216,9 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </div>
 <div class="sect2">
-<h3 id="submit-a-report-code-submit-code"><a class="link" href="#submit-a-report-code-submit-code">3.4. Submit a report: <code>submit</code></a></h3>
+<h3 id="submit-a-report-code-submit-code"><a class="link" href="#submit-a-report-code-submit-code">3.5. Submit a report: <code>submit</code></a></h3>
 <div class="sect3">
-<h4 id="description-3"><a class="link" href="#description-3">3.4.1. Description</a></h4>
+<h4 id="description-3"><a class="link" href="#description-3">3.5.1. Description</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -221,7 +228,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </div>
 <div class="sect3">
-<h4 id="usage-3"><a class="link" href="#usage-3">3.4.2. Usage</a></h4>
+<h4 id="usage-3"><a class="link" href="#usage-3">3.5.2. Usage</a></h4>
 <div class="paragraph">
 <p>Format: <code>submit</code></p>
 </div>
@@ -273,13 +280,6 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </li>
 </ul>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">3.5. Adding a person: <code>add</code></a></h3>
-<div class="paragraph">
-<p>Registers the user for the active session
-Format: <code>login USERNAME</code></p>
 </div>
 </div>
 <div class="sect2">
@@ -496,6 +496,18 @@ There is no need to save manually.</p>
 <div class="ulist">
 <ul>
 <li>
+<p><strong>Login</strong> <code>login USERNAME</code></p>
+</li>
+<li>
+<p><strong>New</strong> <code>new POSTAL_CODE</code></p>
+</li>
+<li>
+<p><strong>Fill</strong> <code>fill n/CALLER_NAME d/INCIDENT_DESCRIPTION</code></p>
+</li>
+<li>
+<p><strong>Submit</strong> <code>submit</code></p>
+</li>
+<li>
 <p><strong>Add</strong> <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code><br>
 e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague</code></p>
 </li>
@@ -523,4 +535,4 @@ e.g. <code>find James Jake</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-03 04:08:25 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-05 06:13:45 UTC</div></div></div></body></html>
