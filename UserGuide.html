@@ -142,10 +142,13 @@ Format: <code>login USERNAME</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Takes in postal code of accident site and dispatches vehicle closest to it.</p>
+<p>Unique ID automatically generated for report.</p>
 </li>
 <li>
-<p>Once operator picks up the call, they will key in the postal code of accident site to dispatch vehicles.</p>
+<p>Takes in district number of accident site and dispatches vehicle near to it.</p>
+</li>
+<li>
+<p>Once operator picks up the call, they will key in the district number of accident site to dispatch vehicles.</p>
 </li>
 </ul>
 </div>
@@ -153,7 +156,7 @@ Format: <code>login USERNAME</code></p>
 <div class="sect3">
 <h4 id="usage"><a class="link" href="#usage">3.3.3. Usage</a></h4>
 <div class="paragraph">
-<p>Format: <code>new POSTAL_CODE</code></p>
+<p>Format: <code>new l/DISTRICT_NUM auto/[y/n]</code></p>
 </div>
 <div class="paragraph">
 <p>For multi-step:</p>
@@ -165,10 +168,10 @@ Format: <code>login USERNAME</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>y</code>- the available vehicle nearest to given postal code is dispatched.</p>
+<p><code>y</code>- an available vehicle in the given district is automatically dispatched and attached to the incident.</p>
 </li>
 <li>
-<p><code>n</code>- an indexed list of available vehicles near the given postal code is given in descending order of proximity.</p>
+<p><code>n</code>- an indexed list of available vehicles in the given district is shown.</p>
 </li>
 </ul>
 </div>
@@ -184,10 +187,10 @@ Format: <code>login USERNAME</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Generates a new report and prompts operator to enter data into report fields.</p>
+<p>Display a list of newly created incidents.</p>
 </li>
 <li>
-<p>Unique ID automatically generated for report.</p>
+<p>Based on this list, user chooses incident to fill.</p>
 </li>
 <li>
 <p>Date/time, operator name, and operator name are auto-filled.</p>
@@ -198,7 +201,7 @@ Format: <code>login USERNAME</code></p>
 <div class="sect3">
 <h4 id="usage-2"><a class="link" href="#usage-2">3.4.2. Usage</a></h4>
 <div class="paragraph">
-<p>Format: <code>fill [n/CALLER_NAME d/INCIDENT_DESCRIPTION]</code></p>
+<p>Format: <code>fill [i/index_of_incident n/CALLER_NAME d/INCIDENT_DESCRIPTION]</code></p>
 </div>
 <div class="paragraph">
 <p>For multi-step:</p>
@@ -535,4 +538,4 @@ e.g. <code>find James Jake</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-18 18:19:47 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-21 06:17:33 UTC</div></div></div></body></html>
