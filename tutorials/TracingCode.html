@@ -165,14 +165,14 @@ what happens inside the component and where the execution transfers to another c
 
      CommandResult commandResult;
      <span class="comment">//Parse user input from String to a Command</span>
-     Command command = addressBookParser.parseCommand(commandText);
+     Command command = incidentManagerParser.parseCommand(commandText);
      <span class="comment">//Executes the Command and stores the result</span>
      commandResult = command.execute(model);
 
      <span class="keyword">try</span> {
          <span class="comment">//We can deduce that the previous line of code modifies model in some way</span>
          <span class="comment">// since it's being stored here.</span>
-         storage.saveAddressBook(model.getAddressBook());
+         storage.saveIncidentManager(model.getIncidentManager());
      } <span class="keyword">catch</span> (<span class="exception">IOException</span> ioe) {
          <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
      }
@@ -193,7 +193,7 @@ look at each one.</p>
 <li>
 <p><code>Step into</code> the line where user input in parsed from a String to a Command.</p>
 <div class="listingblock">
-<div class="title">AddressBookParser#parseCommand()</div>
+<div class="title">IncidentManagerParser#parseCommand()</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> Command parseCommand(<span class="predefined-type">String</span> userInput) <span class="directive">throws</span> <span class="exception">ParseException</span> {
     ...
@@ -216,7 +216,7 @@ look at each one.</p>
 <li>
 <p>Stepping into the <code>switch</code>, we obviously stop at</p>
 <div class="listingblock">
-<div class="title">AddressBookParser#parseCommand()</div>
+<div class="title">IncidentManagerParser#parseCommand()</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">...
 case EditCommand.COMMAND_WORD:
@@ -293,21 +293,21 @@ Does the execution path you traced in the code so far matches with the diagram?<
 </li>
 <li>
 <p>We can a closer look at how storage works by repeatedly stepping into the code until we arrive at
-<code>JsonAddressBook#saveAddressBook()</code>.</p>
+<code>JsonIncidentManager#saveIncidentManager()</code>.</p>
 </li>
 <li>
-<p>Again, it appears that the heavy lifting is delegated. Let&#8217;s take a look at <code>JsonSerializableAddressBook</code>'s
+<p>Again, it appears that the heavy lifting is delegated. Let&#8217;s take a look at <code>JsonSerializableIncidentManager</code>'s
 constructor.</p>
 <div class="listingblock">
-<div class="title">JsonSerializableAddressBook#JsonSerializableAddressBook()</div>
+<div class="title">JsonSerializableIncidentManager#JsonSerializableIncidentManager()</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="comment">/**
- * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+ * Converts a given {@code ReadOnlyIncidentManager} into this class for Jackson use.
  *
  * @param source future changes to this will not affect the created
- * {@code JsonSerializableAddressBook}.
+ * {@code JsonSerializableIncidentManager}.
  */</span>
-<span class="directive">public</span> JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+<span class="directive">public</span> JsonSerializableIncidentManager(ReadOnlyIncidentManager source) {
     persons.addAll(
         source.getPersonList()
               .stream()
@@ -319,7 +319,7 @@ constructor.</p>
 </li>
 <li>
 <p>It appears that a <code>JsonAdaptedPerson</code> is created for each <code>Person</code> and then added to the
-<code>JsonSerializableAddressBook</code>.</p>
+<code>JsonSerializableIncidentManager</code>.</p>
 </li>
 <li>
 <p>We can continue to step through until we return to <code>MainWindow#executeCommand()</code>.</p>
@@ -348,7 +348,7 @@ constructor.</p>
 <div class="sectionbody">
 <div class="paragraph">
 <p>In this tutorial, we traced a valid edit command from raw user input to the result being displayed to the user. From
-this tutorial, you learned more about the inner workings of AddressBook and how the various components mesh together
+this tutorial, you learned more about the inner workings of IncidentManager and how the various components mesh together
 to form one cohesive product.</p>
 </div>
 <div class="sidebarblock">
@@ -398,7 +398,7 @@ handled?</p>
 <p>Allow <code>delete</code> to remove more than one index at a time</p>
 </li>
 <li>
-<p>Save the address book in the CSV format instead</p>
+<p>Save the incident Manager in the CSV format instead</p>
 </li>
 <li>
 <p>Add a new command</p>
@@ -407,7 +407,7 @@ handled?</p>
 <p>Add a new field to <code>Person</code></p>
 </li>
 <li>
-<p>Add a new entity to the address book</p>
+<p>Add a new entity to the incident Manager</p>
 </li>
 </ol>
 </div>
@@ -417,4 +417,4 @@ handled?</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-22 03:03:49 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-22 13:35:56 UTC</div></div></div></body></html>
