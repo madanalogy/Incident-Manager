@@ -22,15 +22,16 @@
 </li>
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#proposed-login-logout-feature">3.1. [Proposed] Login/Logout feature</a></li>
-<li><a href="#proposed-incident-draft-creation-feature">3.2. [Proposed] Incident Draft Creation feature</a></li>
-<li><a href="#proposed-incident-fill-feature">3.3. [Proposed] Incident Fill feature</a></li>
-<li><a href="#proposed-incident-search-feature">3.4. [Proposed] Incident Search feature</a></li>
-<li><a href="#proposed-incident-edit-feature">3.5. [Proposed] Incident Edit feature</a></li>
-<li><a href="#proposed-undo-redo-feature">3.6. [Proposed] Undo/Redo feature</a></li>
-<li><a href="#proposed-data-encryption">3.7. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.8. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.9. Configuration</a></li>
+<li><a href="#proposed-access-control-feature">3.1. [Proposed] Access Control feature</a></li>
+<li><a href="#proposed-account-management-feature">3.2. [Proposed] Account Management feature</a></li>
+<li><a href="#proposed-incident-draft-creation-feature">3.3. [Proposed] Incident Draft Creation feature</a></li>
+<li><a href="#proposed-incident-fill-feature">3.4. [Proposed] Incident Fill feature</a></li>
+<li><a href="#proposed-incident-search-feature">3.5. [Proposed] Incident Search feature</a></li>
+<li><a href="#proposed-incident-edit-feature">3.6. [Proposed] Incident Edit feature</a></li>
+<li><a href="#proposed-undo-redo-feature">3.7. [Proposed] Undo/Redo feature</a></li>
+<li><a href="#proposed-data-encryption">3.8. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.9. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.10. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a></li>
@@ -295,15 +296,22 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Incident Mana
 </table>
 </div>
 <div class="sect3">
-<h4 id="Design-Person"><a class="link" href="#Design-Person">2.4.1. Incident component</a></h4>
+<h4 id="Design-Person"><a class="link" href="#Design-Person">2.4.1. Person Model component</a></h4>
 <div class="paragraph">
 <p><strong>API</strong> : <a href="https://github.com/AY1920S1-CS2103-T11-1/main/src/main/java/seedu/address/model/Person.java"><code>Person.java</code></a></p>
 </div>
 <div class="paragraph">
 <p>The <code>Person</code>,</p>
 </div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
+<div class="ulist">
+<ul>
+<li>
+<p>represents a user account on the incident manager</p>
+</li>
+<li>
+<p>Contains the account <code>Username</code>, <code>Password</code>, <code>Name</code>, <code>Phone</code>, <code>Email</code></p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
@@ -371,15 +379,221 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Incident Mana
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="proposed-login-logout-feature"><a class="link" href="#proposed-login-logout-feature">3.1. [Proposed] Login/Logout feature</a></h3>
+<h3 id="proposed-access-control-feature"><a class="link" href="#proposed-access-control-feature">3.1. [Proposed] Access Control feature</a></h3>
 <div class="sect3">
 <h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.1.1. Proposed Implementation</a></h4>
 <div class="paragraph">
-<p>The login/logout mechanism is facilitated by &#8230;&#8203;</p>
+<p>The access control feature is centered around three core concepts:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>(1) Command Restrictions: Restriction of access to commands until after identity is verified</p>
+</li>
+<li>
+<p>(2) Identity Verification: Verification of identity via unique credentials and a confidential password</p>
+</li>
+<li>
+<p>(3) Account Management Restrictions: Access level restrictions for commands affecting other accounts</p>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="command-restrictions"><a class="link" href="#command-restrictions">Command Restrictions</a></h5>
+<div class="paragraph">
+<p>Prior to login, the user is only granted access to the <code>Login</code> and <code>Add</code> commands. This is achieved via a guard statement in the <code>LogicManager</code> checking whether the command created is an instance of <code>Login</code> or <code>Add</code> command:</p>
+</div>
+<div class="paragraph">
+<p><code>if (!model.isLoggedIn() &amp;&amp; !(command instanceof LoginCommand || command instanceof AddCommand)) {
+    throw new CommandException(ACCESS_CONTROL_MESSAGE);
+}</code></p>
+</div>
+<div class="paragraph">
+<p>Activity Diagram for illustration:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AccessActivityDiagram.png" alt="AccessActivityDiagram">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="identity-verification"><a class="link" href="#identity-verification">Identity Verification</a></h5>
+<div class="paragraph">
+<p>Users are required to login via the <code>Login</code> command with a <code>Username</code> and <code>Password</code>. See user guide for more details on the command syntax for <code>Login</code>. Users are also allowed to <code>Logout</code> and thus end their <code>Session</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Session details are displayed on the status bar in the GUI to reflect whether a user is logged in, and the username as well as time logged in if a user is logged in.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Uniqueness of username is ensured by preventing duplicates during the account creation (<code>AddCommand</code>) and account update (<code>UpdateCommand</code>) processes. The respective commands will check the list of accounts in the model and throw an exception if a duplicate is found.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="account-management-restrictions"><a class="link" href="#account-management-restrictions">Account Management Restrictions</a></h5>
+<div class="paragraph">
+<p>To prevent abuse (e.g. adding a dummy account and editing/deleting other accounts), all new accounts are differentiated from <code>Admin</code> accounts. This restriction based on access level is implemented via account <code>Tags</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Only a <code>Person</code> with an admin <code>Tag</code> can access account management features. Such a person will henceforth be referred to as an Admin.</p>
+</li>
+<li>
+<p>Users who are not admins are not allowed to add tags (via both AddCommand and UpdateCommand).</p>
+</li>
+<li>
+<p>Only Admins are allowed to edit or add tags (via both AddCommand and UpdateCommand).</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Non-admins can still edit their own account details via the <code>Update</code> command. Refer to user guide for more info.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The checks described above all function in the command execution stage. The <code>Add</code> command, <code>Update</code> command, and <code>Delete</code> retrieve the <code>LoggedInPerson</code> from the <code>Model</code> via utilisation of the <code>Session</code> object.</p>
+</div>
+<div class="paragraph">
+<p>Sequence Diagram for illustration:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AccessSequenceDiagram.png" alt="AccessSequenceDiagram">
+</div>
+</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-command-restrictions-are-managed"><a class="link" href="#aspect-how-command-restrictions-are-managed">Aspect: How Command Restrictions are Managed</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Guard statement in LogicManager prior to Command Execution.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Single control point, easy to maintain and debug.</p>
+</li>
+<li>
+<p>Cons: Command still gets instantiated, memory allocated to command creation.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Guard statement in IncidentManagerParser</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Early catching of restriction, command doesn&#8217;t get instantiated unnecessarily.</p>
+</li>
+<li>
+<p>Cons: Need to expose model to parser, increasing coupling.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-identity-verification-is-managed"><a class="link" href="#aspect-how-identity-verification-is-managed">Aspect: How Identity Verification is Managed</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Unique username and password.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: Sufficiently advanced users can access the data file directly to retrieve user passwords.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Physical security USB dongle.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Secure individually identifiable apparatus.</p>
+</li>
+<li>
+<p>Cons: Prone to loss and potential duplication.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-account-management-restrictions-are-managed"><a class="link" href="#aspect-how-account-management-restrictions-are-managed">Aspect: How Account Management Restrictions are Managed</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Utilisation of Account Tags</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: Users cannot add tags to themselves.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Addition of an Admin account attribute.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Distinct object class, improves cohesiveness.</p>
+</li>
+<li>
+<p>Cons: Hard to implement.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proposed-account-management-feature"><a class="link" href="#proposed-account-management-feature">3.2. [Proposed] Account Management feature</a></h3>
+<div class="sect3">
+<h4 id="proposed-implementation-2"><a class="link" href="#proposed-implementation-2">3.2.1. Proposed Implementation</a></h4>
+<div class="paragraph">
+<p>The account management feature &#8230;&#8203;</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-login-logout-executes"><a class="link" href="#aspect-how-login-logout-executes">Aspect: How login &amp; logout executes</a></h5>
 <div class="ulist">
@@ -416,15 +630,15 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Incident Mana
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-incident-draft-creation-feature"><a class="link" href="#proposed-incident-draft-creation-feature">3.2. [Proposed] Incident Draft Creation feature</a></h3>
+<h3 id="proposed-incident-draft-creation-feature"><a class="link" href="#proposed-incident-draft-creation-feature">3.3. [Proposed] Incident Draft Creation feature</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation-2"><a class="link" href="#proposed-implementation-2">3.2.1. Proposed Implementation</a></h4>
+<h4 id="proposed-implementation-3"><a class="link" href="#proposed-implementation-3">3.3.1. Proposed Implementation</a></h4>
 <div class="paragraph">
 <p>The incident draft creation mechanism is facilitated by &#8230;&#8203;</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-incident-draft-creation-executes"><a class="link" href="#aspect-how-incident-draft-creation-executes">Aspect: How incident draft creation executes</a></h5>
 <div class="ulist">
@@ -461,15 +675,15 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Incident Mana
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-incident-fill-feature"><a class="link" href="#proposed-incident-fill-feature">3.3. [Proposed] Incident Fill feature</a></h3>
+<h3 id="proposed-incident-fill-feature"><a class="link" href="#proposed-incident-fill-feature">3.4. [Proposed] Incident Fill feature</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation-3"><a class="link" href="#proposed-implementation-3">3.3.1. Proposed Implementation</a></h4>
+<h4 id="proposed-implementation-4"><a class="link" href="#proposed-implementation-4">3.4.1. Proposed Implementation</a></h4>
 <div class="paragraph">
 <p>The incident fill mechanism is facilitated by &#8230;&#8203;</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-incident-fill-executes"><a class="link" href="#aspect-how-incident-fill-executes">Aspect: How incident fill executes</a></h5>
 <div class="ulist">
@@ -506,15 +720,15 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Incident Mana
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-incident-search-feature"><a class="link" href="#proposed-incident-search-feature">3.4. [Proposed] Incident Search feature</a></h3>
+<h3 id="proposed-incident-search-feature"><a class="link" href="#proposed-incident-search-feature">3.5. [Proposed] Incident Search feature</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation-4"><a class="link" href="#proposed-implementation-4">3.4.1. Proposed Implementation</a></h4>
+<h4 id="proposed-implementation-5"><a class="link" href="#proposed-implementation-5">3.5.1. Proposed Implementation</a></h4>
 <div class="paragraph">
 <p>The incident search mechanism is facilitated by &#8230;&#8203;</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-incident-search-executes"><a class="link" href="#aspect-how-incident-search-executes">Aspect: How incident search executes</a></h5>
 <div class="ulist">
@@ -551,15 +765,15 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Incident Mana
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-incident-edit-feature"><a class="link" href="#proposed-incident-edit-feature">3.5. [Proposed] Incident Edit feature</a></h3>
+<h3 id="proposed-incident-edit-feature"><a class="link" href="#proposed-incident-edit-feature">3.6. [Proposed] Incident Edit feature</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation-5"><a class="link" href="#proposed-implementation-5">3.5.1. Proposed Implementation</a></h4>
+<h4 id="proposed-implementation-6"><a class="link" href="#proposed-implementation-6">3.6.1. Proposed Implementation</a></h4>
 <div class="paragraph">
 <p>The incident edit mechanism is facilitated by &#8230;&#8203;</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.6.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-incident-edit-executes"><a class="link" href="#aspect-how-incident-edit-executes">Aspect: How incident edit executes</a></h5>
 <div class="ulist">
@@ -596,9 +810,9 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Incident Mana
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-undo-redo-feature"><a class="link" href="#proposed-undo-redo-feature">3.6. [Proposed] Undo/Redo feature</a></h3>
+<h3 id="proposed-undo-redo-feature"><a class="link" href="#proposed-undo-redo-feature">3.7. [Proposed] Undo/Redo feature</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation-6"><a class="link" href="#proposed-implementation-6">3.6.1. Proposed Implementation</a></h4>
+<h4 id="proposed-implementation-7"><a class="link" href="#proposed-implementation-7">3.7.1. Proposed Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by <code>VersionedIncidentManager</code>.
 It extends <code>IncidentManager</code> with an undo/redo history, stored internally as an <code>incidentManagerStateList</code> and <code>currentStatePointer</code>.
@@ -740,7 +954,7 @@ If the <code>currentStatePointer</code> is at index <code>incidentManagerStateLi
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.6.2. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.7.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
@@ -810,20 +1024,20 @@ If the <code>currentStatePointer</code> is at index <code>incidentManagerStateLi
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.7. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.8. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.8. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.9. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.9, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.10, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -854,7 +1068,7 @@ If the <code>currentStatePointer</code> is at index <code>incidentManagerStateLi
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.9. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.10. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -1466,4 +1680,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-22 17:34:53 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-22 18:11:35 UTC</div></div></div></body></html>
