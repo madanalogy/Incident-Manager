@@ -22,11 +22,11 @@
 </li>
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#proposed-access-control-feature">3.1. [Proposed] Access Control feature</a></li>
-<li><a href="#proposed-account-management-feature">3.2. [Proposed] Account Management feature</a></li>
+<li><a href="#access-control-feature">3.1. Access Control feature</a></li>
+<li><a href="#account-management-feature">3.2. Account Management feature</a></li>
 <li><a href="#proposed-incident-draft-creation-feature">3.3. [Proposed] Incident Draft Creation feature</a></li>
 <li><a href="#proposed-incident-fill-feature">3.4. [Proposed] Incident Fill feature</a></li>
-<li><a href="#proposed-incident-search-feature">3.5. [Proposed] Incident Search feature</a></li>
+<li><a href="#incident-search-feature">3.5. Incident Search feature</a></li>
 <li><a href="#proposed-incident-edit-feature">3.6. [Proposed] Incident Edit feature</a></li>
 <li><a href="#proposed-undo-redo-feature">3.7. [Proposed] Undo/Redo feature</a></li>
 <li><a href="#proposed-data-encryption">3.8. [Proposed] Data Encryption</a></li>
@@ -379,9 +379,9 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Incident Mana
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="proposed-access-control-feature"><a class="link" href="#proposed-access-control-feature">3.1. [Proposed] Access Control feature</a></h3>
+<h3 id="access-control-feature"><a class="link" href="#access-control-feature">3.1. Access Control feature</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.1.1. Proposed Implementation</a></h4>
+<h4 id="implementation-2"><a class="link" href="#implementation-2">3.1.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The access control feature is centered around three core concepts:</p>
 </div>
@@ -593,9 +593,9 @@ Non-admins can still edit their own account details via the <code>Update</code> 
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-account-management-feature"><a class="link" href="#proposed-account-management-feature">3.2. [Proposed] Account Management feature</a></h3>
+<h3 id="account-management-feature"><a class="link" href="#account-management-feature">3.2. Account Management feature</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation-2"><a class="link" href="#proposed-implementation-2">3.2.1. Proposed Implementation</a></h4>
+<h4 id="implementation-3"><a class="link" href="#implementation-3">3.2.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The account management feature functions as a suite of commands available to the user. The commands available as part of this suite:</p>
 </div>
@@ -710,7 +710,7 @@ Only <code>Admin</code> accounts can access the full suite of account management
 <div class="sect2">
 <h3 id="proposed-incident-draft-creation-feature"><a class="link" href="#proposed-incident-draft-creation-feature">3.3. [Proposed] Incident Draft Creation feature</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation-3"><a class="link" href="#proposed-implementation-3">3.3.1. Proposed Implementation</a></h4>
+<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.3.1. Proposed Implementation</a></h4>
 <div class="paragraph">
 <p>The incident draft creation mechanism is facilitated by &#8230;&#8203;</p>
 </div>
@@ -755,7 +755,7 @@ Only <code>Admin</code> accounts can access the full suite of account management
 <div class="sect2">
 <h3 id="proposed-incident-fill-feature"><a class="link" href="#proposed-incident-fill-feature">3.4. [Proposed] Incident Fill feature</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation-4"><a class="link" href="#proposed-implementation-4">3.4.1. Proposed Implementation</a></h4>
+<h4 id="proposed-implementation-2"><a class="link" href="#proposed-implementation-2">3.4.1. Proposed Implementation</a></h4>
 <div class="paragraph">
 <p>The incident fill mechanism is facilitated by &#8230;&#8203;</p>
 </div>
@@ -798,41 +798,146 @@ Only <code>Admin</code> accounts can access the full suite of account management
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-incident-search-feature"><a class="link" href="#proposed-incident-search-feature">3.5. [Proposed] Incident Search feature</a></h3>
+<h3 id="incident-search-feature"><a class="link" href="#incident-search-feature">3.5. Incident Search feature</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation-5"><a class="link" href="#proposed-implementation-5">3.5.1. Proposed Implementation</a></h4>
+<h4 id="implementation-4"><a class="link" href="#implementation-4">3.5.1. Implementation</a></h4>
 <div class="paragraph">
-<p>The incident search mechanism is facilitated by &#8230;&#8203;</p>
+<p>The incident search mechanism features a set of different types of searches that a user could utilise. Further documentation on the commands available in this set can be found within the link:https://ay1920s1-cs2103-t11-1.github.io/main/UserGuide.html. The types of searches are as listed:
+* Unfiltered - Displays all incidents in <code>Model</code>
+* ID - Displays all incidents with exact matches in <code>IncidentId incidentId</code> in <code>Incident incident</code>
+* Description - Displays all incidents with keyword(s) contained within the <code>Description description</code> in <code>Incident incident</code>
+* Operator - Displays all incidents with keyword(s) contained within the name of the <code>Person operator</code> in <code>Incident incident</code></p>
+</div>
+<div class="paragraph">
+<p>The incident search mechanism is facilitated by <code>ModelManager</code>, which implements abstract class <code>Model</code>. It contains a <code>FilteredList&lt;Incidents&gt; filteredIncidents</code>, which internally stores the list of displayed incidents in the GUI. Additionally, it implements the following key method:
+* <code>updateFilteredIncidentsList(Predicate&lt;Incident&gt; predicate)</code> - Updates the stored filtered incidents list with the new predicate</p>
+</div>
+<div class="paragraph">
+<p>There are two possible commands within this set of searches. Firstly, we will consider when the user calls the command <code>incidents</code> in the application.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the <code>incidents</code> command works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ListIncidentsSequenceDiagram.png" alt="ListIncidentsSequenceDiagram">
+</div>
+</div>
+<div class="paragraph">
+<p>As indicated in the diagram, the <code>LogicManager</code> instantiates a <code>ListIncidentsCommand</code> upon running command <code>execute(incidents)</code>. It then calls <code>ListIncidentsCommand#execute()</code>, which runs <code>Model#updateFilteredIncidentList</code> with the predicate <code>PREDICATE_SHOW_ALL_INCIDENTS</code>. This <code>Predicate&lt;Incident&gt;</code> always evaluates to true. This <code>Predicate&lt;Incident&gt;</code> is passed to <code>FilteredList&lt;Incident&gt; filteredList</code>, as a parameter to run the method <code>setPredicate()</code>. This updates the list of visible incidents. <code>CommandResult commandResult</code> is also returned to the <code>LogicManager</code> to log the success/failure of the method.</p>
+</div>
+<div class="paragraph">
+<p>Next, we will look at an example in which the user calls <code>search</code> to look for incidents written by an operator whose name contains <code>Alex</code>.</p>
+</div>
+<div class="paragraph">
+<p>The execution of this method is a little more complex.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the <code>search</code> command identifies the keyword and flag, and returns related incidents:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SearchIncidentsSequenceDiagram.png" alt="SearchIncidentsSequenceDiagram">
+</div>
+</div>
+<div class="paragraph">
+<p>The key difference is the utility of the <code>SearchIncidentsCommandParser</code> to parse the keyword after tag <code>op\</code> in the command. It creates a <code>NameKeywordsPredicate</code> using the String "Alex", which is returned to be used in constructing a new instance of <code>SearchIncidentsCommand</code>, stored as a <code>Predicate&lt;Incident&gt; predicate</code>. From there, the process is similar, in that <code>SearchIncidentsCommand#execute()</code> is run, causing the Model to run <code>Model#updateFilteredIncidentList(predicate)</code> using the predicate stored in <code>SearchIncidentsCommand</code>. Upon updating the list similar to the <code>incidents</code> listing command above, <code>SearchIncidentsCommand</code> also calls <code>Model#getFilteredIncidentList()</code> to return <code>ObservableList&lt;Incident&gt;</code>. It obtains the size of this list, and returns it in <code>CommandResult commandResult</code>.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-how-incident-search-executes"><a class="link" href="#aspect-how-incident-search-executes">Aspect: How incident search executes</a></h5>
+<h5 id="aspect-how-incident-search-keyword-is-inputted"><a class="link" href="#aspect-how-incident-search-keyword-is-inputted">Aspect: How incident search keyword is inputted</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> &#8230;&#8203;</p>
+<p><strong>Alternative 1 (current choice):</strong> Parse user input after flag (eg. <code>op\</code> or <code>desc\</code>)</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: &#8230;&#8203;</p>
+<p>Pros: Easy to implement.</p>
 </li>
 <li>
-<p>Cons: &#8230;&#8203;</p>
+<p>Cons: Have to parse keyword from command and flag, user has to follow style of flag for successful search.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> &#8230;&#8203;</p>
+<p><strong>Alternative 2:</strong> Prompt user for search input</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: &#8230;&#8203;</p>
+<p>Pros: Separates command from keyword for ease of reading and parsing.</p>
 </li>
 <li>
-<p>Cons: &#8230;&#8203;</p>
+<p>Cons: Difficult to implement multi-command execution.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-listing-all-incidents-is-called"><a class="link" href="#aspect-how-listing-all-incidents-is-called">Aspect: How listing all incidents is called</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Utilise separate command <code>incidents</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Intuitive to use.</p>
+</li>
+<li>
+<p>Cons: Similar code under different command.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Utilise <code>search</code> command (eg. <code>search unfiltered</code>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Less overlap in code.</p>
+</li>
+<li>
+<p>Cons: Unintuitive to the user as no search is being made, even more keywords to remember.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-predicate-is-added-to-code-searchincidentscommand-code"><a class="link" href="#aspect-how-predicate-is-added-to-code-searchincidentscommand-code">Aspect: How predicate is added to <code>SearchIncidentsCommand</code></a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> <code>SearchIncidentsCommandParser</code> class calls <code>Model</code> to create a new Predicate based on search string.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Abstracts the creation and management of predicates to the <code>Model</code>.</p>
+</li>
+<li>
+<p>Cons: Requires greater level of coupling between classes.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> <code>SearchIncidentsCommand</code> or <code>SearchIncidentsCommandParser</code> directly create Predicate based on search string.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Less dependencies within the parser class.</p>
+</li>
+<li>
+<p>Cons: Breaks abstraction flow.</p>
 </li>
 </ul>
 </div>
@@ -845,7 +950,7 @@ Only <code>Admin</code> accounts can access the full suite of account management
 <div class="sect2">
 <h3 id="proposed-incident-edit-feature"><a class="link" href="#proposed-incident-edit-feature">3.6. [Proposed] Incident Edit feature</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation-6"><a class="link" href="#proposed-implementation-6">3.6.1. Proposed Implementation</a></h4>
+<h4 id="proposed-implementation-3"><a class="link" href="#proposed-implementation-3">3.6.1. Proposed Implementation</a></h4>
 <div class="paragraph">
 <p>The incident edit mechanism is facilitated by &#8230;&#8203;</p>
 </div>
@@ -890,7 +995,7 @@ Only <code>Admin</code> accounts can access the full suite of account management
 <div class="sect2">
 <h3 id="proposed-undo-redo-feature"><a class="link" href="#proposed-undo-redo-feature">3.7. [Proposed] Undo/Redo feature</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation-7"><a class="link" href="#proposed-implementation-7">3.7.1. Proposed Implementation</a></h4>
+<h4 id="proposed-implementation-4"><a class="link" href="#proposed-implementation-4">3.7.1. Proposed Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by <code>VersionedIncidentManager</code>.
 It extends <code>IncidentManager</code> with an undo/redo history, stored internally as an <code>incidentManagerStateList</code> and <code>currentStatePointer</code>.
@@ -1743,4 +1848,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-23 04:28:08 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-23 09:24:51 UTC</div></div></div></body></html>
