@@ -24,7 +24,7 @@
 <ul class="sectlevel2">
 <li><a href="#access-control-feature">3.1. Access Control feature</a></li>
 <li><a href="#account-management-feature">3.2. Account Management feature</a></li>
-<li><a href="#proposed-incident-draft-creation-feature">3.3. [Proposed] Incident Draft Creation feature</a></li>
+<li><a href="#incident-draft-creation-feature">3.3. Incident Draft Creation feature</a></li>
 <li><a href="#proposed-incident-filling-and-submission-feature">3.4. [Proposed] Incident Filling and Submission feature</a></li>
 <li><a href="#incident-search-feature">3.5. Incident Search feature</a></li>
 <li><a href="#proposed-incident-edit-feature">3.6. [Proposed] Incident Edit feature</a></li>
@@ -332,8 +332,15 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Incident Mana
 <div class="paragraph">
 <p>The <code>Vehicle</code>,</p>
 </div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
+<div class="ulist">
+<ul>
+<li>
+<p>represents a vehicle that can be dispatched to incident sites.</p>
+</li>
+<li>
+<p>Contains the attributes <code>VehicleNumber</code>, <code>VehicleType</code>, <code>district</code> and <code>availability</code>.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -706,11 +713,11 @@ Only <code>Admin</code> accounts can access the full suite of account management
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-incident-draft-creation-feature"><a class="link" href="#proposed-incident-draft-creation-feature">3.3. [Proposed] Incident Draft Creation feature</a></h3>
+<h3 id="incident-draft-creation-feature"><a class="link" href="#incident-draft-creation-feature">3.3. Incident Draft Creation feature</a></h3>
 <div class="sect3">
 <h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.3.1. Proposed Implementation</a></h4>
 <div class="paragraph">
-<p>The incident draft creation mechanism is facilitated by &#8230;&#8203;</p>
+<p>The incident draft creation mechanism is facilitated by the New Command. It creates a new draft incident report based on district of incident, optional automatic vehicle dispatchment.</p>
 </div>
 </div>
 <div class="sect3">
@@ -720,27 +727,27 @@ Only <code>Admin</code> accounts can access the full suite of account management
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> &#8230;&#8203;</p>
+<p><strong>Alternative 1 (current choice):</strong> Auto assignment of vehicles</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: &#8230;&#8203;</p>
+<p>Pros: Reduces number of steps of execution.</p>
 </li>
 <li>
-<p>Cons: &#8230;&#8203;</p>
+<p>Cons: User does not get to choose.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> &#8230;&#8203;</p>
+<p><strong>Alternative 2:</strong> Manual assignment of vehicles</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: &#8230;&#8203;</p>
+<p>Pros: User is able to choose vehicle to dispatch.</p>
 </li>
 <li>
-<p>Cons: &#8230;&#8203;</p>
+<p>Cons: More number of steps.</p>
 </li>
 </ul>
 </div>
@@ -1661,4 +1668,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-23 11:45:18 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-23 12:22:50 UTC</div></div></div></body></html>
