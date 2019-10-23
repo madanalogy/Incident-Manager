@@ -385,18 +385,18 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Incident Mana
 <div class="paragraph">
 <p>The access control feature is centered around three core concepts:</p>
 </div>
-<div class="ulist">
-<ul>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p>(1) Command Restrictions: Restriction of access to commands until after identity is verified</p>
+<p>Command Restrictions: Restriction of access to commands until after identity is verified</p>
 </li>
 <li>
-<p>(2) Identity Verification: Verification of identity via unique credentials and a confidential password</p>
+<p>Identity Verification: Verification of identity via unique credentials and a confidential key</p>
 </li>
 <li>
-<p>(3) Account Management Restrictions: Access level restrictions for commands affecting other accounts</p>
+<p>Account Management Restrictions: Access level restrictions for commands affecting other accounts</p>
 </li>
-</ul>
+</ol>
 </div>
 <div class="sect4">
 <h5 id="command-restrictions"><a class="link" href="#command-restrictions">Command Restrictions</a></h5>
@@ -410,7 +410,8 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Incident Mana
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The guard statement throws a command exception if the following conditions are met: <code>!model.isLoggedIn() &amp;&amp; !(command instanceof LoginCommand || command instanceof AddCommand || command instanceof ExitCommand)</code>
+The guard statement throws a command exception if the following conditions are met:<br>
+<code>!model.isLoggedIn() &amp;&amp; !(command instanceof LoginCommand || command instanceof AddCommand || command instanceof ExitCommand)</code>
 </td>
 </tr>
 </table>
@@ -442,7 +443,7 @@ Session details are displayed on the status bar in the GUI to reflect whether a 
 </table>
 </div>
 <div class="paragraph">
-<p>Uniqueness of username is ensured by preventing duplicates during the account creation (<code>AddCommand</code>) and account update (<code>UpdateCommand</code>) processes. The respective commands will check the list of accounts in the model and throw an exception if a duplicate is found.</p>
+<p>Uniqueness of username is ensured by preventing duplicates during the account creation [<code>AddCommand</code>] and account update [<code>UpdateCommand</code>] processes. The respective commands will check the list of accounts in the model and throw an exception if a duplicate is found.</p>
 </div>
 </div>
 <div class="sect4">
@@ -1742,4 +1743,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-23 04:13:07 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-23 04:28:08 UTC</div></div></div></body></html>
