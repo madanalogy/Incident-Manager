@@ -28,8 +28,9 @@
 <li><a href="#incident-filling-and-submission-feature">3.4. Incident Filling and Submission feature</a></li>
 <li><a href="#incident-search-feature">3.5. Incident Search feature</a></li>
 <li><a href="#incident-edit-feature">3.6. Incident Edit feature</a></li>
-<li><a href="#logging">3.7. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.8. Configuration</a></li>
+<li><a href="#vehicle-search-feature">3.7. Vehicle Search feature</a></li>
+<li><a href="#logging">3.8. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.9. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a></li>
@@ -720,7 +721,7 @@ Only <code>Admin</code> accounts can access the full suite of account management
 <p>The incident draft creation mechanism is facilitated by the New Command. It creates a new draft incident report based on district of incident, optional automatic vehicle dispatchment.</p>
 </div>
 <div class="paragraph">
-<p>Automatic vehicle dispatchment:</p>
+<p>With automatic vehicle dispatchment:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -728,7 +729,12 @@ Only <code>Admin</code> accounts can access the full suite of account management
 </div>
 </div>
 <div class="paragraph">
-<p>Manual vehicle dispatchment:</p>
+<p>With manual vehicle dispatchment:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/NewDraftSequenceDiagramManual.png" alt="NewDraftSequenceDiagramManual">
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -821,9 +827,13 @@ These two commands as well as the two modes they can be used in are summarised i
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>SubmitCommand</code> functions similarly, this time listing the incidents filtered by whether they are <code>COMPLETE</code> or not.
-===== Parameter mode (modifying incidents)
-The <code>FillCommandParser</code> will be invoked to parse the fields <code>targetIndex</code>, <code>callerNumber</code>, and <code>description</code> and return a <code>FillCommand</code> containing these non-null fields. The <code>execute()</code> method in <code>FillCommand</code> will now fetch the specified incident from the list of drafts and call the static <code>updateReport()</code> method. The <code>updateReport()</code> method creates a new Incident object which has all its required attributes filled. The attributes from the incident to be updated are simply copied into this new Incident object. The fill command then inserts this new Incident into the list of incidents at the same index.
+<p>The <code>SubmitCommand</code> functions similarly, this time listing the incidents filtered by whether they are <code>COMPLETE</code> or not.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="parameter-mode-modifying-incidents"><a class="link" href="#parameter-mode-modifying-incidents">Parameter mode (modifying incidents)</a></h5>
+<div class="paragraph">
+<p>The <code>FillCommandParser</code> will be invoked to parse the fields <code>targetIndex</code>, <code>callerNumber</code>, and <code>description</code> and return a <code>FillCommand</code> containing these non-null fields. The <code>execute()</code> method in <code>FillCommand</code> will now fetch the specified incident from the list of drafts and call the static <code>updateReport()</code> method. The <code>updateReport()</code> method creates a new Incident object which has all its required attributes filled. The attributes from the incident to be updated are simply copied into this new Incident object. The fill command then inserts this new Incident into the list of incidents at the same index.
 The <code>SubmitCommand</code> functions similarly, with one crucial difference. As no Incident fields are to be updated, the specified incident is simply retrieved, marked as <code>FINAL</code> using the static <code>submitReport()</code> method, and inserted into the list of incidents at the same index again. The <code>submitReport</code> method also creates a new Incident object which is a copy of the Incident to be submitted, with the difference being that the newly created Incident is marked <code>FINAL</code>.</p>
 </div>
 <div class="imageblock">
@@ -875,11 +885,23 @@ The <code>SubmitCommand</code> functions similarly, with one crucial difference.
 <div class="sect3">
 <h4 id="implementation-5"><a class="link" href="#implementation-5">3.5.1. Implementation</a></h4>
 <div class="paragraph">
-<p>The incident search mechanism features a set of different types of searches that a user could utilise. Further documentation on the commands available in this set can be found within the link:https://ay1920s1-cs2103-t11-1.github.io/main/UserGuide.html. The types of searches are as listed:
-* Unfiltered - Displays all incidents in <code>Model</code>
-* ID - Displays all incidents with exact matches in <code>IncidentId incidentId</code> in <code>Incident incident</code>
-* Description - Displays all incidents with keyword(s) contained within the <code>Description description</code> in <code>Incident incident</code>
-* Operator - Displays all incidents with keyword(s) contained within the name of the <code>Person operator</code> in <code>Incident incident</code></p>
+<p>The incident search mechanism features a set of different types of searches that a user could utilise. Further documentation on the commands available in this set can be found within the link:https://ay1920s1-cs2103-t11-1.github.io/main/UserGuide.html. The types of searches are as listed:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Unfiltered - Displays all incidents in <code>Model</code></p>
+</li>
+<li>
+<p>ID - Displays all incidents with exact matches in <code>IncidentId incidentId</code> in <code>Incident incident</code></p>
+</li>
+<li>
+<p>Description - Displays all incidents with keyword(s) contained within the <code>Description description</code> in <code>Incident incident</code></p>
+</li>
+<li>
+<p>Operator - Displays all incidents with keyword(s) contained within the name of the <code>Person operator</code> in <code>Incident incident</code></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>The incident search mechanism is facilitated by <code>ModelManager</code>, which implements abstract class <code>Model</code>. It contains a <code>FilteredList&lt;Incidents&gt; filteredIncidents</code>, which internally stores the list of displayed incidents in the GUI. Additionally, it implements the following key method:
@@ -1092,14 +1114,145 @@ using <code>EditIncident</code> each time the command is executed and then repla
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.7. Logging</a></h3>
+<h3 id="vehicle-search-feature"><a class="link" href="#vehicle-search-feature">3.7. Vehicle Search feature</a></h3>
+<div class="sect3">
+<h4 id="implementation-6"><a class="link" href="#implementation-6">3.7.1. Implementation</a></h4>
+<div class="paragraph">
+<p>The vehicle search mechanism features a set of different types of searches that a user could utilise. Further documentation on the commands available in this set can be found within the link:https://ay1920s1-cs2103-t11-1.github.io/main/UserGuide.html. The types of searches are as listed:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Unfiltered - Displays all vehicles in <code>Model</code></p>
+</li>
+<li>
+<p>District - Displays all vehicles with exact matches in <code>District district</code> in <code>Vehicle vehicle</code></p>
+</li>
+<li>
+<p>Vehicle Number - Displays all vehicles with exact matches in <code>VehicleNumber vehicleNumber</code> in <code>Vehicle vehicle</code></p>
+</li>
+<li>
+<p>Vehicle Type - Displays all vehicles with exact matches in <code>VehicleType vehicleType</code> in <code>Vehicle vehicle</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The vehicle search mechanism is facilitated by <code>ModelManager</code>, which implements abstract class <code>Model</code>. It contains a <code>FilteredList&lt;Vehicle&gt; filteredVehicles</code>, which internally stores the list of displayed vehicles in the GUI. Additionally, it implements the following key method:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>updateFilteredVehiclesList(Predicate&lt;Vehicle&gt; predicate)</code> - Updates the stored filtered vehicle list with the new predicate</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.7.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-vehicle-search-keyword-is-inputted"><a class="link" href="#aspect-how-vehicle-search-keyword-is-inputted">Aspect: How vehicle search keyword is inputted</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Current choice:</strong> Parse user input after flag (eg. <code>ds\</code> or <code>vnum\</code>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Easy to implement.</p>
+</li>
+<li>
+<p>Reduce number of steps of input, more efficient.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Have to parse keyword from command and flag, user has to follow style of flag for successful search.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Prompt user for search input</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Separates command from keyword for ease of reading and parsing.</p>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Difficult to implement multi-command execution.</p>
+</li>
+<li>
+<p>Requires multiple steps of input, slower and less efficient.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-listing-all-incidents-is-called-2"><a class="link" href="#aspect-how-listing-all-incidents-is-called-2">Aspect: How listing all incidents is called</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Current choice:</strong> Utilise separate command <code>vehicles</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: Might not be very intuitive; user might prefer action words like `list vehicles"</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Utilise <code>list</code> command (eg. <code>list vehicles</code>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Intuitive and clear.</p>
+</li>
+<li>
+<p>Cons: More keywords to parse.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logging"><a class="link" href="#logging">3.8. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.8, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.9, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1130,7 +1283,7 @@ using <code>EditIncident</code> each time the command is executed and then repla
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.8. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.9. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -1727,4 +1880,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-25 01:42:18 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-25 01:47:48 UTC</div></div></div></body></html>
