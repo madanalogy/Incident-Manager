@@ -287,7 +287,7 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-As a more OOP model, we can store a <code>Tag</code> list in <code>Incident Manager</code>, which <code>Person</code> can reference. This would allow <code>Incident Manager</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Person</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
+As a more OOP model, we can store a <code>Tag</code> list in <code>IncidentManager</code>, which <code>Person</code> can reference. This would allow <code>IncidentManager</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Person</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
 <br>
 <span class="image"><img src="images/BetterModelClassDiagram.png" alt="BetterModelClassDiagram"></span>
 </td>
@@ -407,7 +407,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Incident Mana
 <div class="sect4">
 <h5 id="command-restrictions"><a class="link" href="#command-restrictions">Command Restrictions</a></h5>
 <div class="paragraph">
-<p>Prior to login, the user is only granted access to the <code>Login</code>, <code>Add</code>, and <code>Exit</code> commands. This is achieved via a guard statement in the <code>LogicManager</code> checking whether the user is logged in or the command created is an approved command that doesn&#8217;t require login.</p>
+<p>Prior to login, the user is only granted access to the <code>Login</code>, <code>Add</code>, <code>Help</code>, and <code>Exit</code> commands. This is achieved via a guard statement in the <code>LogicManager</code> checking whether the user is logged in or the command created is an approved command that doesn&#8217;t require login.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -416,8 +416,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Incident Mana
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The guard statement throws a command exception if the following conditions are met:<br>
-<code>!model.isLoggedIn() &amp;&amp; !(command instanceof LoginCommand || command instanceof AddCommand || command instanceof ExitCommand)</code>
+The guard statement throws a command exception and informs the user of the available commands prior to login.
 </td>
 </tr>
 </table>
@@ -449,7 +448,7 @@ Session details are displayed on the status bar in the GUI to reflect whether a 
 </table>
 </div>
 <div class="paragraph">
-<p>Uniqueness of username is ensured by preventing duplicates during the account creation [<code>AddCommand</code>] and account update [<code>UpdateCommand</code>] processes. The respective commands will check the list of accounts in the model and throw an exception if a duplicate is found.</p>
+<p>Uniqueness of a username is ensured by preventing duplicates during the account creation [<code>AddCommand</code>] and account update [<code>UpdateCommand</code>] processes. The respective commands will check the list of accounts in the model and throw an exception if a duplicate is found.</p>
 </div>
 </div>
 <div class="sect4">
@@ -483,7 +482,26 @@ Non-admins can still edit their own account details via the <code>Update</code> 
 </table>
 </div>
 <div class="paragraph">
-<p>The checks described above all function in the command execution stage. The <code>Add</code> command, <code>Update</code> command, and <code>Delete</code> retrieve the <code>LoggedInPerson</code> from the <code>Model</code> via utilisation of the <code>Session</code> object.</p>
+<p>Additional access restrictions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Only admins can update an account that is not their own.</p>
+</li>
+<li>
+<p>Only admins can access the delete command.</p>
+</li>
+<li>
+<p>Admins cannot delete their own account.</p>
+</li>
+<li>
+<p>Admins cannot 'downgrade' themselves by removing their own admin tag.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The checks described above all function in the command execution stage. The <code>AddCommand</code>, <code>UpdateCommand</code>, and <code>DeleteCommand</code> retrieves the logged in <code>Person</code> from the <code>Model</code> via utilisation of the <code>Session</code> object.</p>
 </div>
 <div class="paragraph">
 <p>Sequence Diagram for illustration:</p>
@@ -502,7 +520,7 @@ Non-admins can still edit their own account details via the <code>Update</code> 
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Guard statement in LogicManager prior to Command Execution.</p>
+<p><strong>Current Choice:</strong> Guard statement in LogicManager prior to Command Execution.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -515,7 +533,7 @@ Non-admins can still edit their own account details via the <code>Update</code> 
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Guard statement in IncidentManagerParser</p>
+<p><strong>Alternative:</strong> Guard statement in IncidentManagerParser</p>
 <div class="ulist">
 <ul>
 <li>
@@ -535,7 +553,7 @@ Non-admins can still edit their own account details via the <code>Update</code> 
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Unique username and password.</p>
+<p><strong>Current Choice:</strong> Unique username and password.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -548,11 +566,11 @@ Non-admins can still edit their own account details via the <code>Update</code> 
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Physical security USB dongle.</p>
+<p><strong>Alternative:</strong> Physical security USB dongle.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Secure individually identifiable apparatus.</p>
+<p>Pros: Secure individually identifiable token.</p>
 </li>
 <li>
 <p>Cons: Prone to loss and potential duplication.</p>
@@ -568,7 +586,7 @@ Non-admins can still edit their own account details via the <code>Update</code> 
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Utilisation of Account Tags</p>
+<p><strong>Current Choice:</strong> Utilisation of Account Tags</p>
 <div class="ulist">
 <ul>
 <li>
@@ -581,7 +599,7 @@ Non-admins can still edit their own account details via the <code>Update</code> 
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Addition of an Admin account attribute.</p>
+<p><strong>Alternative:</strong> Addition of an Admin account attribute.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -595,6 +613,12 @@ Non-admins can still edit their own account details via the <code>Update</code> 
 </li>
 </ul>
 </div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="known-issues"><a class="link" href="#known-issues">3.1.3. Known Issues</a></h4>
+<div class="paragraph">
+<p>A sufficiently advanced user can access the data file directly to manipulate account details. Data file encryption will resolve this issue, but has yet to be implemented.</p>
 </div>
 </div>
 </div>
@@ -617,10 +641,10 @@ Non-admins can still edit their own account details via the <code>Update</code> 
 <p>Delete Command - Deletes a a user account. Not allowed to delete your own account.</p>
 </li>
 <li>
-<p>List Command - Lists all user accounts or those whose tags match the user input.</p>
+<p>List Persons Command - Lists all user accounts or those whose tags match the user input.</p>
 </li>
 <li>
-<p>Find Command - Searches for user accounts based on matching name keywords.</p>
+<p>Find Persons Command - Searches for user accounts based on matching name or username keywords.</p>
 </li>
 <li>
 <p>Swap Command - Swaps GUI interface between account management and incident management.</p>
@@ -642,6 +666,18 @@ Only <code>Admin</code> accounts can access the full suite of account management
 <div class="paragraph">
 <p>In the code base, Persons represent user accounts. See person model for more information.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The swap command also restricts users from accessing commands affecting objects not on display.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
@@ -650,27 +686,27 @@ Only <code>Admin</code> accounts can access the full suite of account management
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> No index indicates own account update</p>
+<p><strong>Current Choice:</strong> No index indicates own account update</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Improves user experience.</p>
+<p>Pros: Improves user experience, user does not need to look for their own index.</p>
 </li>
 <li>
-<p>Cons: Prone to user error.</p>
+<p>Cons: Susceptible to user error.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Select index of own account for update</p>
+<p><strong>Alternative:</strong> Select index of own account for update</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros: Easy to implement.</p>
 </li>
 <li>
-<p>Cons: Decreases user experience.</p>
+<p>Cons: Decreases user experience, user will first need to find their own index.</p>
 </li>
 </ul>
 </div>
@@ -683,27 +719,27 @@ Only <code>Admin</code> accounts can access the full suite of account management
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Adding keyword after the List command prefix performs a search</p>
+<p><strong>Current Choice:</strong> Adding keywords after the list command performs a search</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Intuitive. Improves user exprience.</p>
+<p>Pros: Easy to implement.</p>
 </li>
 <li>
-<p>Cons: Can only search for one tag at a time.</p>
+<p>Cons: User might get confused between list and find command usage.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Utilising Find command to search for tags</p>
+<p><strong>Alternative:</strong> Utilising find command to search for tags</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Potential to include more granular filters.</p>
+<p>Pros: Centralise all account search operations in one command.</p>
 </li>
 <li>
-<p>Cons: Decreases user experience.</p>
+<p>Cons: Requires the addition of argument prefixes, hard to implement.</p>
 </li>
 </ul>
 </div>
@@ -1880,4 +1916,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-25 12:43:38 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-25 15:33:57 UTC</div></div></div></body></html>

@@ -15,18 +15,19 @@
 <ul class="sectlevel2">
 <li><a href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></li>
 <li><a href="#logging-in-code-login-code">3.2. Logging in: <code>login</code></a></li>
-<li><a href="#create-new-incident-code-new-code">3.3. Create New Incident: <code>new</code></a></li>
-<li><a href="#filling-a-new-report-code-fill-code">3.4. Filling a new report: <code>fill</code></a></li>
-<li><a href="#submit-a-report-code-submit-code">3.5. Submit a report: <code>submit</code></a></li>
-<li><a href="#adding-a-user-code-add-code">3.6. Adding a user: <code>add</code></a></li>
-<li><a href="#listing-all-persons-code-list-code">3.7. Listing all persons : <code>list</code></a></li>
-<li><a href="#editing-a-person-code-edit-code">3.8. Editing a person : <code>edit</code></a></li>
-<li><a href="#locating-persons-by-name-code-find-code">3.9. Locating persons by name: <code>find</code></a></li>
-<li><a href="#deleting-a-person-code-delete-code">3.10. Deleting a person : <code>delete</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">3.11. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.12. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.13. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.14. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#logging-out-code-logout-code">3.3. Logging out: <code>logout</code></a></li>
+<li><a href="#swapping-interfaces-code-swap-code">3.4. Swapping interfaces: <code>swap</code></a></li>
+<li><a href="#adding-a-user-code-add-code">3.5. Adding a user: <code>add</code></a></li>
+<li><a href="#updating-an-account-code-update-code">3.6. Updating an account : <code>update</code></a></li>
+<li><a href="#listing-accounts-code-list-p-code">3.7. Listing accounts : <code>list-p</code></a></li>
+<li><a href="#locating-accounts-by-name-or-username-code-find-p-code">3.8. Locating accounts by name or username: <code>find-p</code></a></li>
+<li><a href="#deleting-an-account-code-delete-code">3.9. Deleting an account : <code>delete</code></a></li>
+<li><a href="#create-new-incident-code-new-code">3.10. Create New Incident: <code>new</code></a></li>
+<li><a href="#filling-a-new-report-code-fill-code">3.11. Filling a new report: <code>fill</code></a></li>
+<li><a href="#submit-a-report-code-submit-code">3.12. Submit a report: <code>submit</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.13. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.14. Saving the data</a></li>
+<li><a href="#decrypting-data-files-code-coming-in-v2-0-code">3.15. Decrypting data files <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -121,14 +122,272 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="sect2">
 <h3 id="logging-in-code-login-code"><a class="link" href="#logging-in-code-login-code">3.2. Logging in: <code>login</code></a></h3>
 <div class="paragraph">
-<p>Registers the user for the active session
-Format: <code>login USERNAME</code></p>
+<p>Logs the user into the IMS and registers the active session.<br>
+Format: <code>login u/USERNAME p/PASSWORD</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The only commands available prior to login are <code>Add</code>, <code>Login</code>, <code>Help</code>, and <code>Exit</code>.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="create-new-incident-code-new-code"><a class="link" href="#create-new-incident-code-new-code">3.3. Create New Incident: <code>new</code></a></h3>
+<h3 id="logging-out-code-logout-code"><a class="link" href="#logging-out-code-logout-code">3.3. Logging out: <code>logout</code></a></h3>
+<div class="paragraph">
+<p>Logs the user out of the IMS and closes the user&#8217;s session.<br>
+Format: <code>logout</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="swapping-interfaces-code-swap-code"><a class="link" href="#swapping-interfaces-code-swap-code">3.4. Swapping interfaces: <code>swap</code></a></h3>
+<div class="paragraph">
+<p>Swaps the user interface between account view and incidents/vehicle view.<br>
+Format: <code>swap</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+A user cannot access commands affecting entities not displayed in their current interface view.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-user-code-add-code"><a class="link" href="#adding-a-user-code-add-code">3.5. Adding a user: <code>add</code></a></h3>
+<div class="paragraph">
+<p>Adds an account to the IMS as a registered user<br>
+Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL u/USERNAME p/PASSWORD [t/TAG]&#8230;&#8203;</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+A account can have any number of tags (including 0). Only logged-in admins can add tags.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>add n/John Doe p/98765432 e/johnd@example.com u/op1</code></p>
+</li>
+<li>
+<p><code>add n/Betsy Crowe e/betsycrowe@example.com u/oc1 p/1234567 t/Team-1-OC</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="updating-an-account-code-update-code"><a class="link" href="#updating-an-account-code-update-code">3.6. Updating an account : <code>update</code></a></h3>
+<div class="paragraph">
+<p>updates an existing account in the incident Manager or the own account of the user logged in if the index is left empty.<br>
+Format: <code>update [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Only admins can update other user accounts. Non-admins cannot specify an index when executing the update command.
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>If an index is not provided, update executes on the account of the user logged in.</p>
+</li>
+<li>
+<p>If an index is provided, updates the account at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed account list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+<li>
+<p>When updating tags, the existing tags of the account will be removed i.e adding of tags is not cumulative.</p>
+</li>
+<li>
+<p>Only admins can access and edit tags. Admins cannot remove their own admin tag.</p>
+</li>
+<li>
+<p>You can remove all the account&#8217;s tags by typing <code>t/</code> without specifying any tags after it.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>update p/91234567 e/johndoe@example.com</code><br>
+updates the phone number and email address of the logged in account to be <code>91234567</code> and <code>johndoe@example.com</code> respectively.</p>
+</li>
+<li>
+<p><code>update 2 n/Betsy Crower t/</code><br>
+updates the name of the 2nd account to be <code>Betsy Crower</code> and clears all existing tags.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-accounts-code-list-p-code"><a class="link" href="#listing-accounts-code-list-p-code">3.7. Listing accounts : <code>list-p</code></a></h3>
+<div class="paragraph">
+<p>Shows a list of all accounts registered in the incident Manager or those whose tags match any of the keywords if a keyword is specified.<br>
+Format: <code>list-p [KEYWORD] [MORE_KEYWORDS]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case insensitive. e.g <code>admin</code> will match <code>Admin</code></p>
+</li>
+<li>
+<p>Only the account tags are searched.</p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>ad</code> will not match <code>admin</code></p>
+</li>
+<li>
+<p>accounts matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>admin team-1</code> will return all accounts with the <code>admin</code> tag and those with the <code>team-1</code> tag.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="locating-accounts-by-name-or-username-code-find-p-code"><a class="link" href="#locating-accounts-by-name-or-username-code-find-p-code">3.8. Locating accounts by name or username: <code>find-p</code></a></h3>
+<div class="paragraph">
+<p>Finds accounts whose name or username contains any of the given keywords.<br>
+Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
+</li>
+<li>
+<p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
+</li>
+<li>
+<p>Only the name and username is searched.</p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
+</li>
+<li>
+<p>Accounts matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find John</code><br>
+Returns <code>john</code> and <code>John Doe</code></p>
+</li>
+<li>
+<p><code>find Betsy Tim John</code><br>
+Returns any account having names or usernames <code>Betsy</code>, <code>Tim</code>, or <code>John</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-an-account-code-delete-code"><a class="link" href="#deleting-an-account-code-delete-code">3.9. Deleting an account : <code>delete</code></a></h3>
+<div class="paragraph">
+<p>Deletes the specified account from the incident Manager.<br>
+Format: <code>delete INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the account at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed account list.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Only admins can access the delete command.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>delete 2</code><br>
+Deletes the 2nd account in the incident Manager.</p>
+</li>
+<li>
+<p><code>find Betsy</code><br>
+<code>delete 1</code><br>
+Deletes the 1st account in the results of the <code>find</code> command.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="create-new-incident-code-new-code"><a class="link" href="#create-new-incident-code-new-code">3.10. Create New Incident: <code>new</code></a></h3>
 <div class="sect3">
-<h4 id="assumptions"><a class="link" href="#assumptions">3.3.1. Assumptions</a></h4>
+<h4 id="assumptions"><a class="link" href="#assumptions">3.10.1. Assumptions</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -138,7 +397,7 @@ Format: <code>login USERNAME</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="description"><a class="link" href="#description">3.3.2. Description</a></h4>
+<h4 id="description"><a class="link" href="#description">3.10.2. Description</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -154,7 +413,7 @@ Format: <code>login USERNAME</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="usage"><a class="link" href="#usage">3.3.3. Usage</a></h4>
+<h4 id="usage"><a class="link" href="#usage">3.10.3. Usage</a></h4>
 <div class="paragraph">
 <p>Format: <code>new l/DISTRICT_NUM auto/[y/n]</code></p>
 </div>
@@ -181,9 +440,9 @@ Format: <code>login USERNAME</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="filling-a-new-report-code-fill-code"><a class="link" href="#filling-a-new-report-code-fill-code">3.4. Filling a new report: <code>fill</code></a></h3>
+<h3 id="filling-a-new-report-code-fill-code"><a class="link" href="#filling-a-new-report-code-fill-code">3.11. Filling a new report: <code>fill</code></a></h3>
 <div class="sect3">
-<h4 id="description-2"><a class="link" href="#description-2">3.4.1. Description</a></h4>
+<h4 id="description-2"><a class="link" href="#description-2">3.11.1. Description</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -199,7 +458,7 @@ Format: <code>login USERNAME</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="usage-2"><a class="link" href="#usage-2">3.4.2. Usage</a></h4>
+<h4 id="usage-2"><a class="link" href="#usage-2">3.11.2. Usage</a></h4>
 <div class="paragraph">
 <p>Format: <code>fill [i/index_of_incident n/CALLER_NAME d/INCIDENT_DESCRIPTION]</code></p>
 </div>
@@ -219,9 +478,9 @@ Format: <code>login USERNAME</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="submit-a-report-code-submit-code"><a class="link" href="#submit-a-report-code-submit-code">3.5. Submit a report: <code>submit</code></a></h3>
+<h3 id="submit-a-report-code-submit-code"><a class="link" href="#submit-a-report-code-submit-code">3.12. Submit a report: <code>submit</code></a></h3>
 <div class="sect3">
-<h4 id="description-3"><a class="link" href="#description-3">3.5.1. Description</a></h4>
+<h4 id="description-3"><a class="link" href="#description-3">3.12.1. Description</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -231,7 +490,7 @@ Format: <code>login USERNAME</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="usage-3"><a class="link" href="#usage-3">3.5.2. Usage</a></h4>
+<h4 id="usage-3"><a class="link" href="#usage-3">3.12.2. Usage</a></h4>
 <div class="paragraph">
 <p>Format: <code>submit</code></p>
 </div>
@@ -286,200 +545,27 @@ Format: <code>login USERNAME</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-user-code-add-code"><a class="link" href="#adding-a-user-code-add-code">3.6. Adding a user: <code>add</code></a></h3>
-<div class="paragraph">
-<p>Adds a person to the IMS as a registered user<br>
-Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL u/USERNAME [t/TAG]&#8230;&#8203;</code></p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-A person can have any number of tags (including 0)
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>add n/John Doe p/98765432 e/johnd@example.com u/op1</code></p>
-</li>
-<li>
-<p><code>add n/Betsy Crowe e/betsycrowe@example.com u/oc1 p/1234567 t/Team-1-OC</code></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="listing-all-persons-code-list-code"><a class="link" href="#listing-all-persons-code-list-code">3.7. Listing all persons : <code>list</code></a></h3>
-<div class="paragraph">
-<p>Shows a list of all persons registered in the incident Manager.<br>
-Format: <code>list</code></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="editing-a-person-code-edit-code"><a class="link" href="#editing-a-person-code-edit-code">3.8. Editing a person : <code>edit</code></a></h3>
-<div class="paragraph">
-<p>Edits an existing person in the incident Manager.<br>
-Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Edits the person at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed person list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-<li>
-<p>At least one of the optional fields must be provided.</p>
-</li>
-<li>
-<p>Existing values will be updated to the input values.</p>
-</li>
-<li>
-<p>When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.</p>
-</li>
-<li>
-<p>You can remove all the person&#8217;s tags by typing <code>t/</code> without specifying any tags after it.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>edit 1 p/91234567 e/johndoe@example.com</code><br>
-Edits the phone number and email address of the 1st person to be <code>91234567</code> and <code>johndoe@example.com</code> respectively.</p>
-</li>
-<li>
-<p><code>edit 2 n/Betsy Crower t/</code><br>
-Edits the name of the 2nd person to be <code>Betsy Crower</code> and clears all existing tags.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="locating-persons-by-name-code-find-code"><a class="link" href="#locating-persons-by-name-code-find-code">3.9. Locating persons by name: <code>find</code></a></h3>
-<div class="paragraph">
-<p>Finds persons whose names contain any of the given keywords.<br>
-Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>The search is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
-</li>
-<li>
-<p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
-</li>
-<li>
-<p>Only the name is searched.</p>
-</li>
-<li>
-<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
-</li>
-<li>
-<p>Persons matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>find John</code><br>
-Returns <code>john</code> and <code>John Doe</code></p>
-</li>
-<li>
-<p><code>find Betsy Tim John</code><br>
-Returns any person having names <code>Betsy</code>, <code>Tim</code>, or <code>John</code></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="deleting-a-person-code-delete-code"><a class="link" href="#deleting-a-person-code-delete-code">3.10. Deleting a person : <code>delete</code></a></h3>
-<div class="paragraph">
-<p>Deletes the specified person from the incident Manager.<br>
-Format: <code>delete INDEX</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Deletes the person at the specified <code>INDEX</code>.</p>
-</li>
-<li>
-<p>The index refers to the index number shown in the displayed person list.</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>list</code><br>
-<code>delete 2</code><br>
-Deletes the 2nd person in the incident Manager.</p>
-</li>
-<li>
-<p><code>find Betsy</code><br>
-<code>delete 1</code><br>
-Deletes the 1st person in the results of the <code>find</code> command.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.11. Clearing all entries : <code>clear</code></a></h3>
-<div class="paragraph">
-<p>Clears all entries from the incident Manager.<br>
-Format: <code>clear</code></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.12. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.13. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.13. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.14. Saving the data</a></h3>
 <div class="paragraph">
 <p>Incident Manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.14. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="decrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#decrypting-data-files-code-coming-in-v2-0-code">3.15. Decrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
-<p><em>{explain how the user can enable/disable data encryption}</em></p>
+<p>Decrypts the incident manager data file.<br>
+Format: <code>decrypt PASSWORD</code></p>
+</div>
+<div class="paragraph">
+<p>Data files will be encrypted by default. Users can decrypt the file with the command above.</p>
 </div>
 </div>
 </div>
@@ -499,7 +585,36 @@ There is no need to save manually.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Login</strong> <code>login USERNAME</code></p>
+<p><strong>Help</strong> : <code>help</code></p>
+</li>
+<li>
+<p><strong>Login</strong> <code>login u/USERNAME p/PASSWORD</code></p>
+</li>
+<li>
+<p><strong>Logout</strong> <code>logout</code></p>
+</li>
+<li>
+<p><strong>Swap</strong> <code>swap</code></p>
+</li>
+<li>
+<p><strong>Add</strong> <code>add n/NAME p/PHONE_NUMBER e/EMAIL u/USERNAME p/PASSWORD [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com u/Agent-3 w/password t/Admin t/Team-01</code></p>
+</li>
+<li>
+<p><strong>Update</strong> : <code>update [INDEX] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [u/USERNAME] [p/PASSWORD] [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>update 2 n/James Lee e/jameslee@example.com</code></p>
+</li>
+<li>
+<p><strong>List Accounts</strong> : <code>list-p [KEYWORD] [MORE_KEYWORDS]</code><br>
+e.g. <code>list-p Admin</code></p>
+</li>
+<li>
+<p><strong>Find Accounts</strong> : <code>find-p KEYWORD [MORE_KEYWORDS]</code><br>
+e.g. <code>find-pJames Jake</code></p>
+</li>
+<li>
+<p><strong>Delete</strong> : <code>delete INDEX</code><br>
+e.g. <code>delete 3</code></p>
 </li>
 <li>
 <p><strong>New</strong> <code>new POSTAL_CODE</code></p>
@@ -510,32 +625,7 @@ There is no need to save manually.</p>
 <li>
 <p><strong>Submit</strong> <code>submit</code></p>
 </li>
-<li>
-<p><strong>Add</strong> <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague</code></p>
-</li>
-<li>
-<p><strong>Clear</strong> : <code>clear</code></p>
-</li>
-<li>
-<p><strong>Delete</strong> : <code>delete INDEX</code><br>
-e.g. <code>delete 3</code></p>
-</li>
-<li>
-<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>edit 2 n/James Lee e/jameslee@example.com</code></p>
-</li>
-<li>
-<p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code><br>
-e.g. <code>find James Jake</code></p>
-</li>
-<li>
-<p><strong>List</strong> : <code>list</code></p>
-</li>
-<li>
-<p><strong>Help</strong> : <code>help</code></p>
-</li>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-25 12:43:38 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-25 15:33:57 UTC</div></div></div></body></html>
