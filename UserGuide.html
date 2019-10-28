@@ -23,8 +23,8 @@
 <li><a href="#locating-accounts-by-name-or-username-code-find-p-code">3.8. Locating accounts by name or username: <code>find-p</code></a></li>
 <li><a href="#deleting-an-account-code-delete-code">3.9. Deleting an account : <code>delete</code></a></li>
 <li><a href="#create-new-incident-code-new-code">3.10. Create New Incident: <code>new</code></a></li>
-<li><a href="#filling-a-new-report-code-fill-code">3.11. Filling a new report: <code>fill</code></a></li>
-<li><a href="#submit-a-report-code-submit-code">3.12. Submit a report: <code>submit</code></a></li>
+<li><a href="#filling-a-draft-incident-report-code-fill-code">3.11. Filling a draft incident report: <code>fill</code></a></li>
+<li><a href="#submitting-a-completed-draft-report-code-submit-code">3.12. Submitting a completed draft report: <code>submit</code></a></li>
 <li><a href="#exiting-the-program-code-exit-code">3.13. Exiting the program : <code>exit</code></a></li>
 <li><a href="#saving-the-data">3.14. Saving the data</a></li>
 <li><a href="#decrypting-data-files-code-coming-in-v2-0-code">3.15. Decrypting data files <code>[coming in v2.0]</code></a></li>
@@ -440,108 +440,183 @@ Deletes the 1st account in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="filling-a-new-report-code-fill-code"><a class="link" href="#filling-a-new-report-code-fill-code">3.11. Filling a new report: <code>fill</code></a></h3>
-<div class="sect3">
-<h4 id="description-2"><a class="link" href="#description-2">3.11.1. Description</a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Display a list of newly created incidents.</p>
-</li>
-<li>
-<p>Based on this list, user chooses incident to fill.</p>
-</li>
-<li>
-<p>Date/time, operator name, and operator name are auto-filled.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="usage-2"><a class="link" href="#usage-2">3.11.2. Usage</a></h4>
+<h3 id="filling-a-draft-incident-report-code-fill-code"><a class="link" href="#filling-a-draft-incident-report-code-fill-code">3.11. Filling a draft incident report: <code>fill</code></a></h3>
 <div class="paragraph">
-<p>Format: <code>fill [i/index_of_incident n/CALLER_NAME d/INCIDENT_DESCRIPTION]</code></p>
+<p>Fills a draft incident report if relevant parameters are specified, otherwise lists all draft reports ready for filling.</p>
 </div>
 <div class="paragraph">
-<p>For multi-step:</p>
+<p>This command works in two modes:</p>
+</div>
+<div class="paragraph">
+<p><strong>1. No parameter mode</strong><br>
+Format: <code>fill</code><br>
+Lists all draft incident reports ready to be filled.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Prompts for name of caller. Operator types it and presses <code>enter</code>.</p>
-</li>
+<p>This command lists both incomplete and complete drafts.</p>
+<div class="ulist">
+<ul>
 <li>
-<p>Prompts for description of incident. Operator types it and presses <code>enter</code>.</p>
+<p>If no drafts exist, a relevant message is displayed in the GUI result panel while the GUI incident panel view remains unchanged.</p>
 </li>
 </ul>
 </div>
+</li>
+<li>
+<p>Example usage:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/fillCommandNoParamsBeforeScreenshot.png" alt="FillExample1">
+</div>
+</div>
+<div class="ulist">
+<div class="title">Fig X. Incident panel GUI shows all incidents before executing <code>fill</code> in no-parameter mode.</div>
+<ul>
+<li>
+<p>Expected outcome:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/fillCommandNoParamsAfterScreenshot.png" alt="fillCommandNoParamsAfterScreenshot">
+</div>
+</div>
+<div class="paragraph">
+<div class="title">Fig X. Incident panel GUI shows all draft incidents after executing <code>fill</code> in no-parameter mode.</div>
+<p><strong>2. Parameter mode</strong><br>
+Format: <code>fill [INDEX] [c/CALLER_NUMBER] [d/DESCRIPTION]</code><br>
+Fills the draft incident report corresponding to the specified index with the phone number of the caller who reported the incident and the description of the incident.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Index must be assigned <strong>with reference to the currently shown list of incidents</strong> on the GUI incident panel.</p>
+</li>
+<li>
+<p>Both incomplete and complete drafts can be filled.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Fields of complete drafts will be overwritten.</p>
+</li>
+<li>
+<p>Executing this command changes incident <code>status</code> to <code>COMPLETE_DRAFT</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Both <code>CALLER_NUMBER</code> and <code>DESCRIPTION</code> fields must be specified while executing this command.</p>
+</li>
+<li>
+<p>The newly filled draft will now appear at the top of the list of incidents in the GUI incident panel view.</p>
+</li>
+<li>
+<p>Example usage:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/fillCommandWithParamsBeforeScreenshot.png" alt="fillCommandWithParamsBeforeScreenshot">
+</div>
+</div>
+<div class="ulist">
+<div class="title">Fig X. After using <code>fill</code> in no parameter mode, this screenshot shows how to fill the 2nd incident in the displayed list.</div>
+<ul>
+<li>
+<p>Expected outcome:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/fillCommandWithParamsAfterScreenshot.png" alt="fillCommandWithParamsAfterScreenshot">
+</div>
+</div>
+<div class="paragraph">
+<div class="title">Fig X. After using <code>fill</code> in parameter mode, this screenshot shows that the description of the specified incident has been updated while the caller number has been overwritten with the new value. The status of the draft has changed from <code>INCOMPLETE_DRAFT</code> to <code>COMPLETE_DRAFT</code>.</div>
+<p>Using <code>fill</code> in both modes one after the other thus enables convenient listing and filling of target incident reports.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="submit-a-report-code-submit-code"><a class="link" href="#submit-a-report-code-submit-code">3.12. Submit a report: <code>submit</code></a></h3>
-<div class="sect3">
-<h4 id="description-3"><a class="link" href="#description-3">3.12.1. Description</a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Submits a just-filled report if one is available, else shows a list of unsubmitted draft reports.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="usage-3"><a class="link" href="#usage-3">3.12.2. Usage</a></h4>
+<h3 id="submitting-a-completed-draft-report-code-submit-code"><a class="link" href="#submitting-a-completed-draft-report-code-submit-code">3.12. Submitting a completed draft report: <code>submit</code></a></h3>
 <div class="paragraph">
-<p>Format: <code>submit</code></p>
+<p>Submits a completed draft incident report if relevant parameters are specified, otherwise lists all completed drafts ready for submission.</p>
 </div>
 <div class="paragraph">
-<p>For new report:</p>
+<p>Similar to <code>fill</code>, this command also works in two modes:</p>
+</div>
+<div class="paragraph">
+<p><strong>1. No parameter mode</strong><br>
+Format: <code>submit</code><br>
+Lists all completed draft incident reports ready for submission.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Once the user fills in a new report and presses <code>enter</code>, the IMS prompts the operator to submit.</p>
-</li>
+<p>This command only lists complete drafts.</p>
+<div class="ulist">
+<ul>
 <li>
-<p><code>y</code> or <code>submit</code>- to submit the report immediately.</p>
-</li>
-<li>
-<p>Submission has to be done before user can edit again.</p>
-</li>
-<li>
-<p><code>n</code>- to save entry as draft.</p>
+<p>If no complete drafts exist, a relevant message is displayed in the GUI result panel while the GUI incident panel view remains unchanged.</p>
 </li>
 </ul>
 </div>
+</li>
+<li>
+<p>Expected outcome of <code>submit</code>:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/submitCommandNoParamsAfterScreenshot.png" alt="submitCommandNoParamsAfterScreenshot">
+</div>
+</div>
 <div class="paragraph">
-<p>For other reports:</p>
+<div class="title">Fig X. Executing <code>submit</code> in no parameter mode lists all completed drafts ready for submission.</div>
+<p><strong>2. Parameter mode</strong><br>
+Format: <code>submit [INDEX]</code><br>
+Submits the completed draft incident report corresponding to the specified index.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>If the the <code>submit</code> command is issued at any other time, the operator will be shown an indexed list of unsubmitted draft reports.</p>
+<p>Index must be assigned <strong>with reference to the currently shown list of incidents</strong> on the GUI incident panel.</p>
 </li>
 <li>
-<p>The IMS will then prompt thehe operator to enter the index number of the report they wish to submit. The operator types that number and presses <code>enter</code> to submit the chosen report.</p>
-</li>
+<p>Only complete drafts can be submitted.</p>
+<div class="ulist">
+<ul>
 <li>
-<p>The submission of a report will trigger three other operations:</p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>an unique ID will be generated to tag the report</p>
-</li>
-<li>
-<p>an automated email will be sent to the operator&#8217;s supervisor</p>
-</li>
-<li>
-<p>the report will be saved in the database</p>
-</li>
-</ol>
-</div>
+<p>Executing this command changes incident <code>status</code> to <code>SUBMITTED_REPORT</code>.</p>
 </li>
 </ul>
 </div>
+</li>
+<li>
+<p>The newly submitted draft will now appear at the top of the list of incidents in the GUI incident panel view.</p>
+</li>
+<li>
+<p>Expected outcome of <code>submit 2</code>:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/submitCommandWithParamsAfterScreenshot.png" alt="submitCommandWithParamsAfterScreenshot">
+</div>
+</div>
+<div class="paragraph">
+<div class="title">Fig X. The incident filled using the <code>fill</code> command above has been submitted. The newly submitted incident is listed at the top and its status changes from <code>COMPLETE_DRAFT</code> to <code>SUBMITTED_REPORT</code>.</div>
+<p>Using <code>submit</code> in both modes right after using <code>fill</code> thus enables convenient submitting of newly filled complete incident report drafts.</p>
 </div>
 </div>
 <div class="sect2">
@@ -628,4 +703,4 @@ e.g. <code>delete 3</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-28 06:02:51 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-28 09:14:51 UTC</div></div></div></body></html>
