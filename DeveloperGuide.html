@@ -425,7 +425,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>IncidentManag
 <div class="sect4">
 <h5 id="command-restrictions"><a class="link" href="#command-restrictions">Command Restrictions</a></h5>
 <div class="paragraph">
-<p>Prior to login, the user is only granted access to the <code>Login</code>, <code>Add</code>, <code>Help</code>, and <code>Exit</code> commands. This is achieved via a guard statement in the <code>LogicManager</code> checking whether the user is logged in or the command created is an approved command that doesn&#8217;t require login.</p>
+<p>Prior to login, the user is only granted access to the <code>Login</code>, <code>Register</code>, <code>Help</code>, and <code>Exit</code> commands. This is achieved via a guard statement in the <code>LogicManager</code> checking whether the user is logged in or the command created is an approved command that doesn&#8217;t require login.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -466,7 +466,15 @@ Session details are displayed on the status bar in the GUI to reflect whether a 
 </table>
 </div>
 <div class="paragraph">
-<p>Uniqueness of a username is ensured by preventing duplicates during the account creation [<code>AddCommand</code>] and account update [<code>UpdateCommand</code>] processes. The respective commands will check the list of accounts in the model and throw an exception if a duplicate is found.</p>
+<p>Class Diagram for illustration:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SessionClassDiagram.png" alt="SessionClassDiagram">
+</div>
+</div>
+<div class="paragraph">
+<p>Uniqueness of a username is ensured by preventing duplicates during the account creation [<code>RegisterCommand</code>] and account update [<code>UpdateCommand</code>] processes. The respective commands will check the list of accounts in the model and throw an exception if a duplicate is found.</p>
 </div>
 </div>
 <div class="sect4">
@@ -494,7 +502,7 @@ Session details are displayed on the status bar in the GUI to reflect whether a 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Non-admins can still edit their own account details via the <code>Update</code> command. Refer to user guide for more info.
+Non-admins can still edit their own account details via the <code>UpdateCommand</code>. Refer to user guide for more info.
 </td>
 </tr>
 </table>
@@ -519,7 +527,7 @@ Non-admins can still edit their own account details via the <code>Update</code> 
 </ul>
 </div>
 <div class="paragraph">
-<p>The checks described above all function in the command execution stage. The <code>AddCommand</code>, <code>UpdateCommand</code>, and <code>DeleteCommand</code> retrieves the logged in <code>Person</code> from the <code>Model</code> via utilisation of the <code>Session</code> object.</p>
+<p>The checks described above all function in the command execution stage. The <code>RegisterCommand</code>, <code>UpdateCommand</code>, and <code>DeleteCommand</code> retrieves the logged in <code>Person</code> from the <code>Model</code> via utilisation of the <code>Session</code> object.</p>
 </div>
 <div class="paragraph">
 <p>Sequence Diagram for illustration:</p>
@@ -528,6 +536,18 @@ Non-admins can still edit their own account details via the <code>Update</code> 
 <div class="content">
 <img src="images/AccessSequenceDiagram.png" alt="AccessSequenceDiagram">
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The lifeline for DeleteCommand should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -650,7 +670,7 @@ Non-admins can still edit their own account details via the <code>Update</code> 
 <div class="ulist">
 <ul>
 <li>
-<p>Add Command - Creates a new user account.</p>
+<p>Register Command - Creates a new user account.</p>
 </li>
 <li>
 <p>Update Command - Edits a user account. Not including an index updates your own account.</p>
@@ -676,25 +696,16 @@ Non-admins can still edit their own account details via the <code>Update</code> 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Only <code>Admin</code> accounts can access the full suite of account management features. See access control feature for more information. Non-Admins only have access to <code>Add</code>, <code>List</code>, <code>Find</code>, and <code>Swap</code> commands, as well as <code>Update</code> for their own account.
+Users are restricted from accessing commands affecting objects not on display. They need to invoke <code>Swap</code> to access the different command suites.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>In the code base, Persons represent user accounts. See person model for more information.</p>
+<p>Only <code>Admin</code> accounts can access the full suite of account management features. See access control feature for more information. Non-Admins only have access to <code>Register</code>, <code>List</code>, <code>Find</code>, and <code>Swap</code> commands, as well as <code>Update</code> for their own account.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The swap command also restricts users from accessing commands affecting objects not on display.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>In the code base, Persons represent user accounts. See person model for more information.</p>
 </div>
 </div>
 <div class="sect3">
@@ -741,10 +752,10 @@ The swap command also restricts users from accessing commands affecting objects 
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy to implement.</p>
+<p>Pros: Does not require argument prefixes, improves user experience.</p>
 </li>
 <li>
-<p>Cons: User might get confused between list and find command usage.</p>
+<p>Cons: Decreases system cohesiveness as searching is performed in two separate commands.</p>
 </li>
 </ul>
 </div>
@@ -754,10 +765,10 @@ The swap command also restricts users from accessing commands affecting objects 
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Centralise all account search operations in one command.</p>
+<p>Pros: Centralise all account search operations in one command, improves system cohesiveness.</p>
 </li>
 <li>
-<p>Cons: Requires the addition of argument prefixes, hard to implement.</p>
+<p>Cons: Requires the addition of argument prefixes, decreases user experience.</p>
 </li>
 </ul>
 </div>
@@ -2125,4 +2136,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-30 14:23:35 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-30 14:34:52 UTC</div></div></div></body></html>

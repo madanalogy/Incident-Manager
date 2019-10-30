@@ -17,11 +17,11 @@
 <li><a href="#logging-in-code-login-code">3.2. Logging in: <code>login</code></a></li>
 <li><a href="#logging-out-code-logout-code">3.3. Logging out: <code>logout</code></a></li>
 <li><a href="#swapping-interfaces-code-swap-code">3.4. Swapping interfaces: <code>swap</code></a></li>
-<li><a href="#adding-a-user-code-add-code">3.5. Adding a user: <code>add</code></a></li>
+<li><a href="#registering-an-account-code-register-code">3.5. Registering an account: <code>register</code></a></li>
 <li><a href="#updating-an-account-code-update-code">3.6. Updating an account : <code>update</code></a></li>
-<li><a href="#listing-accounts-code-list-p-code">3.7. Listing accounts : <code>list-p</code></a></li>
-<li><a href="#locating-accounts-by-name-or-username-code-find-p-code">3.8. Locating accounts by name or username: <code>find-p</code></a></li>
-<li><a href="#deleting-an-account-code-delete-code">3.9. Deleting an account : <code>delete</code></a></li>
+<li><a href="#listing-accounts-code-list-a-code">3.7. Listing accounts : <code>list-a</code></a></li>
+<li><a href="#locating-accounts-by-name-or-username-code-find-a-code">3.8. Locating accounts by name or username: <code>find-a</code></a></li>
+<li><a href="#deleting-an-account-code-delete-a-code">3.9. Deleting an account : <code>delete-a</code></a></li>
 <li><a href="#create-new-incident-code-new-code">3.10. Create New Incident: <code>new</code></a></li>
 <li><a href="#filling-a-draft-incident-report-code-fill-code">3.11. Filling a draft incident report: <code>fill</code></a></li>
 <li><a href="#submitting-a-completed-draft-report-code-submit-code">3.12. Submitting a completed draft report: <code>submit</code></a></li>
@@ -139,7 +139,7 @@ Format: <code>login u/USERNAME p/PASSWORD</code></p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The only commands available prior to login are <code>Add</code>, <code>Login</code>, <code>Help</code>, and <code>Exit</code>.
+The only commands available prior to login are <code>Register</code>, <code>Login</code>, <code>Help</code>, and <code>Exit</code>.
 </td>
 </tr>
 </table>
@@ -172,10 +172,10 @@ A user cannot access commands affecting entities not displayed in their current 
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-user-code-add-code"><a class="link" href="#adding-a-user-code-add-code">3.5. Adding a user: <code>add</code></a></h3>
+<h3 id="registering-an-account-code-register-code"><a class="link" href="#registering-an-account-code-register-code">3.5. Registering an account: <code>register</code></a></h3>
 <div class="paragraph">
-<p>Adds an account to the IMS as a registered user<br>
-Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL u/USERNAME p/PASSWORD [t/TAG]&#8230;&#8203;</code></p>
+<p>Registers an account into the Incident Management System<br>
+Format: <code>register n/NAME p/PHONE_NUMBER e/EMAIL u/USERNAME p/PASSWORD [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -195,10 +195,10 @@ A account can have any number of tags (including 0). Only logged-in admins can a
 <div class="ulist">
 <ul>
 <li>
-<p><code>add n/John Doe p/98765432 e/johnd@example.com u/op1</code></p>
+<p><code>register n/John Doe p/98765432 e/johnd@example.com u/op1</code></p>
 </li>
 <li>
-<p><code>add n/Betsy Crowe e/betsycrowe@example.com u/oc1 p/1234567 t/Team-1-OC</code></p>
+<p><code>register n/Betsy Crowe e/betsycrowe@example.com u/oc1 p/1234567 t/Team-1-OC</code></p>
 </li>
 </ul>
 </div>
@@ -267,7 +267,7 @@ updates the name of the 2nd account to be <code>Betsy Crower</code> and clears a
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-accounts-code-list-p-code"><a class="link" href="#listing-accounts-code-list-p-code">3.7. Listing accounts : <code>list-p</code></a></h3>
+<h3 id="listing-accounts-code-list-a-code"><a class="link" href="#listing-accounts-code-list-a-code">3.7. Listing accounts : <code>list-a</code></a></h3>
 <div class="paragraph">
 <p>Shows a list of all accounts registered in the incident Manager or those whose tags match any of the keywords if a keyword is specified.<br>
 Format: <code>list-p [KEYWORD] [MORE_KEYWORDS]</code></p>
@@ -286,18 +286,33 @@ Format: <code>list-p [KEYWORD] [MORE_KEYWORDS]</code></p>
 <p>Only full words will be matched e.g. <code>ad</code> will not match <code>admin</code></p>
 </li>
 <li>
-<p>accounts matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>admin team-1</code> will return all accounts with the <code>admin</code> tag and those with the <code>team-1</code> tag.</p>
+<p>Accounts matching all keywords will be returned (i.e. <code>AND</code> search).</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list-a</code><br>
+Displays the entire list of accounts</p>
+</li>
+<li>
+<p><code>list-a team-1 admin</code><br>
+Returns a list of all accounts that have both the <code>admin</code> and <code>team-1</code> tag</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect2">
-<h3 id="locating-accounts-by-name-or-username-code-find-p-code"><a class="link" href="#locating-accounts-by-name-or-username-code-find-p-code">3.8. Locating accounts by name or username: <code>find-p</code></a></h3>
+<h3 id="locating-accounts-by-name-or-username-code-find-a-code"><a class="link" href="#locating-accounts-by-name-or-username-code-find-a-code">3.8. Locating accounts by name or username: <code>find-a</code></a></h3>
 <div class="paragraph">
 <p>Finds accounts whose name or username contains any of the given keywords.<br>
-Format: <code>find-p KEYWORD [MORE_KEYWORDS]</code></p>
+Format: <code>find-a KEYWORD [MORE_KEYWORDS]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -313,7 +328,10 @@ Format: <code>find-p KEYWORD [MORE_KEYWORDS]</code></p>
 <p>Only the name and username is searched.</p>
 </li>
 <li>
-<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
+<p>Only full words will be matched for Names e.g. <code>Han</code> will not match <code>Hans</code></p>
+</li>
+<li>
+<p>Partial words will be matched for Usernames e.g. <code>Agent</code> will match <code>Agent01</code></p>
 </li>
 <li>
 <p>Accounts matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
@@ -328,21 +346,21 @@ Format: <code>find-p KEYWORD [MORE_KEYWORDS]</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>find-p John</code><br>
+<p><code>find-a John</code><br>
 Returns <code>john</code> and <code>John Doe</code></p>
 </li>
 <li>
-<p><code>find-p Betsy Tim John</code><br>
-Returns any account having names or usernames <code>Betsy</code>, <code>Tim</code>, or <code>John</code></p>
+<p><code>find-a Betsy agent</code><br>
+Returns any account having names or usernames <code>Betsy</code> or <code>agent</code></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-an-account-code-delete-code"><a class="link" href="#deleting-an-account-code-delete-code">3.9. Deleting an account : <code>delete</code></a></h3>
+<h3 id="deleting-an-account-code-delete-a-code"><a class="link" href="#deleting-an-account-code-delete-a-code">3.9. Deleting an account : <code>delete-a</code></a></h3>
 <div class="paragraph">
 <p>Deletes the specified account from the incident Manager.<br>
-Format: <code>delete INDEX</code></p>
+Format: <code>delete-a INDEX</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -368,7 +386,7 @@ Format: <code>delete INDEX</code></p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Only admins can access the delete command.
+Only admins can access the delete command. You cannot delete your own account.
 </td>
 </tr>
 </table>
@@ -380,12 +398,12 @@ Only admins can access the delete command.
 <ul>
 <li>
 <p><code>list</code><br>
-<code>delete 2</code><br>
+<code>delete-a 2</code><br>
 Deletes the 2nd account in the incident Manager.</p>
 </li>
 <li>
-<p><code>find Betsy</code><br>
-<code>delete 1</code><br>
+<p><code>find-a Agent01</code><br>
+<code>delete-a 1</code><br>
 Deletes the 1st account in the results of the <code>find</code> command.</p>
 </li>
 </ul>
@@ -1275,4 +1293,4 @@ e.g. <code>find-v ds/1 2 3</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-30 14:23:35 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-30 14:34:52 UTC</div></div></div></body></html>
