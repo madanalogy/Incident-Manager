@@ -813,10 +813,20 @@ Users are restricted from accessing commands affecting objects not on display. T
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Reduces number of steps of execution.</p>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Reduces number of steps of execution.</p>
 </li>
 <li>
-<p>Cons: User does not get to choose vehicle to dispatch.</p>
+<p>User need not waste time on decision making; an available vehicle will be dispatched directly, and if no vehicles are available, user will be notified as well.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons: User does not get to choose vehicle to dispatch, especially if vehicle of a specific type is wanted.</p>
 </li>
 </ul>
 </div>
@@ -826,10 +836,10 @@ Users are restricted from accessing commands affecting objects not on display. T
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: User is able to choose vehicle to dispatch.</p>
+<p>Pros: User is able to choose vehicle to dispatch, especially if a specific vehicle type is wanted.</p>
 </li>
 <li>
-<p>Cons: More number of steps.</p>
+<p>Cons: More number of steps, potentially a waste of time.</p>
 </li>
 </ul>
 </div>
@@ -1379,16 +1389,16 @@ using <code>EditIncident</code> each time the command is executed and then repla
 <div class="ulist">
 <ul>
 <li>
-<p>Unfiltered - Displays all vehicles in <code>Model</code></p>
+<p>Unfiltered - Displays all vehicles in <code>Model</code>.</p>
 </li>
 <li>
-<p>District - Displays all vehicles with exact matches in <code>District district</code> in <code>Vehicle vehicle</code></p>
+<p>District - Displays all vehicles with <code>District district</code> in list of specified districts.</p>
 </li>
 <li>
-<p>Vehicle Number - Displays all vehicles with exact matches in <code>VehicleNumber vehicleNumber</code> in <code>Vehicle vehicle</code></p>
+<p>Vehicle Number - Displays all vehicles with <code>VehicleNumber vehicleNumberKeyword</code> in <code>Vehicle vehicle</code>. Need not be exact matches.</p>
 </li>
 <li>
-<p>Vehicle Type - Displays all vehicles with exact matches in <code>VehicleType vehicleType</code> in <code>Vehicle vehicle</code></p>
+<p>Vehicle Type - Displays all vehicles with exact matches in <code>VehicleType vehicleType</code> in <code>Vehicle vehicle</code>.</p>
 </li>
 </ul>
 </div>
@@ -1410,7 +1420,7 @@ using <code>EditIncident</code> each time the command is executed and then repla
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Current choice:</strong> Parse user input after flag (eg. <code>ds\</code> or <code>vnum\</code>)</p>
+<p><strong>Current choice:</strong> Parse user input after flag (eg. <code>ds/</code> or <code>vnum/</code>)</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1433,6 +1443,12 @@ using <code>EditIncident</code> each time the command is executed and then repla
 <li>
 <p>Have to parse keyword from command and flag, user has to follow style of flag for successful search.</p>
 </li>
+<li>
+<p>User might confuse relevant flags, eg ds/ and l/, as they both pertain to districts.</p>
+</li>
+<li>
+<p>User might have to remember too many flags.</p>
+</li>
 </ul>
 </div>
 </li>
@@ -1444,7 +1460,17 @@ using <code>EditIncident</code> each time the command is executed and then repla
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Separates command from keyword for ease of reading and parsing.</p>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Separates command from keyword for ease of reading and parsing.</p>
+</li>
+<li>
+<p>User need not remember flags and will not confuse flags, just key in information as prompted.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p>Cons:</p>
@@ -1466,31 +1492,48 @@ using <code>EditIncident</code> each time the command is executed and then repla
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-how-listing-all-incidents-is-called-2"><a class="link" href="#aspect-how-listing-all-incidents-is-called-2">Aspect: How listing all incidents is called</a></h5>
+<h5 id="aspect-how-listing-all-vehicles-is-called"><a class="link" href="#aspect-how-listing-all-vehicles-is-called">Aspect: How listing all vehicles is called</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Current choice:</strong> Utilise separate command <code>vehicles</code></p>
+<p><strong>Current choice:</strong> Utilise separate command <code>list-v</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy to implement.</p>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Intuitive to user, as it contains clear action word.</p>
 </li>
 <li>
-<p>Cons: Might not be very intuitive; user might prefer action words like `list vehicles"</p>
+<p>Consistent with other list commands.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Utilise <code>list</code> command (eg. <code>list vehicles</code>)</p>
+<p>Cons:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Intuitive and clear.</p>
+<p>Some users might find it more intuitive to simply call <code>vehicles</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Cons: More keywords to parse.</p>
+<p><strong>Alternative 2:</strong> Utilise separate command <code>vehicles</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Intuitive for some.</p>
+</li>
+<li>
+<p>Cons: Appears separate from other list commands even though they are of the same nature and implemented similarly.</p>
 </li>
 </ul>
 </div>
@@ -2136,4 +2179,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-31 08:16:08 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-31 08:21:49 UTC</div></div></div></body></html>
