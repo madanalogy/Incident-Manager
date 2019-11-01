@@ -30,11 +30,12 @@
 <li><a href="#editing-an-incident-code-edit-i-code">3.15. Editing an Incident: <code>edit-i</code></a></li>
 <li><a href="#adding-a-vehicle-code-add-v-code">3.16. Adding a Vehicle: <code>add-v</code></a></li>
 <li><a href="#editing-a-vehicle-code-edit-v-code">3.17. Editing a Vehicle: <code>edit-v</code></a></li>
-<li><a href="#deleting-a-vehicle-code-delete-v-code">3.18. Deleting a Vehicle: <code>delete-v</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.19. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.20. Saving the data</a></li>
-<li><a href="#track-incident-history-code-coming-in-v2-0-code">3.21. Track incident history <code>[coming in v2.0]</code></a></li>
-<li><a href="#decrypting-data-files-code-coming-in-v2-0-code">3.22. Decrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#finding-a-vehicle-code-find-v-code">3.18. Finding a Vehicle: <code>find-v</code></a></li>
+<li><a href="#deleting-a-vehicle-code-delete-v-code">3.19. Deleting a Vehicle: <code>delete-v</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.20. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.21. Saving the data</a></li>
+<li><a href="#track-incident-history-code-coming-in-v2-0-code">3.22. Track incident history <code>[coming in v2.0]</code></a></li>
+<li><a href="#decrypting-data-files-code-coming-in-v2-0-code">3.23. Decrypting data files <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -454,34 +455,6 @@ Deletes the 1st account in the results of the <code>find</code> command.</p>
 </div>
 <div class="sect2">
 <h3 id="create-new-incident-code-new-code"><a class="link" href="#create-new-incident-code-new-code">3.10. Create New Incident: <code>new</code></a></h3>
-<div class="sect3">
-<h4 id="assumptions"><a class="link" href="#assumptions">3.10.1. Assumptions</a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p>User has logged in</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="description"><a class="link" href="#description">3.10.2. Description</a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Unique ID automatically generated for report.</p>
-</li>
-<li>
-<p>Takes in district number of accident site and dispatches vehicle near to it.</p>
-</li>
-<li>
-<p>Once operator picks up the call, they will key in the district number of accident site to dispatch vehicles.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="usage"><a class="link" href="#usage">3.10.3. Usage</a></h4>
 <div class="paragraph">
 <p>This command works in two ways:</p>
 </div>
@@ -565,11 +538,22 @@ Format: <code>new l/DISTRICT_NUM auto/n</code></p>
 <img src="images/newCommandAutoNAfterPromptSS.png" alt="newCommandAutoNAfterPromptSS">
 </div>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="images/newCommandAutoNAfterSS.png" alt="newCommandAutoNAfterSS">
+<div class="paragraph">
+<p>image::newCommandAutoNAfterSS.png[</p>
 </div>
-</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+If multiple flags of the same prefix is provided by user, the command will take the last valid parameter of each prefix.<br>
+For example <code>new l/1 l/2 l/3 auto/y auto/n</code> is equivalent to <code>new l/3 auto/n</code>.<br>
+Rationale: user need not waste time backspacing if an input was keyed in wrongly.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -1168,7 +1152,90 @@ Number of fields provided for edit may vary. If no fields are provided, the vehi
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-vehicle-code-delete-v-code"><a class="link" href="#deleting-a-vehicle-code-delete-v-code">3.18. Deleting a Vehicle: <code>delete-v</code></a></h3>
+<h3 id="finding-a-vehicle-code-find-v-code"><a class="link" href="#finding-a-vehicle-code-find-v-code">3.18. Finding a Vehicle: <code>find-v</code></a></h3>
+<div class="paragraph">
+<p>Finds a vehicle by its district number, vehicle number or vehicle type.</p>
+</div>
+<div class="paragraph">
+<p>The command works in three ways:</p>
+</div>
+<div class="paragraph">
+<p><strong>1. Find by district</strong>
+Format: <code>find-v ds/DISTRICT [MORE DISTRICTS]</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>User can input multiple districts to search for vehicles in.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example usage:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/findVDsBeforeSS.png" alt="findVDsBeforeSS">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/findVDsAfterSS.png" alt="findVDsAfterSS">
+</div>
+</div>
+<div class="paragraph">
+<div class="title">Fig X finding vehicle by district number.</div>
+<p><strong>2. Find by vehicle number</strong>
+Format: <code>find-v vnum/NUMBER</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The number need not be an exact match of any vehicle number; any vehicle with input number in its vehicle number will be returned.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example usage:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/findVVnumBeforeSS.png" alt="findVVnumBeforeSS">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/findVVnumAfterSS.png" alt="findVVnumAfterSS">
+</div>
+</div>
+<div class="paragraph">
+<div class="title">Fig X finding vehicke by vehicle number.</div>
+<p><strong>3. Find by vehicle type</strong>
+Format: <code>find-v vtype/VEHICLE TYPE</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The vehicle type keyword must match the actual vehicle type exactly.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example usage:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/findVVtypeBeforeSS.png" alt="findVVtypeBeforeSS">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/findVVtypeAfterSS.png" alt="findVVtypeAfterSS">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-vehicle-code-delete-v-code"><a class="link" href="#deleting-a-vehicle-code-delete-v-code">3.19. Deleting a Vehicle: <code>delete-v</code></a></h3>
 <div class="paragraph">
 <p>Deletes a vehicle in the list as identified by the index.</p>
 </div>
@@ -1206,21 +1273,21 @@ A valid index is a positive integer and points to a vehicle displayed in the veh
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.19. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.20. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.20. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.21. Saving the data</a></h3>
 <div class="paragraph">
 <p>Incident Manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="track-incident-history-code-coming-in-v2-0-code"><a class="link" href="#track-incident-history-code-coming-in-v2-0-code">3.21. Track incident history <code>[coming in v2.0]</code></a></h3>
+<h3 id="track-incident-history-code-coming-in-v2-0-code"><a class="link" href="#track-incident-history-code-coming-in-v2-0-code">3.22. Track incident history <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p>Allows user to track any changes made to an incident report throughout its lifecycle in the incident management system.<br>
 Format: <code>track [INDEX]</code><br>
@@ -1231,7 +1298,7 @@ Function: Outputs a list of timestamps and a brief summary of changes made to th
 </div>
 </div>
 <div class="sect2">
-<h3 id="decrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#decrypting-data-files-code-coming-in-v2-0-code">3.22. Decrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="decrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#decrypting-data-files-code-coming-in-v2-0-code">3.23. Decrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p>Decrypts the incident manager data file.<br>
 Format: <code>decrypt PASSWORD</code></p>
@@ -1336,4 +1403,4 @@ e.g. <code>find-v ds/1 2 3</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-01 07:50:46 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-01 10:18:00 UTC</div></div></div></body></html>
