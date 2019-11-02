@@ -425,7 +425,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>IncidentManag
 <div class="sect4">
 <h5 id="command-restrictions"><a class="link" href="#command-restrictions">Command Restrictions</a></h5>
 <div class="paragraph">
-<p>Prior to login, the user is only granted access to the <code>Login</code>, <code>Register</code>, <code>Help</code>, and <code>Exit</code> commands. This is achieved via a guard statement in the <code>LogicManager</code> checking whether the user is logged in or the command created is an approved command that doesn&#8217;t require login.</p>
+<p>Prior to login, the user is only granted access to the <code>Login</code>, <code>Register</code>, <code>Help</code>, and <code>Exit</code> commands. This is achieved via a guard statement in the <code>IncidentManagerParser</code> checking whether the user is logged in or the command created is an approved command that doesn&#8217;t require login.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -527,7 +527,7 @@ Non-admins can still edit their own account details via the <code>UpdateCommand<
 </ul>
 </div>
 <div class="paragraph">
-<p>The checks described above all function in the command execution stage. The <code>RegisterCommand</code>, <code>UpdateCommand</code>, and <code>DeleteCommand</code> retrieves the logged in <code>Person</code> from the <code>Model</code> via utilisation of the <code>Session</code> object.</p>
+<p>The checks described above all function in the command execution stage. The <code>RegisterCommand</code>, <code>UpdateCommand</code>, and <code>DeleteCommand</code> retrieves the logged in <code>Person</code> from the <code>Model</code> via utilisation of the <code>Session</code>.</p>
 </div>
 <div class="paragraph">
 <p>Sequence Diagram for illustration:</p>
@@ -565,7 +565,7 @@ The lifeline for DeleteCommand should end at the destroy marker (X) but due to a
 <p>Pros: Early catching of restriction, command doesn&#8217;t get instantiated unnecessarily. Better user experience as error message is displayed early.</p>
 </li>
 <li>
-<p>Cons: Need to expose model to parser, increasing coupling.</p>
+<p>Cons: Need to expose model to parser as session is managed by model, increasing coupling.</p>
 </li>
 </ul>
 </div>
@@ -575,7 +575,7 @@ The lifeline for DeleteCommand should end at the destroy marker (X) but due to a
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Model does not need to be exposed to parser, decreasing coupling.</p>
+<p>Pros: Model does not need to be exposed to parser as it is already managed by command execution, decreasing coupling.</p>
 </li>
 <li>
 <p>Cons: Command still gets instantiated, memory allocated to command creation. Decreases user experience as user still has to type a proper command before the access error is thrown.</p>
@@ -611,7 +611,7 @@ The lifeline for DeleteCommand should end at the destroy marker (X) but due to a
 <p>Pros: Secure individually identifiable token.</p>
 </li>
 <li>
-<p>Cons: Prone to loss and potential duplication.</p>
+<p>Cons: Prone to loss and potential duplication. Hard to implement.</p>
 </li>
 </ul>
 </div>
@@ -631,7 +631,7 @@ The lifeline for DeleteCommand should end at the destroy marker (X) but due to a
 <p>Pros: Easy to implement.</p>
 </li>
 <li>
-<p>Cons: Users cannot add tags to themselves unless they are an admin.</p>
+<p>Cons: Easy to exploit, requires additional restrictions (e.g. users cannot add tags unless they are an admin).</p>
 </li>
 </ul>
 </div>
@@ -656,7 +656,7 @@ The lifeline for DeleteCommand should end at the destroy marker (X) but due to a
 <div class="sect3">
 <h4 id="known-issues"><a class="link" href="#known-issues">3.1.3. Known Issues</a></h4>
 <div class="paragraph">
-<p>A sufficiently advanced user can access the data file directly to manipulate account details. Data file encryption will resolve this issue, but will only be implemented in v2.0</p>
+<p>A sufficiently advanced user can access the data file directly to manipulate account details. Data file encryption (to be implemented in v2.0) will resolve this issue.</p>
 </div>
 </div>
 </div>
@@ -710,6 +710,39 @@ Users are restricted from accessing commands affecting objects not on display. T
 </div>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-interface-implementation"><a class="link" href="#aspect-interface-implementation">Aspect: Interface Implementation</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Current Choice:</strong> Utilising a swap command that transitions between two distinct interfaces.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Distinct difference in command suite utilisation (account vs incidents), giving users a much cleaner distinction of what&#8217;s being managed, improves user experience.</p>
+</li>
+<li>
+<p>Cons: Hard to implement.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative:</strong> Having account information display alongside incidents and vehicles in a separate pane.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: User might be overloaded with information in one screen, and text might get truncate in lower resolutions, decreases user experience.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
 <div class="sect4">
 <h5 id="aspect-how-update-executes"><a class="link" href="#aspect-how-update-executes">Aspect: How Update executes</a></h5>
 <div class="ulist">
@@ -2179,4 +2212,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-02 13:16:39 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-02 16:23:31 UTC</div></div></div></body></html>
