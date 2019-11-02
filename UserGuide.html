@@ -944,7 +944,7 @@ Returns any incidents whereby the description contains 'fire'</p>
 <div class="sect2">
 <h3 id="editing-an-incident-code-edit-i-code"><a class="link" href="#editing-an-incident-code-edit-i-code">3.15. Editing an Incident: <code>edit-i</code></a></h3>
 <div class="paragraph">
-<p>Edits an existing vehicle in the Incident Manager as identified by the index in the display.
+<p>Edits an existing incident in the Incident Manager as identified by the index in the display.
 Format: <code>edit-i [INDEX] [l/DISTRICT] [C/CALLER NUMBER] [d/DESCRIPTION]</code></p>
 </div>
 <div class="ulist">
@@ -982,7 +982,7 @@ If no fields are provided, incident will remain unchanged.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Incidents with all the same fields (<code>DateTime</code>, <code>District</code>, <code>Description</code>, <code>Caller Number</code>) are considered duplicates.
+Incidents with all the same fields (<code>DateTime</code>, <code>District</code>, <code>IncidentId</code>, <code>Caller Number</code>) are considered duplicates.
 </td>
 </tr>
 </table>
@@ -1029,7 +1029,7 @@ Incidents with all the same fields (<code>DateTime</code>, <code>District</code>
 <h3 id="adding-a-vehicle-code-add-v-code"><a class="link" href="#adding-a-vehicle-code-add-v-code">3.16. Adding a Vehicle: <code>add-v</code></a></h3>
 <div class="paragraph">
 <p>Adds a vehicle into the Incident Management System.
-Format: <code>add-v [l/DISTRICT] [vn/VEHICLE NUMBER] [vt/VEHICLE TYPE] [a/AVAILABILITY]</code></p>
+Format: <code>add-v [l/DISTRICT] &amp; [vn/VEHICLE NUMBER] &amp; [vt/VEHICLE TYPE] &amp; [a/AVAILABILITY]</code></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1275,6 +1275,9 @@ A valid index is a positive integer and points to a vehicle displayed in the veh
 </table>
 </div>
 </li>
+<li>
+<p>Vehicles that are currently dispatched or indicated as <code>BUSY</code> will not be able to be deleted.</p>
+</li>
 </ul>
 </div>
 <div class="imageblock">
@@ -1419,4 +1422,4 @@ e.g. <code>find-v ds/1 2 3</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-02 05:04:54 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-02 06:08:53 UTC</div></div></div></body></html>
