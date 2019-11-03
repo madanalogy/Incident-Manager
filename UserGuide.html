@@ -981,10 +981,22 @@ Returns any incidents whereby the description contains 'fire'</p>
 <p>Edits an existing incident in the Incident Manager as identified by the index in the display.
 Format: <code>edit-i [INDEX] [l/DISTRICT] [C/CALLER NUMBER] [d/DESCRIPTION]</code></p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Use <code>edit-i</code> to list all submitted reports
+</td>
+</tr>
+</table>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>If an index is not provided, system will prompt for index. Does not make any edits.</p>
+<p>Only admins can edit all reports, other users are only allowed to edit the reports they created.</p>
 </li>
 <li>
 <p>Number of fields provided for update is optional and can vary.</p>
@@ -1006,6 +1018,10 @@ If no fields are provided, incident will remain unchanged.
 </li>
 <li>
 <p>Edits that result in duplicate incidents are not allowed</p>
+</li>
+<li>
+<p>Can only edit submitted reports. Edit command should not be used on
+reports in draft state, instead, the fill command should be used.</p>
 </li>
 </ul>
 </div>
@@ -1295,6 +1311,9 @@ Format: <code>find-v vtype/VEHICLE TYPE</code></p>
 <div class="ulist">
 <ul>
 <li>
+<p>Only an admin account can delete vehicles.</p>
+</li>
+<li>
 <p>A valid index has to be provided</p>
 <div class="admonitionblock note">
 <table>
@@ -1322,6 +1341,11 @@ A valid index is a positive integer and points to a vehicle displayed in the veh
 <div class="imageblock">
 <div class="content">
 <img src="images/deleteVehicle2.png" alt="deleteVehicle2">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deleteVehicleNonAdmin.png" alt="deleteVehicleNonAdmin">
 </div>
 </div>
 </div>
@@ -1456,4 +1480,4 @@ e.g. <code>find-v ds/1 2 3</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-03 04:10:51 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-03 09:14:45 UTC</div></div></div></body></html>
