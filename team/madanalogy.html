@@ -10,7 +10,7 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Incident Management System is a desktop application used for managing incidents. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+<p>The Incident Management System is a desktop application used for managing incidents and dispatching vehicles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
 </div>
 </div>
 </div>
@@ -355,6 +355,54 @@ Returns a list of all accounts that have both the <code>admin</code> and <code>t
 </div>
 </div>
 <div class="sect2">
+<h3 id="locating-accounts-by-name-or-username-code-find-a-code"><a class="link" href="#locating-accounts-by-name-or-username-code-find-a-code">Locating accounts by name or username: <code>find-a</code></a></h3>
+<div class="paragraph">
+<p>Finds accounts whose name or username contains any of the given keywords.<br>
+Format: <code>find-a KEYWORD [MORE_KEYWORDS]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
+</li>
+<li>
+<p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
+</li>
+<li>
+<p>Only the name and username is searched.</p>
+</li>
+<li>
+<p>Only full words will be matched for Names e.g. <code>Han</code> will not match <code>Hans</code></p>
+</li>
+<li>
+<p>Partial words will be matched for Usernames e.g. <code>Agent</code> will match <code>Agent01</code></p>
+</li>
+<li>
+<p>Accounts matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find-a John</code><br>
+Returns <code>john</code> and <code>John Doe</code></p>
+</li>
+<li>
+<p><code>find-a Agent01 Betty</code>
+Returns all accounts with username or name matching either <code>agent01</code> or <code>betty</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
 <h3 id="deleting-an-account-code-delete-a-code"><a class="link" href="#deleting-an-account-code-delete-a-code">Deleting an account : <code>delete-a</code></a></h3>
 <div class="paragraph">
 <p>Deletes the specified account from the incident Manager.<br>
@@ -411,16 +459,6 @@ Deletes the 1st account in the results of the <code>find</code> command.</p>
 <div class="paragraph">
 <p>Deleting a user will search for all incidents created by the user and place a <code>deleted</code> flag next to the account details.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 100%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Omitted from this portfolio for page requirement constraints is the <code>find-a</code> command from the <a href="https://whattheduke.netlify.com/UserGuide.html#locating-accounts-by-name-or-username-code-find-a-code">user guide</a>.</em></p></td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 </div>
@@ -848,4 +886,4 @@ Users are restricted from accessing commands affecting objects not on display. T
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 02:55:20 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 05:15:48 UTC</div></div></div></body></html>
