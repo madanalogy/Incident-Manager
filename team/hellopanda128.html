@@ -1,7 +1,7 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>John Doe - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Lin Mei An - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Incident Management System</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/AY1920S1-CS2103-T11-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>John Doe - Project Portfolio</h1></div><div id="content"><div class="sect1">
-<h2 id="project-incidentmanager-level-3"><a class="link" href="#project-incidentmanager-level-3">PROJECT: IncidentManager - Level 3</a></h2>
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Incident Management System</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/AY1920S1-CS2103-T11-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Lin Mei An - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<h2 id="project-incidentmanager"><a class="link" href="#project-incidentmanager">PROJECT: IncidentManager</a></h2>
 <div class="sectionbody">
 <hr>
 </div>
@@ -10,7 +10,7 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>IncidentManager - Level 3 is a desktop incident Manager application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+<p>The Incident Management System is a desktop application used for managing incidents. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
 </div>
 </div>
 </div>
@@ -20,95 +20,40 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to undo/redo previous commands</strong></p>
+<p><strong>Major enhancement</strong>: Implemented <strong>edit</strong> for Vehicles and Incidents</p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.</p>
+<p>What it does: allows the user to edit the details of the vehicles and incidents</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.</p>
+<p>Justification: This feature allows post entry management of the elements in the Incident Manager.</p>
 </li>
 <li>
-<p>Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.</p>
+<p>Highlights: A variable number of fields can be used together with the command so that the user only needs to input fields that are necessary.</p>
 </li>
 <li>
-<p>Credits: <em>{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}</em></p>
+<p>Credits: <em>{Took reference from the edit command Addressbook lvl 3}</em></p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: added a history command that allows the user to navigate to previous commands using up/down keys.</p>
+<p><strong>Minor enhancement</strong>: Implemented other CRUD commands for Vehicle object such as <strong>add</strong> and <strong>delete</strong> as well as Incident model.</p>
 </li>
 <li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
+<p><strong>Code contributed</strong>: <a href="https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#=undefined&amp;search=hellopanda128" class="bare">https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#=undefined&amp;search=hellopanda128</a> [View on RepoSense]</p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Project management:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Enhancements to existing features:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
-</li>
-<li>
-<p>Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
 <p>Documentation:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Did cosmetic tweaks to existing contents of the User Guide: <a href="https://github.com">#14</a></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Community:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com">#12</a>, <a href="https://github.com">#32</a>, <a href="https://github.com">#19</a>, <a href="https://github.com">#42</a></p>
-</li>
-<li>
-<p>Contributed to forum discussions (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>, <a href="https://github.com">4</a>)</p>
-</li>
-<li>
-<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
-</li>
-<li>
-<p>Some parts of the history feature I added was adopted by several other class mates (<a href="https://github.com">1</a>, <a href="https://github.com">2</a>)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Tools:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Integrated a third party library (Natty) to the project (<a href="https://github.com">#42</a>)</p>
-</li>
-<li>
-<p>Integrated a new Github plugin (CircleCI) to the team repo</p>
+<p>Did cosmetic tweaks to existing contents of the README: <a href="https://github.com/AY1920S1-CS2103-T11-1/main/blob/master/README.adoc" class="bare">https://github.com/AY1920S1-CS2103-T11-1/main/blob/master/README.adoc</a></p>
 </li>
 </ul>
 </div>
@@ -137,13 +82,189 @@
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="decrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#decrypting-data-files-code-coming-in-v2-0-code">Decrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="editing-an-incident-code-edit-i-code"><a class="link" href="#editing-an-incident-code-edit-i-code">Editing an Incident: <code>edit-i</code></a></h3>
 <div class="paragraph">
-<p>Decrypts the incident manager data file.<br>
-Format: <code>decrypt PASSWORD</code></p>
+<p>Edits an existing incident in the Incident Manager as identified by the index in the display.
+Format: <code>edit-i [INDEX] [dist/DISTRICT] [C/CALLER NUMBER] [d/DESCRIPTION]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>If an index is not provided, system will prompt for index. Does not make any edits.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Use <code>edit-i</code> to list all submitted reports
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Only admins can edit all reports, other users are only allowed to edit the reports they created.</p>
+</li>
+<li>
+<p>Number of fields provided for update is optional and can vary.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If no fields are provided, incident will remain unchanged.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Existing values will be updated to input values provided.</p>
+</li>
+<li>
+<p>Edits that result in duplicate incidents are not allowed</p>
+</li>
+<li>
+<p>Can only edit submitted reports. Edit command should not be used on
+reports in draft state, instead, the fill command should be used.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Incidents with all the same fields (<code>DateTime</code>, <code>District</code>, <code>IncidentId</code>, <code>Caller Number</code>) are considered duplicates.
+</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 <div class="paragraph">
-<p>Data files will be encrypted by default. Users can decrypt the file with the command above.</p>
+<p>Example of input:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit-i 1 dist/2 d/This is an incident description.</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>result: only district and description is changed.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>edit-i 1</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>result: <code>No new fields were provided, incident is not edited.</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/editIncident1.png" alt="editIncident1">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/editIncident2.png" alt="editIncident2">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editing-a-vehicle-code-edit-v-code"><a class="link" href="#editing-a-vehicle-code-edit-v-code">Editing a Vehicle: <code>edit-v</code></a></h3>
+<div class="paragraph">
+<p>Edits a vehicle identified by the index displayed in the Incident Management System.
+Format: <code>edit-v [INDEX] [dist/DISTRICT] [vn/VEHICLE NUMBER] [vt/VEHICLE TYPE] [a/AVAILABILITY]</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Number of fields provided for edit may vary. If no fields are provided, the vehicle will not be edited.
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Edit inputs that result in duplicate vehicles in the list will not be allowed.</p>
+</li>
+<li>
+<p>Only vehicles displayed on the interface are valid of edit.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values given.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit-v 1 dist/13 vt/Ambulance</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>result: district will be changed to 13 and vehicle type will be changed to Ambulance</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Edit vehicle:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/editVehicle1.png" alt="editVehicle1">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/editVehicle2.png" alt="editVehicle2">
+</div>
+</div>
+<div class="paragraph">
+<p>Edit Vehicle that results in duplicates:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/editDuplicateVeh1.png" alt="editDuplicateVeh1">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/editDuplicateVeh2.png" alt="editDuplicateVeh2">
+</div>
 </div>
 </div>
 </div>
@@ -161,14 +282,76 @@ Format: <code>decrypt PASSWORD</code></p>
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="sect1">
-<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">PROJECT: PowerPointLabs</a></h2>
-<div class="sectionbody">
-<hr>
+<div class="sect2">
+<h3 id="incident-edit-feature"><a class="link" href="#incident-edit-feature">Incident Edit feature</a></h3>
+<div class="sect3">
+<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">Proposed Implementation</a></h4>
 <div class="paragraph">
-<p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
+<p>The incident edit mechanism is facilitated by <code>EditCommand</code> class. Validity of user input is checked when <code>execute()</code> is called and an exception is thrown if invalid.</p>
+</div>
+<div class="paragraph">
+<p>An exception will be thrown under these 2 conditions:
+* <code>index.getZeroBased() &gt;= listOfIncidents.size()</code>
+* <code>!incidentToEdit.equals(editedIncident) &amp;&amp; model.hasIncident(editedIncident)</code></p>
+</div>
+<div class="paragraph">
+<p>Below is an activity diagram to illustrate the process that the user may go through</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/EditCommandActivity.png" alt="EditCommandActivity">
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 13:47:21 UTC</div></div></div></body></html>
+<div class="paragraph">
+<p>To prevent direct access and modification to the attributes in an incident object, a new incident object is created
+using <code>EditIncident</code> each time the command is executed and then replaced at the specified index in a
+<code>List&lt;Incident&gt;</code> that is facilitated by <code>FilteredIncidentList</code> class. This is all done in the execution stage.</p>
+</div>
+<div class="paragraph">
+<p>Below is a sequence diagram to illustrate how the command executes:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/EditCommandSequence.png" alt="EditCommandSequence">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-incident-edit-executes"><a class="link" href="#aspect-how-incident-edit-executes">Aspect: How incident edit executes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Current choice:</strong> Create a new incident object and replace the old copy in the list</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: able to control access to attributes in incident objects</p>
+</li>
+<li>
+<p>Cons: more tedious implementation and more objects created</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative:</strong> Directly access the attributes of the incident and change it</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: less objects created, do not need to worry much about <code>IncidentId</code> of instance.</p>
+</li>
+<li>
+<p>Cons: More prone to errors since attributes can be directly access and changed outside the class.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 13:59:06 UTC</div></div></div></body></html>
