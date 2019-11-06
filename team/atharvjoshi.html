@@ -1,7 +1,7 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>John Doe - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Atharv Joshi - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Incident Management System</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/AY1920S1-CS2103-T11-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>John Doe - Project Portfolio</h1></div><div id="content"><div class="sect1">
-<h2 id="project-incidentmanager-level-3"><a class="link" href="#project-incidentmanager-level-3">PROJECT: IncidentManager - Level 3</a></h2>
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Incident Management System</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/AY1920S1-CS2103-T11-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Atharv Joshi - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<h2 id="project-incident-management-system"><a class="link" href="#project-incident-management-system">PROJECT: Incident Management System</a></h2>
 <div class="sectionbody">
 <hr>
 </div>
@@ -10,7 +10,7 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>IncidentManager - Level 3 is a desktop incident Manager application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+<p>The Incident Management System is a desktop application used by emergency call operators for managing incidents. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
 </div>
 </div>
 </div>
@@ -20,29 +20,52 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to undo/redo previous commands</strong></p>
+<p><strong>Major enhancement</strong>: Implemented <strong>Incident Filling and Submission</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.</p>
+<p>What it does: Allows users to identify and subsequently fill and/or submit incident reports in the system.</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.</p>
+<p>Justification: This enhancement improves the product by:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>(1) fulfilling its most basic function of reporting incidents.</p>
 </li>
 <li>
-<p>Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.</p>
+<p>(2) categorising incidents into 'drafts' which can be filled and/or re-filled before they become 'submitted reports' officially registered in the system.</p>
 </li>
 <li>
-<p>Credits: <em>{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}</em></p>
+<p>(3) providing users a convenient way to list incidents ready for filling and submission.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: added a history command that allows the user to navigate to previous commands using up/down keys.</p>
+<p>Highlights: This enhancement affects existing commands and modifies the Incident model (and hence, UI) behaviour.
+It is designed so it can be easily extended to accommodate changes to the Incident model.
+It required an in-depth analysis of design alternatives.
+The implementation too was challenging as it required brainstorming a seamless way of tracking changes to the status of incidents.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
+<p><strong>Minor enhancement</strong>: Implemented <strong>Incident and Vehicle GUI layout</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Summary: this enhancement allows users to view incident reports and on-duty vehicles side-by-side in a readable format.</p>
+</li>
+<li>
+<p>Highlights: this enhancement required in-depth understanding of the GUI design and JavaFX syntax for its implementation.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#=undefined&amp;search=atharvjoshi">View on RepoSense</a>]</p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
@@ -53,62 +76,17 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
+<p>Integrated Travis CI to the team repo</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Enhancements to existing features:</p>
+<p>Team tasks:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
-</li>
-<li>
-<p>Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Documentation:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Did cosmetic tweaks to existing contents of the User Guide: <a href="https://github.com">#14</a></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Community:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com">#12</a>, <a href="https://github.com">#32</a>, <a href="https://github.com">#19</a>, <a href="https://github.com">#42</a></p>
-</li>
-<li>
-<p>Contributed to forum discussions (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>, <a href="https://github.com">4</a>)</p>
-</li>
-<li>
-<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
-</li>
-<li>
-<p>Some parts of the history feature I added was adopted by several other class mates (<a href="https://github.com">1</a>, <a href="https://github.com">2</a>)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Tools:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Integrated a third party library (Natty) to the project (<a href="https://github.com">#42</a>)</p>
-</li>
-<li>
-<p>Integrated a new Github plugin (CircleCI) to the team repo</p>
+<p>Created initial UI mockup of the product [<a href="https://github.com/AY1920S1-CS2103-T11-1/main/pull/16">#16</a>]</p>
 </li>
 </ul>
 </div>
@@ -117,9 +95,6 @@
 </div>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p><em>{you can add/remove categories in the list above}</em></p>
 </div>
 </div>
 </div>
@@ -137,13 +112,235 @@
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="decrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#decrypting-data-files-code-coming-in-v2-0-code">Decrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="filling-a-draft-incident-report-code-fill-code"><a class="link" href="#filling-a-draft-incident-report-code-fill-code">Filling a draft incident report: <code>fill</code></a></h3>
 <div class="paragraph">
-<p>Decrypts the incident manager data file.<br>
-Format: <code>decrypt PASSWORD</code></p>
+<p>Fills a draft incident report if relevant parameters are specified, otherwise lists all draft reports ready for filling.</p>
 </div>
 <div class="paragraph">
-<p>Data files will be encrypted by default. Users can decrypt the file with the command above.</p>
+<p>This command works in two modes:</p>
+</div>
+<div class="paragraph">
+<p><strong>1. No parameter mode</strong><br>
+Format: <code>fill</code><br>
+Lists all draft incident reports ready to be filled.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>This command lists both incomplete and complete drafts.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If no drafts exist, a relevant message is displayed in the GUI result panel while the GUI incident panel view remains unchanged.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The user can only fill the draft incident reports that have been created by them.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Example usage:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/fillCommandNoParamsBeforeScreenshot.png" alt="FillExample1">
+</div>
+</div>
+<div class="ulist">
+<div class="title">Fig X. Incident panel GUI shows all incidents before executing <code>fill</code> in no-parameter mode.</div>
+<ul>
+<li>
+<p>Expected outcome:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/fillCommandNoParamsAfterScreenshot.png" alt="fillCommandNoParamsAfterScreenshot">
+</div>
+</div>
+<div class="paragraph">
+<div class="title">Fig X. Incident panel GUI shows all draft incidents after executing <code>fill</code> in no-parameter mode.</div>
+<p><strong>2. Parameter mode</strong><br>
+Format: <code>fill [INDEX] [c/CALLER_NUMBER] [d/DESCRIPTION]</code><br>
+Fills the draft incident report corresponding to the specified index with the phone number of the caller who reported the incident and the description of the incident.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Index must be assigned <strong>with reference to the currently shown list of incidents</strong> on the GUI incident panel.</p>
+</li>
+<li>
+<p>Both incomplete and complete drafts can be filled.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Fields of complete drafts will be overwritten.</p>
+</li>
+<li>
+<p>Executing this command changes incident <code>status</code> to <code>COMPLETE_DRAFT</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Both <code>CALLER_NUMBER</code> and <code>DESCRIPTION</code> fields must be specified while executing this command.</p>
+</li>
+<li>
+<p>The newly filled draft will now appear at the top of the list of incidents in the GUI incident panel view.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Example usage:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/fillCommandWithParamsBeforeScreenshot.png" alt="fillCommandWithParamsBeforeScreenshot">
+</div>
+</div>
+<div class="ulist">
+<div class="title">Fig X. After using <code>fill</code> in no parameter mode, this screenshot shows how to fill the 2nd incident in the displayed list.</div>
+<ul>
+<li>
+<p>Expected outcome:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/fillCommandWithParamsAfterScreenshot.png" alt="fillCommandWithParamsAfterScreenshot">
+</div>
+</div>
+<div class="paragraph">
+<div class="title">Fig X. After using <code>fill</code> in parameter mode, this screenshot shows that the description of the specified incident has been updated while the caller number has been overwritten with the new value. The status of the draft has changed from <code>INCOMPLETE_DRAFT</code> to <code>COMPLETE_DRAFT</code>.</div>
+<p>Using <code>fill</code> in both modes one after the other thus enables convenient listing and filling of target incident reports.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="submitting-a-completed-draft-report-code-submit-code"><a class="link" href="#submitting-a-completed-draft-report-code-submit-code">Submitting a completed draft report: <code>submit</code></a></h3>
+<div class="paragraph">
+<p>Submits a completed draft incident report if relevant parameters are specified, otherwise lists all completed drafts ready for submission.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The user can only submit the completed incident reports that have been created by them.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Similar to <code>fill</code>, this command also works in two modes:</p>
+</div>
+<div class="paragraph">
+<p><strong>1. No parameter mode</strong><br>
+Format: <code>submit</code><br>
+Lists all completed draft incident reports ready for submission.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>This command only lists complete drafts.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If no complete drafts exist, a relevant message is displayed in the GUI result panel while the GUI incident panel view remains unchanged.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Expected outcome of <code>submit</code>:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/submitCommandNoParamsAfterScreenshot.png" alt="submitCommandNoParamsAfterScreenshot">
+</div>
+</div>
+<div class="paragraph">
+<div class="title">Fig X. Executing <code>submit</code> in no parameter mode lists all completed drafts ready for submission.</div>
+<p><strong>2. Parameter mode</strong><br>
+Format: <code>submit [INDEX]</code><br>
+Submits the completed draft incident report corresponding to the specified index.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Index must be assigned <strong>with reference to the currently shown list of incidents</strong> on the GUI incident panel.</p>
+</li>
+<li>
+<p>Only complete drafts can be submitted.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Executing this command changes incident <code>status</code> to <code>SUBMITTED_REPORT</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The newly submitted draft will now appear at the top of the list of incidents in the GUI incident panel view.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Expected outcome of <code>submit 2</code>:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/submitCommandWithParamsAfterScreenshot.png" alt="submitCommandWithParamsAfterScreenshot">
+</div>
+</div>
+<div class="paragraph">
+<div class="title">Fig X. The incident filled using the <code>fill</code> command above has been submitted. The newly submitted incident is listed at the top and its status changes from <code>COMPLETE_DRAFT</code> to <code>SUBMITTED_REPORT</code>.</div>
+<p>Using <code>submit</code> in both modes right after using <code>fill</code> thus enables convenient submitting of newly filled complete incident report drafts.</p>
 </div>
 </div>
 </div>
@@ -161,14 +358,332 @@ Format: <code>decrypt PASSWORD</code></p>
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="sect1">
-<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">PROJECT: PowerPointLabs</a></h2>
-<div class="sectionbody">
-<hr>
+<div class="sect2">
+<h3 id="incident-filling-and-submission-feature"><a class="link" href="#incident-filling-and-submission-feature">Incident Filling and Submission feature</a></h3>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
 <div class="paragraph">
-<p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
+<p>The incident filling and submission subroutines are facilitated by the <code>fill</code> and <code>submit</code> commands respectively.
+In the IMS, each incident can have one of three statuses - <code>INCOMPLETE_DRAFT</code>, <code>COMPLETE_DRAFT</code>, and <code>SUBMITTED REPORT</code>.
+These three statuses are maintained by an <code>enum</code> in <code>Incident</code>. Executing the <code>fill</code> command changes the status of
+drafts (complete or incomplete) into <code>COMPLETE_DRAFT</code> while the <code>submit</code> command changes the status of only <code>COMPLETE_DRAFTS</code> to <code>SUBMITTED_REPORT</code>.</p>
+</div>
+<div class="sect4">
+<h5 id="overview-of-code-fill-code-and-code-submit-code"><a class="link" href="#overview-of-code-fill-code-and-code-submit-code">Overview of <code>Fill</code> and <code>Submit</code></a></h5>
+<div class="paragraph">
+<p>Each command works in two modes:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Without parameters:<br>
+In this mode, the command - <code>fill</code> or <code>submit</code> - lists the incidents that are ready for Filling (i.e. only all complete and incomplete drafts) or Submitting (i.e. only all complete drafts).</p>
+</li>
+<li>
+<p>With parameters:
+In this mode, the command - <code>fill</code> or <code>submit</code> - actually fills (i.e. makes incident status <code>COMPLETE_DRAFT</code>) or submits (i.e. changes incident status from <code>COMPLETE_DRAFT</code> to <code>SUBMITTED_REPORT</code>) the specified incident.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The implementation of these two modes is discussed below. As both <code>fill</code> and <code>submit</code> are rather similar in their implementation, a detailed discussion of only the <code>fill</code> command is given below.</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-05 18:25:08 UTC</div></div></div></body></html>
+<div class="sect4">
+<h5 id="no-parameter-mode-listing-incidents"><a class="link" href="#no-parameter-mode-listing-incidents">No parameter mode (listing incidents)</a></h5>
+<div class="paragraph">
+<p>This mode leverages the ability of the <code>ListIncidentsCommand</code> to list incidents by different predicates.
+When the <code>IncidentManagerParser</code> parses a <code>fill</code> command without parameters, it returns a new <code>ListIncidentsCommand</code>
+with predicate <code>Incident::isDraft</code>. This <code>ListIncidentsCommand</code> is then executed as per usual.</p>
+</div>
+<div class="paragraph">
+<p>For the <code>submit</code> command, the predicate <code>Incident::isCompleteDraft</code> is used instead.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/FillCommandNoParamsSequenceDiagram.png" alt="FillCommandNoParamsSequenceDiagram">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="parameter-mode-modifying-incidents"><a class="link" href="#parameter-mode-modifying-incidents">Parameter mode (modifying incidents)</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>For the <code>fill</code> command with parameters, the <code>FillCommandParser</code> will be invoked to parse the fields <code>targetIndex</code>, <code>callerNumber</code>, and <code>description</code> and return a <code>FillCommand</code> containing these non-null fields.</p>
+</li>
+<li>
+<p>The <code>execute()</code> method in <code>FillCommand</code> will then retrieve the specified incident if there are drafts to be filled and if the index is valid.</p>
+</li>
+<li>
+<p>Two helper methods - <code>processReportFilling</code> and <code>fillReport</code> - will complete the filling process. <code>fillReport</code> returns a new <code>Incident</code> which is a copy of the incident report to be filled, but with the specified caller and description details and a <code>COMPLETE_DRAFT</code> status.</p>
+</li>
+<li>
+<p>The old incident report will be removed from the system and be replaced with the new updated incident report.</p>
+</li>
+<li>
+<p>The new incident report is placed at the front of the incident list for easy access.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/FillCommandWithParamsSequenceDiagram.png" alt="FillCommandWithParamsSequenceDiagram">
+</div>
+</div>
+<div class="paragraph">
+<div class="title">In this sequence diagram, the helper methods within <code>FillCommand</code> are omitted for clarity.</div>
+<p>The <code>SubmitCommand</code> functions similarly, with one crucial difference. As no Incident fields are to be updated, the specified incident is simply retrieved, and its fields are copied into a new <code>Incident</code> object with a <code>SUBMITTED_REPORT</code> status.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-incident-code-fill-code-and-code-submit-code-commands-execute-in-no-parameter-mode"><a class="link" href="#aspect-how-incident-code-fill-code-and-code-submit-code-commands-execute-in-no-parameter-mode">Aspect: How incident <code>fill</code> and <code>submit</code> commands execute in no parameter mode</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Current choice:</strong> Use <code>ListIncidents</code> command with appropriate predicate to fulfill <code>fill</code> and <code>submit</code> functionalities in no-parameter mode.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:<br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Intuitive and convenient to use. If user needs easy access to reports that can be filled or submitted, they do not need to remember a new command keyword.<br></p>
+</li>
+<li>
+<p>Requires lesser code. Abstraction of the filtered listing subroutine reduces the amount of redundant code.<br></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Cons:<br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Might be potentially confusing to user as <code>FillCommand</code> is performing a function of listing that is extraneous to the function of filling.</p>
+</li>
+<li>
+<p>This mode might be redundant <strong>if</strong> the user follows a strict incident management workflow where any newly generated incident is promptly filled and submitted without it remaining in the system as a draft.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 1:</strong> Extend <code>FillCommand</code> to create two child classes <code>FillCommandNoParams</code> and <code>FillCommandWithParams</code>.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:<br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Better use of the OOP principle of inheritance.<br></p>
+</li>
+<li>
+<p>Reduce coupling between <code>ListIncidentsCommand</code> and <code>FillCommand</code>.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Con:<br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Increases amount of code and hence marginally reduces app performance as one additional new class needs to be created.</p>
+</li>
+<li>
+<p>Misleading use of abstraction as the <code>FillCommandNoParams</code> is technically not performing the function of filling but that of listing.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Separate the 'listing' and the 'filling' aspect by using separate command words.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pro:<br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Most appropriate use of abstraction and single responsibility principle, which are crucial OOP concepts.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Con:<br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User needs to either remember an additional command word or type a longer <code>list-i</code> command by specifying the filter predicate, which reduces user convenience.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-incident-code-fill-code-and-code-submit-code-commands-execute-in-parameter-mode"><a class="link" href="#aspect-how-incident-code-fill-code-and-code-submit-code-commands-execute-in-parameter-mode">Aspect: How incident <code>fill</code> and <code>submit</code> commands execute in parameter mode</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Current choice:</strong> Both <code>callerNumber</code> and <code>description</code> fields need to be specified when filling specified incident report. The other incident report fields are auto-filled and can only be changed by using the <code>edit</code> command once the incident report has been submitted.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:<br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Improved accountability. Prevents a user from changing the most important fields of the incident report, such as <code>incidentId</code>, <code>incidentDateTime</code>, and <code>vehicle</code>, without first committing the report into the system.<br></p>
+</li>
+<li>
+<p>More convenient for the user as they only have to specify 2 report fields instead of 6 or 7.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Cons:<br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User is unable to fill <code>callerNumber</code> independently of <code>description</code> unless they first submit the incident report and then use the <code>edit</code> command.</p>
+</li>
+<li>
+<p>If an incident report has a very long description, then this way of filling the report can be troublesome.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 1:</strong> Combine <code>fill</code> and <code>submit</code> functions i.e. filling a report completely will automatically submit it.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:<br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Easier to implement as Incident reports have two statuses - DRAFT or SUBMITTED - instead of three.</p>
+</li>
+<li>
+<p>More convenient as this results in one less step in the user&#8217;s workflow and one less command word for the user to remember.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Con:<br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Less adaptable and modular. If new fields are added to the incident report, then the user might want to enter / replace those fields by executing repeated fill commands in parameter mode without committing the report into the system and possibly alerting their supervisors and/or relevant agencies with incomplete / likely to change information.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Allow <code>fill</code> command to fill variable number of fields.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pro:<br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Satisfies the cons of the two approaches above as it is versatile enough to allow the user to independently fill different incident report fields as well as adaptable enough to accommodate extra fields.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Con:<br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Harder to implement as we would need to make elaborate and thorough methods to parse the variable arguments.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="known-issues"><a class="link" href="#known-issues">Known Issues</a></h4>
+<div class="paragraph">
+<p>A user cannot independently fill the various incident report fields unless they first submit the incident report.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="activity-diagram-summarising-incident-creation-filling-and-submission-features"><a class="link" href="#activity-diagram-summarising-incident-creation-filling-and-submission-features">Activity diagram summarising Incident creation, filling, and submission features</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="../images/IncidentReportingActivityDiagram.png" alt="IncidentReportingActivityDiagram">
+</div>
+</div>
+<div class="paragraph">
+<p>In this activity diagram, the catch-all term 'report' is used to encompass the acts of creating, filling, and submitting incident reports.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Design-Incident"><a class="link" href="#Design-Incident">Incident component</a></h4>
+<div class="paragraph">
+<p><strong>API</strong> : <a href="{repoURL}/src/main/java/seedu/address/model/Incident.java"><code>Incident.java</code></a></p>
+</div>
+<div class="paragraph">
+<p>The <code>Incident</code>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/IncidentClassDiagram.png" alt="IncidentClassDiagram">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Represents an incident report in the incident manager.</p>
+</li>
+<li>
+<p>Contains the attributes <code>CallerNumber</code>, <code>Description</code>, <code>IncidentDateTime</code> and IncidentId`.</p>
+</li>
+<li>
+<p>Also contains a <code>Person</code> object representing the 'Operator' who filed the incident, a <code>District</code> which represents the location of the incident, and a <code>Vehicle</code> representing the vehicle dispatched to investigate this incident.</p>
+</li>
+<li>
+<p>Has three states encapsulated by a <code>Status</code> enum - <code>INCOMPLETE_DRAFT</code> (report not completely filled and not submitted), <code>COMPLETE_DRAFT</code> (report completely filled but not submitted), and <code>SUBMITTED_REPORT</code> (report completely filled and submitted).</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 02:55:20 UTC</div></div></div></body></html>
