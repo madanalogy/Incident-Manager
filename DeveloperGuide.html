@@ -25,12 +25,14 @@
 <li><a href="#access-control-feature">3.1. Access Control feature</a></li>
 <li><a href="#account-management-feature">3.2. Account Management feature</a></li>
 <li><a href="#incident-draft-creation-feature">3.3. Incident Draft Creation feature</a></li>
-<li><a href="#incident-filling-and-submission-feature">3.4. Incident Filling and Submission feature</a></li>
-<li><a href="#incident-search-feature">3.5. Incident Search feature</a></li>
-<li><a href="#incident-edit-feature">3.6. Incident Edit feature</a></li>
-<li><a href="#vehicle-search-feature">3.7. Vehicle Search feature</a></li>
-<li><a href="#logging">3.8. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.9. Configuration</a></li>
+<li><a href="#automatic-vehicle-dispatchment">3.4. Automatic vehicle dispatchment:</a></li>
+<li><a href="#manual-vehicle-dispatchment">3.5. Manual vehicle dispatchment:</a></li>
+<li><a href="#incident-filling-and-submission-feature">3.6. Incident Filling and Submission feature</a></li>
+<li><a href="#incident-search-feature">3.7. Incident Search feature</a></li>
+<li><a href="#incident-edit-feature">3.8. Incident Edit feature</a></li>
+<li><a href="#vehicle-search-feature">3.9. Vehicle Search feature</a></li>
+<li><a href="#logging">3.10. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.11. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a></li>
@@ -824,27 +826,42 @@ Users are restricted from accessing commands affecting objects not on display. T
 <div class="sect3">
 <h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.3.1. Proposed Implementation</a></h4>
 <div class="paragraph">
-<p>The incident draft creation mechanism is facilitated by the New Command. It creates a new draft incident report based on district of incident, optional automatic vehicle dispatchment.</p>
+<p>The incident draft creation mechanism is facilitated by the New Command. It creates a new draft incident report based on district of incident, optional automatic vehicle dispatchment.
+There are two ways to use the New Command:
+1. Auto dispatchment
+2. Manual dispatchment, which requires user to provide a valid index that selects a vehicle</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="automatic-vehicle-dispatchment"><a class="link" href="#automatic-vehicle-dispatchment">3.4. Automatic vehicle dispatchment:</a></h3>
+<div class="paragraph">
+<p>Vehicle will be automatically assigned to the incident draft if any is available in the district. If no vehicle is available, an exception will be thrown.</p>
 </div>
 <div class="paragraph">
-<p>With automatic vehicle dispatchment:</p>
+<p>Below is a sequence diagram of a successful case:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/NewDraftSequenceDiagramAuto.png" alt="NewDraftSequenceDiagramAuto">
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="manual-vehicle-dispatchment"><a class="link" href="#manual-vehicle-dispatchment">3.5. Manual vehicle dispatchment:</a></h3>
 <div class="paragraph">
-<p>With manual vehicle dispatchment:</p>
+<p>User needs to key in the index of vehicle (based on the displayed vehicle list) to dispatch. If no index is provided, or the index is not a positive integer, an exception will be thrown and user will be prompted to provide a valid index.</p>
+</div>
+<div class="paragraph">
+<p>Below is a sequence diagram of a successful case:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/NewDraftSequenceDiagramManual.png" alt="NewDraftSequenceDiagramManual">
 </div>
 </div>
-</div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.5.1. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-incident-draft-creation-executes"><a class="link" href="#aspect-how-incident-draft-creation-executes">Aspect: How incident draft creation executes</a></h5>
 <div class="ulist">
@@ -891,9 +908,9 @@ Users are restricted from accessing commands affecting objects not on display. T
 </div>
 </div>
 <div class="sect2">
-<h3 id="incident-filling-and-submission-feature"><a class="link" href="#incident-filling-and-submission-feature">3.4. Incident Filling and Submission feature</a></h3>
+<h3 id="incident-filling-and-submission-feature"><a class="link" href="#incident-filling-and-submission-feature">3.6. Incident Filling and Submission feature</a></h3>
 <div class="sect3">
-<h4 id="implementation-4"><a class="link" href="#implementation-4">3.4.1. Implementation</a></h4>
+<h4 id="implementation-4"><a class="link" href="#implementation-4">3.6.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The incident filling and submission subroutines are facilitated by the <code>fill</code> and <code>submit</code> commands respectively.
 In the IMS, each incident can have one of three statuses - <code>INCOMPLETE_DRAFT</code>, <code>COMPLETE_DRAFT</code>, and <code>SUBMITTED REPORT</code>.
@@ -970,7 +987,7 @@ with predicate <code>Incident::isDraft</code>. This <code>ListIncidentsCommand</
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.6.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-incident-code-fill-code-and-code-submit-code-commands-execute-in-no-parameter-mode"><a class="link" href="#aspect-how-incident-code-fill-code-and-code-submit-code-commands-execute-in-no-parameter-mode">Aspect: How incident <code>fill</code> and <code>submit</code> commands execute in no parameter mode</a></h5>
 <div class="ulist">
@@ -1170,13 +1187,13 @@ with predicate <code>Incident::isDraft</code>. This <code>ListIncidentsCommand</
 </div>
 </div>
 <div class="sect3">
-<h4 id="known-issues-2"><a class="link" href="#known-issues-2">3.4.3. Known Issues</a></h4>
+<h4 id="known-issues-2"><a class="link" href="#known-issues-2">3.6.3. Known Issues</a></h4>
 <div class="paragraph">
 <p>A user cannot independently fill the various incident report fields unless they first submit the incident report.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="activity-diagram-summarising-incident-creation-filling-and-submission-features"><a class="link" href="#activity-diagram-summarising-incident-creation-filling-and-submission-features">3.4.4. Activity diagram summarising Incident creation, filling, and submission features</a></h4>
+<h4 id="activity-diagram-summarising-incident-creation-filling-and-submission-features"><a class="link" href="#activity-diagram-summarising-incident-creation-filling-and-submission-features">3.6.4. Activity diagram summarising Incident creation, filling, and submission features</a></h4>
 <div class="imageblock">
 <div class="content">
 <img src="images/IncidentReportingActivityDiagram.png" alt="IncidentReportingActivityDiagram">
@@ -1188,9 +1205,9 @@ with predicate <code>Incident::isDraft</code>. This <code>ListIncidentsCommand</
 </div>
 </div>
 <div class="sect2">
-<h3 id="incident-search-feature"><a class="link" href="#incident-search-feature">3.5. Incident Search feature</a></h3>
+<h3 id="incident-search-feature"><a class="link" href="#incident-search-feature">3.7. Incident Search feature</a></h3>
 <div class="sect3">
-<h4 id="implementation-5"><a class="link" href="#implementation-5">3.5.1. Implementation</a></h4>
+<h4 id="implementation-5"><a class="link" href="#implementation-5">3.7.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The incident search mechanism features a set of different types of searches that a user could utilise. Further documentation on the commands available in this set can be found within the link:https://ay1920s1-cs2103-t11-1.github.io/main/UserGuide.html. The types of searches are as listed:</p>
 </div>
@@ -1247,7 +1264,7 @@ with predicate <code>Incident::isDraft</code>. This <code>ListIncidentsCommand</
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.7.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-incident-search-keyword-is-inputted"><a class="link" href="#aspect-how-incident-search-keyword-is-inputted">Aspect: How incident search keyword is inputted</a></h5>
 <div class="ulist">
@@ -1350,9 +1367,9 @@ with predicate <code>Incident::isDraft</code>. This <code>ListIncidentsCommand</
 </div>
 </div>
 <div class="sect2">
-<h3 id="incident-edit-feature"><a class="link" href="#incident-edit-feature">3.6. Incident Edit feature</a></h3>
+<h3 id="incident-edit-feature"><a class="link" href="#incident-edit-feature">3.8. Incident Edit feature</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation-2"><a class="link" href="#proposed-implementation-2">3.6.1. Proposed Implementation</a></h4>
+<h4 id="proposed-implementation-2"><a class="link" href="#proposed-implementation-2">3.8.1. Proposed Implementation</a></h4>
 <div class="paragraph">
 <p>The incident edit mechanism is facilitated by <code>EditCommand</code> class. Validity of user input is checked when <code>execute()</code> is called and an exception is thrown if invalid.</p>
 </div>
@@ -1384,7 +1401,7 @@ using <code>EditIncident</code> each time the command is executed and then repla
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.6.2. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.8.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-incident-edit-executes"><a class="link" href="#aspect-how-incident-edit-executes">Aspect: How incident edit executes</a></h5>
 <div class="ulist">
@@ -1421,9 +1438,9 @@ using <code>EditIncident</code> each time the command is executed and then repla
 </div>
 </div>
 <div class="sect2">
-<h3 id="vehicle-search-feature"><a class="link" href="#vehicle-search-feature">3.7. Vehicle Search feature</a></h3>
+<h3 id="vehicle-search-feature"><a class="link" href="#vehicle-search-feature">3.9. Vehicle Search feature</a></h3>
 <div class="sect3">
-<h4 id="implementation-6"><a class="link" href="#implementation-6">3.7.1. Implementation</a></h4>
+<h4 id="implementation-6"><a class="link" href="#implementation-6">3.9.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The vehicle search mechanism features a set of different types of searches that a user could utilise. Further documentation on the commands available in this set can be found within the link:https://ay1920s1-cs2103-t11-1.github.io/main/UserGuide.html. The types of searches are as listed:</p>
 </div>
@@ -1455,13 +1472,13 @@ using <code>EditIncident</code> each time the command is executed and then repla
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.7.2. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.9.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-vehicle-search-keyword-is-inputted"><a class="link" href="#aspect-how-vehicle-search-keyword-is-inputted">Aspect: How vehicle search keyword is inputted</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Current choice:</strong> Parse user input after flag (eg. <code>ds/</code> or <code>vnum/</code>)</p>
+<p><strong>Current choice:</strong> Parse user input after flag (eg. <code>dist/</code> or <code>vnum/</code>)</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1483,9 +1500,6 @@ using <code>EditIncident</code> each time the command is executed and then repla
 <ul>
 <li>
 <p>Have to parse keyword from command and flag, user has to follow style of flag for successful search.</p>
-</li>
-<li>
-<p>User might confuse relevant flags, eg ds/ and l/, as they both pertain to districts.</p>
 </li>
 <li>
 <p>User might have to remember too many flags.</p>
@@ -1585,14 +1599,14 @@ using <code>EditIncident</code> each time the command is executed and then repla
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.8. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.10. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.9, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.11, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1623,7 +1637,7 @@ using <code>EditIncident</code> each time the command is executed and then repla
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.9. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.11. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -1926,10 +1940,7 @@ Use case ends.</p>
 <p>User requests to create a new incident</p>
 </li>
 <li>
-<p>IMS prompts for confirmation of vehicle assignment</p>
-</li>
-<li>
-<p>User accepts auto assigned vehicle for dispatch</p>
+<p>User chooses auto vehicle dispatchment</p>
 </li>
 <li>
 <p>IMS creates a new incident with autofill details</p>
@@ -1954,14 +1965,14 @@ Use case ends.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a. User opts for manual assignment.</p>
+<p>2a. User opts for manual assignment.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a1. IMS displays list of all available vehicles.</p>
+<p>2a1. IMS displays list of all available vehicles.</p>
 </li>
 <li>
-<p>3a2. User selects index of vehicle to dispatch.</p>
+<p>2a2. User selects index of vehicle to dispatch.</p>
 <div class="paragraph">
 <p>Use case resumes at step 4.</p>
 </div>
@@ -2220,4 +2231,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 08:28:31 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 08:51:21 UTC</div></div></div></body></html>

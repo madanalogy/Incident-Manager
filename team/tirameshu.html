@@ -20,26 +20,39 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to undo/redo previous commands</strong></p>
+<p><strong>Major enhancement</strong> : Implemented <strong>Vehicle Assignment Command</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.</p>
+<p>What it does: Dispatches nearby vehicles to newly created incidents.</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.</p>
+<p>Justification: Whenever new incidents are reported, vehicles in the area need to be dispatched to respond to the emergency.</p>
 </li>
 <li>
-<p>Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.</p>
-</li>
-<li>
-<p>Credits: <em>{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}</em></p>
+<p>Highlights: This enhancement supports both automatic and manual vehicle dispatchment to incident sites, resulting in a multitude of considerations in the algorithm design for both vehicle assignment command and its associated new command. It required an in-depth analysis of the nature of vehicle dispatchment and design alternatives. The implementation too was challenging as many validity checks have to be conducted to handle a range of exceptions.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: added a history command that allows the user to navigate to previous commands using up/down keys.</p>
+<p><strong>Medium enhancement</strong>: Implemented <strong>Find Vehicles Command</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: Searches for vehicles by district number, vehicle type or vehicle number in the existing list of vehicles.</p>
+</li>
+<li>
+<p>Justification: This feature helps operators check the status of vehicles present in a given district, both available and already dispatched. Searching by vehicle type also shows operators the vehicles of a specific type that are present, for them to make relevant judgements and decisions. Searching for vehicles by their vehicle numbers allows operators to locate a vehicle even if they only remember one character in its vehicle number.</p>
+</li>
+<li>
+<p>Highlights: This enhancement significantly increases flexibility in vehicle searching beyond exact matches, which added complexity in the implementation.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement</strong>: Implemented the <strong>Vehicle Model</strong> and <strong>New Command</strong>, allowing for new incident creation and vehicle actions.</p>
 </li>
 <li>
 <p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
@@ -49,24 +62,20 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Project management:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
 <p>Enhancements to existing features:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
+<p>Detects irrelevant prefixes in user input (Pull request <a href="https://github.com/AY1920S1-CS2103-T11-1/main/pull/270">#270</a>)</p>
 </li>
 <li>
-<p>Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
+<p>Allow for case insensitivity of vehicle searches (Pull request <a href="https://github.com/AY1920S1-CS2103-T11-1/main/pull/260">#260</a>)</p>
+</li>
+<li>
+<p>Removed repetitive prefixes (Pull request <a href="https://github.com/AY1920S1-CS2103-T11-1/main/pull/286">#286</a>)</p>
+</li>
+<li>
+<p>Wrote tests for existing features to increase coverage (Pull requests <a href="https://github.com/AY1920S1-CS2103-T11-1/main/pull/178">#178</a>, <a href="https://github.com/AY1920S1-CS2103-T11-1/main/pull/292">#292</a>)</p>
 </li>
 </ul>
 </div>
@@ -76,39 +85,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Did cosmetic tweaks to existing contents of the User Guide: <a href="https://github.com">#14</a></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Community:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com">#12</a>, <a href="https://github.com">#32</a>, <a href="https://github.com">#19</a>, <a href="https://github.com">#42</a></p>
-</li>
-<li>
-<p>Contributed to forum discussions (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>, <a href="https://github.com">4</a>)</p>
-</li>
-<li>
-<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
-</li>
-<li>
-<p>Some parts of the history feature I added was adopted by several other class mates (<a href="https://github.com">1</a>, <a href="https://github.com">2</a>)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Tools:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Integrated a third party library (Natty) to the project (<a href="https://github.com">#42</a>)</p>
-</li>
-<li>
-<p>Integrated a new Github plugin (CircleCI) to the team repo</p>
+<p>Peer-reviewed and standardised formatting for Developer Guide and User Guide (Pull requests <a href="https://github.com/AY1920S1-CS2103-T11-1/main/pull/280">#280</a>, <a href="https://github.com/AY1920S1-CS2103-T11-1/main/pull/281">#281</a>)</p>
 </li>
 </ul>
 </div>
@@ -117,9 +94,6 @@
 </div>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p><em>{you can add/remove categories in the list above}</em></p>
 </div>
 </div>
 </div>
@@ -137,14 +111,366 @@
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="decrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#decrypting-data-files-code-coming-in-v2-0-code">Decrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="create-new-incident-code-new-code"><a class="link" href="#create-new-incident-code-new-code">Create New Incident: <code>new</code></a></h3>
 <div class="paragraph">
-<p>Decrypts the incident manager data file.<br>
-Format: <code>decrypt PASSWORD</code></p>
+<p>This command works in two ways:</p>
 </div>
 <div class="paragraph">
-<p>Data files will be encrypted by default. Users can decrypt the file with the command above.</p>
+<p><strong>1. auto/Y</strong><br>
+Format: <code>new dist/DISTRICT auto/Y</code></p>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>An available vehicle in the given district will be automatically dispatched to the incident site.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If no vehicle is available, the vehicle pane will be blank, and a relevant message is displayed.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>After the new incident is successfully created, the vehicle pane will show all vehicles in the given district.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Valid district numbers are from 1 to 28!
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Example usage:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/newCommandAutoYBeforeSS.png" alt="newCommandAutoYBeforeSS">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Expected outcome: In this case, there is no vehicle available in district 1.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/newCommandAutoYAfterSS.png" alt="newCommandAutoYAfterSS">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>2. auto/N</strong><br>
+Format: <code>new dist/DISTRICT auto/N</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>A list of available vehicles in the given district will be shown.</p>
+</li>
+<li>
+<p>A message will also appear to prompt user to also include the index of the chosen vehicle.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If no vehicle is available, the vehicle pane will be blank, and a relevant message is displayed.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>After the new incident is successfully created, the vehicle pane will show all vehicles in the given district.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Example usage:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/newCommandAutoNBeforeSS.png" alt="newCommandAutoNBeforeSS">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/newCommandAutoNPromptSS.png" alt="newCommandAutoNPromptSS">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/newCommandAutoNAfterPromptSS.png" alt="newCommandAutoNAfterPromptSS">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/newCommandAutoNAfterSS.png" alt="newCommandAutoNAfterSS">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If multiple flags of the same prefix is provided by user, the command will take the last valid parameter of each prefix.<br>
+For example <code>new dist/1 dist/2 dist/3 auto/Y auto/N</code> is equivalent to <code>new dist/3 auto/N</code>.<br>
+Rationale: user need not waste time backspacing if an input was keyed in wrongly.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-vehicles"><a class="link" href="#listing-vehicles">Listing vehicles</a></h3>
+<div class="paragraph">
+<p>Shows a list of all vehicles registered in the incident Manager.
+Format: <code>list-v</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The listing returns all vehicles and their relevant details.</p>
+</li>
+<li>
+<p>All keywords and parameters used are ignored.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example usage and expected outcome:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/listVSS.png" alt="listVSS">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="finding-a-vehicle-code-find-v-code"><a class="link" href="#finding-a-vehicle-code-find-v-code">Finding a Vehicle: <code>find-v</code></a></h3>
+<div class="paragraph">
+<p>Finds a vehicle by its district number, vehicle number or vehicle type.</p>
+</div>
+<div class="paragraph">
+<p>The command works in three ways:</p>
+</div>
+<div class="paragraph">
+<p><strong>1. Find by district</strong>
+Format: <code>find-v dist/DISTRICT [MORE DISTRICTS]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>User can input multiple districts to search for vehicles in.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example usage:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/findVDsBeforeSS.png" alt="findVDsBeforeSS">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/findVDsAfterSS.png" alt="findVDsAfterSS">
+</div>
+</div>
+<div class="paragraph">
+<div class="title">Fig X finding vehicle by district number.</div>
+<p><strong>2. Find by vehicle number</strong>
+Format: <code>find-v vnum/NUMBER</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The number need not be an exact match of any vehicle number; any vehicle with input number in its vehicle number will be returned.<br></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example usage:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/findVVnumBeforeSS.png" alt="findVVnumBeforeSS">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/findVVnumAfterSS.png" alt="findVVnumAfterSS">
+</div>
+</div>
+<div class="paragraph">
+<div class="title">Fig X finding vehicke by vehicle number.</div>
+<p><strong>3. Find by vehicle type</strong>
+Format: <code>find-v vtype/VEHICLE TYPE</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The vehicle type keyword must match the actual vehicle type exactly.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example usage:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/findVVtypeBeforeSS.png" alt="findVVtypeBeforeSS">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/findVVtypeAfterSS.png" alt="findVVtypeAfterSS">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating-new-incidents-even-when-no-vehicle-is-available-in-the-given-district-code-comin-in-v2-0-code"><a class="link" href="#creating-new-incidents-even-when-no-vehicle-is-available-in-the-given-district-code-comin-in-v2-0-code">Creating new incidents even when no vehicle is available in the given district. <code>[comin in v2.0]</code></a></h3>
+<div class="paragraph">
+<p>User can choose to create an incident pending vehicle dispatchment.
+Format: <code>new dist/DISTRICT auto/Y r/pending</code></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="faq"><a class="link" href="#faq">FAQ</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
+<strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Incident Management System folder.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="command-summary"><a class="link" href="#command-summary">Command Summary</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Help</strong> : <code>help</code></p>
+</li>
+<li>
+<p><strong>Login</strong> : <code>login u/USERNAME p/PASSWORD</code></p>
+</li>
+<li>
+<p><strong>Logout</strong> : <code>logout</code></p>
+</li>
+<li>
+<p><strong>Swap</strong> : <code>swap</code></p>
+</li>
+<li>
+<p><strong>Register</strong> : <code>register n/NAME p/PHONE_NUMBER e/EMAIL u/USERNAME p/PASSWORD [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>register n/James Ho p/22224444 e/jamesho@example.com u/Agent-3 w/password t/Admin t/Team-01</code></p>
+</li>
+<li>
+<p><strong>Update</strong> : <code>update [INDEX] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [u/USERNAME] [p/PASSWORD] [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>update 2 n/James Lee e/jameslee@example.com</code></p>
+</li>
+<li>
+<p><strong>List Accounts</strong> : <code>list-a [KEYWORD] [MORE_KEYWORDS]</code><br>
+e.g. <code>list-a Admin</code></p>
+</li>
+<li>
+<p><strong>Find Account</strong> : <code>find-a KEYWORD [MORE_KEYWORDS]</code><br>
+e.g. <code>find-a James Jake</code></p>
+</li>
+<li>
+<p><strong>Delete Account</strong> : <code>delete-a INDEX</code><br>
+e.g. <code>delete-a 3</code></p>
+</li>
+<li>
+<p><strong>New</strong> <code>new dist/DISTRICT auto/Y</code></p>
+</li>
+<li>
+<p><strong>Fill</strong></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>fill</code> (to list all draft incidents ready for filling)</p>
+</li>
+<li>
+<p><code>fill [INDEX] [c/CALLER_NUMBER] [d/DESCRIPTION]</code> (to fill specified incident report)<br>
+e.g. <code>fill 1 c/98984932 d/This is a sample description for incident 1 in district 3.</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><strong>Submit</strong></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>submit</code> (to list all completed draft incidents ready for submission)</p>
+</li>
+<li>
+<p><code>submit</code> [INDEX] (to submit specified incident report)<br>
+e.g. <code>submit 4</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><strong>List Incidents</strong> : <code>list-i</code></p>
+</li>
+<li>
+<p><strong>Find Incidents</strong> : <code>find-i [op/KEYWORD(s)] [desc/KEYWORD(s)] [id/KEYWORD] [self]</code><br>
+e.g. <code>find-i op/alex yeoh desc/6 self</code></p>
+</li>
+<li>
+<p><strong>List Vehicles</strong> : <code>list-v</code></p>
+</li>
+<li>
+<p><strong>Find Vehicles</strong> : <code>find-v [dist/KEYWORDS] [vtype/KEYWORD] [vnum/KEYWORD]</code><br>
+e.g. <code>find-v dist/1 2 3</code></p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -161,6 +487,253 @@ Format: <code>decrypt PASSWORD</code></p>
 </tr>
 </tbody>
 </table>
+<div class="sect2">
+<h3 id="incident-draft-creation-feature"><a class="link" href="#incident-draft-creation-feature">Incident Draft Creation feature</a></h3>
+<div class="sect3">
+<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">Proposed Implementation</a></h4>
+<div class="paragraph">
+<p>The incident draft creation mechanism is facilitated by the New Command. It creates a new draft incident report based on district of incident, optional automatic vehicle dispatchment.
+There are two ways to use the New Command:
+1. Auto dispatchment
+2. Manual dispatchment, which requires user to provide a valid index that selects a vehicle</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="automatic-vehicle-dispatchment"><a class="link" href="#automatic-vehicle-dispatchment">Automatic vehicle dispatchment:</a></h3>
+<div class="paragraph">
+<p>Vehicle will be automatically assigned to the incident draft if any is available in the district. If no vehicle is available, an exception will be thrown.</p>
+</div>
+<div class="paragraph">
+<p>Below is a sequence diagram of a successful case:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/NewDraftSequenceDiagramAuto.png" alt="NewDraftSequenceDiagramAuto">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="manual-vehicle-dispatchment"><a class="link" href="#manual-vehicle-dispatchment">Manual vehicle dispatchment:</a></h3>
+<div class="paragraph">
+<p>User needs to key in the index of vehicle (based on the displayed vehicle list) to dispatch. If no index is provided, or the index is not a positive integer, an exception will be thrown and user will be prompted to provide a valid index.</p>
+</div>
+<div class="paragraph">
+<p>Below is a sequence diagram of a successful case:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/NewDraftSequenceDiagramManual.png" alt="NewDraftSequenceDiagramManual">
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-incident-draft-creation-executes"><a class="link" href="#aspect-how-incident-draft-creation-executes">Aspect: How incident draft creation executes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Current Choice:</strong> Auto assignment of vehicles</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Reduces number of steps of execution.</p>
+</li>
+<li>
+<p>User need not waste time on decision making; an available vehicle will be dispatched directly, and if no vehicles are available, user will be notified as well.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons: User does not get to choose vehicle to dispatch, especially if vehicle of a specific type is wanted.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative:</strong> Manual assignment of vehicles</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User is able to choose vehicle to dispatch, especially if a specific vehicle type is wanted.</p>
+</li>
+<li>
+<p>Cons: More number of steps, potentially a waste of time.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="vehicle-search-feature"><a class="link" href="#vehicle-search-feature">Vehicle Search feature</a></h3>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<div class="paragraph">
+<p>The vehicle search mechanism features a set of different types of searches that a user could utilise. Further documentation on the commands available in this set can be found within the link:{websiteURL}/main/UserGuide.html. The types of searches are as listed:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Unfiltered - Displays all vehicles in <code>Model</code>.</p>
+</li>
+<li>
+<p>District - Displays all vehicles with <code>District district</code> in list of specified districts.</p>
+</li>
+<li>
+<p>Vehicle Number - Displays all vehicles with <code>VehicleNumber vehicleNumberKeyword</code> in <code>Vehicle vehicle</code>. Need not be exact matches.</p>
+</li>
+<li>
+<p>Vehicle Type - Displays all vehicles with exact matches in <code>VehicleType vehicleType</code> in <code>Vehicle vehicle</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The vehicle search mechanism is facilitated by <code>ModelManager</code>, which implements abstract class <code>Model</code>. It contains a <code>FilteredList&lt;Vehicle&gt; filteredVehicles</code>, which internally stores the list of displayed vehicles in the GUI. Additionally, it implements the following key method:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>updateFilteredVehiclesList(Predicate&lt;Vehicle&gt; predicate)</code> - Updates the stored filtered vehicle list with the new predicate</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-vehicle-search-keyword-is-inputted"><a class="link" href="#aspect-how-vehicle-search-keyword-is-inputted">Aspect: How vehicle search keyword is inputted</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Current choice:</strong> Parse user input after flag (eg. <code>dist/</code> or <code>vnum/</code>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Easy to implement.</p>
+</li>
+<li>
+<p>Reduce number of steps of input, more efficient.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Have to parse keyword from command and flag, user has to follow style of flag for successful search.</p>
+</li>
+<li>
+<p>User might have to remember too many flags.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative:</strong> Prompt user for search input</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Separates command from keyword for ease of reading and parsing.</p>
+</li>
+<li>
+<p>User need not remember flags and will not confuse flags, just key in information as prompted.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Difficult to implement multi-command execution.</p>
+</li>
+<li>
+<p>Requires multiple steps of input, slower and less efficient.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-listing-all-vehicles-is-called"><a class="link" href="#aspect-how-listing-all-vehicles-is-called">Aspect: How listing all vehicles is called</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Current choice:</strong> Utilise separate command <code>list-v</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Intuitive to user, as it contains clear action word.</p>
+</li>
+<li>
+<p>Consistent with other list commands.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Some users might find it more intuitive to simply call <code>vehicles</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative:</strong> Utilise separate command <code>vehicles</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Intuitive for some.</p>
+</li>
+<li>
+<p>Cons: Appears separate from other list commands even though they are of the same nature and implemented similarly.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -171,4 +744,4 @@ Format: <code>decrypt PASSWORD</code></p>
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 08:28:31 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 08:51:21 UTC</div></div></div></body></html>
