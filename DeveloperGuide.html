@@ -25,8 +25,8 @@
 <li><a href="#access-control-feature">3.1. Access Control feature</a></li>
 <li><a href="#account-management-feature">3.2. Account Management feature</a></li>
 <li><a href="#incident-draft-creation-feature">3.3. Incident Draft Creation feature</a></li>
-<li><a href="#automatic-vehicle-dispatchment">3.4. Automatic vehicle dispatchment:</a></li>
-<li><a href="#manual-vehicle-dispatchment">3.5. Manual vehicle dispatchment:</a></li>
+<li><a href="#automatic-vehicle-dispatchment">3.4. Automatic Vehicle Dispatchment:</a></li>
+<li><a href="#manual-vehicle-dispatchment">3.5. Manual Vehicle Dispatchment:</a></li>
 <li><a href="#incident-filling-and-submission-feature">3.6. Incident Filling and Submission feature</a></li>
 <li><a href="#incident-search-feature">3.7. Incident Search feature</a></li>
 <li><a href="#incident-edit-feature">3.8. Incident Edit feature</a></li>
@@ -834,7 +834,7 @@ There are two ways to use the New Command:
 </div>
 </div>
 <div class="sect2">
-<h3 id="automatic-vehicle-dispatchment"><a class="link" href="#automatic-vehicle-dispatchment">3.4. Automatic vehicle dispatchment:</a></h3>
+<h3 id="automatic-vehicle-dispatchment"><a class="link" href="#automatic-vehicle-dispatchment">3.4. Automatic Vehicle Dispatchment:</a></h3>
 <div class="paragraph">
 <p>Vehicle will be automatically assigned to the incident draft if any is available in the district. If no vehicle is available, an exception will be thrown.</p>
 </div>
@@ -848,7 +848,7 @@ There are two ways to use the New Command:
 </div>
 </div>
 <div class="sect2">
-<h3 id="manual-vehicle-dispatchment"><a class="link" href="#manual-vehicle-dispatchment">3.5. Manual vehicle dispatchment:</a></h3>
+<h3 id="manual-vehicle-dispatchment"><a class="link" href="#manual-vehicle-dispatchment">3.5. Manual Vehicle Dispatchment:</a></h3>
 <div class="paragraph">
 <p>User needs to key in the index of vehicle based on the list of available vehicle in given district to dispatch. Note that this list can only be obtained with the input <code>new dist/DISTRICT auto/N</code>, and not based on the list of vehicles currently displayed. If no index is provided, or the index is not valid, an exception will be thrown and user will be prompted to provide a valid index.</p>
 </div>
@@ -1209,33 +1209,58 @@ with predicate <code>Incident::isDraft</code>. This <code>ListIncidentsCommand</
 <div class="sect3">
 <h4 id="implementation-5"><a class="link" href="#implementation-5">3.7.1. Implementation</a></h4>
 <div class="paragraph">
-<p>The incident search mechanism features a set of different types of searches that a user could utilise. Further documentation on the commands available in this set can be found within the link:https://ay1920s1-cs2103-t11-1.github.io/main/UserGuide.html. The types of searches are as listed:</p>
+<p>The incident search mechanism features a set of different types of searches that a user could utilise to list out all related incidents, inclusive of incomplete drafts, complete drafts and completed reports. Further documentation on the commands available in this set can be found in the User Guide. The types of searches are as listed:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Unfiltered - Displays all incidents in <code>Model</code></p>
+<p>Unfiltered - Displays all incidents in <code>Model</code><br>
+eg. <code>list-i</code></p>
 </li>
 <li>
-<p>ID - Displays all incidents with exact matches in <code>IncidentId incidentId</code> in <code>Incident incident</code></p>
+<p>ID - Displays all incidents with exact matches in <code>IncidentId incidentId</code> in <code>Incident incident</code>, within <code>Model</code><br>
+eg. <code>find-i id/0620150001</code></p>
 </li>
 <li>
-<p>Description - Displays all incidents with keyword(s) contained within the <code>Description description</code> in <code>Incident incident</code></p>
+<p>Description - Displays all incidents with keyword(s) contained within the <code>Description description</code> in <code>Incident incident</code>, within <code>Model</code>+
+eg. <code>find-i desc/traffic</code></p>
 </li>
 <li>
-<p>Operator - Displays all incidents with keyword(s) contained within the name of the <code>Person operator</code> in <code>Incident incident</code></p>
+<p>Operator - Displays all incidents with keyword(s) contained within the name of the <code>Person operator</code> in <code>Incident incident</code>, within <code>Model</code><br>
+eg. <code>find-i op/bill</code></p>
+</li>
+<li>
+<p>Operator - Displays all incidents with  the name of the <code>Person operator</code> in <code>Incident incident</code> matching the logged-in user&#8217;s name exactly, within <code>Model</code><br>
+eg. <code>find-i self</code></p>
 </li>
 </ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Each parameter in <code>find-i</code> search commands can be combined in any order and quantity, returning only results that abide by all filtering by each parameter used</p>
+</li>
+<li>
+<p>Search by keywords is case-insensitive</p>
+</li>
+<li>
+<p>Each parameter in <code>find-i</code> accepts multiple keywords, and searches for matches containing any of these keywords</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>The incident search mechanism is facilitated by <code>ModelManager</code>, which implements abstract class <code>Model</code>. It contains a <code>FilteredList&lt;Incidents&gt; filteredIncidents</code>, which internally stores the list of displayed incidents in the GUI. Additionally, it implements the following key method:
 * <code>updateFilteredIncidentsList(Predicate&lt;Incident&gt; predicate)</code> - Updates the stored filtered incidents list with the new predicate</p>
 </div>
 <div class="paragraph">
-<p>There are two possible commands within this set of searches. Firstly, we will consider when the user calls the command <code>incidents</code> in the application.</p>
+<p>There are two possible commands within this set of searches. Firstly, we will consider when the user calls the command <code>list-i</code> in the application.</p>
 </div>
 <div class="paragraph">
-<p>The following sequence diagram shows how the <code>incidents</code> command works:</p>
+<p>The following sequence diagram shows how the <code>list-i</code> command works:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1243,7 +1268,7 @@ with predicate <code>Incident::isDraft</code>. This <code>ListIncidentsCommand</
 </div>
 </div>
 <div class="paragraph">
-<p>As indicated in the diagram, the <code>LogicManager</code> instantiates a <code>ListIncidentsCommand</code> upon running command <code>execute(incidents)</code>. It then calls <code>ListIncidentsCommand#execute()</code>, which runs <code>Model#updateFilteredIncidentList</code> with the predicate <code>PREDICATE_SHOW_ALL_INCIDENTS</code>. This <code>Predicate&lt;Incident&gt;</code> always evaluates to true. This <code>Predicate&lt;Incident&gt;</code> is passed to <code>FilteredList&lt;Incident&gt; filteredList</code>, as a parameter to run the method <code>setPredicate()</code>. This updates the list of visible incidents. <code>CommandResult commandResult</code> is also returned to the <code>LogicManager</code> to log the success/failure of the method.</p>
+<p>As indicated in the diagram, the <code>LogicManager</code> instantiates a <code>ListIncidentsCommand</code> upon running command <code>execute(list-i)</code>. It then calls <code>ListIncidentsCommand#execute()</code>, which runs <code>Model#updateFilteredIncidentList</code> with the predicate <code>PREDICATE_SHOW_ALL_INCIDENTS</code>. This <code>Predicate&lt;Incident&gt;</code> always evaluates to true. This <code>Predicate&lt;Incident&gt;</code> is passed to <code>FilteredList&lt;Incident&gt; filteredList</code>, as a parameter to run the method <code>setPredicate()</code>. This updates the list of visible incidents. <code>CommandResult commandResult</code> is also returned to the <code>LogicManager</code> to log the success/failure of the method.</p>
 </div>
 <div class="paragraph">
 <p>Next, we will look at an example in which the user calls <code>search</code> to look for incidents written by an operator whose name contains <code>Alex</code>.</p>
@@ -2231,4 +2256,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 15:10:52 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 15:23:01 UTC</div></div></div></body></html>

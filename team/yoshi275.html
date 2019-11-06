@@ -1,7 +1,7 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>John Doe - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Cheryl Ng - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Incident Management System</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/AY1920S1-CS2103-T11-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>John Doe - Project Portfolio</h1></div><div id="content"><div class="sect1">
-<h2 id="project-incidentmanager-level-3"><a class="link" href="#project-incidentmanager-level-3">PROJECT: IncidentManager - Level 3</a></h2>
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Incident Management System</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/AY1920S1-CS2103-T11-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Cheryl Ng - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<h2 id="project-incident-management-system"><a class="link" href="#project-incident-management-system">PROJECT: Incident Management System</a></h2>
 <div class="sectionbody">
 <hr>
 </div>
@@ -10,7 +10,7 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>IncidentManager - Level 3 is a desktop incident Manager application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+<p>Incident Management System is a desktop incident Manager application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
 </div>
 </div>
 </div>
@@ -20,106 +20,44 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to undo/redo previous commands</strong></p>
+<p><strong>Major enhancement</strong>: Implemented <strong>Incident Search and Listing</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.</p>
+<p>What it does: allows the user to list a filtered or unfiltered list of incidents dependent on commands and parameters used.</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.</p>
+<p>Justification: This feature improves the product significantly because a user can handle large sets of data efficiently through searching for relevant incident reports based on the parameters, to prepare these incidents for filling and submission, or for reviewing.</p>
 </li>
 <li>
-<p>Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.</p>
+<p>Highlights: This enhancement is easily extendable to various data within the Incident model, and has been designed to easily accommodate additional parameters. It required an in-depth analysis of design alternatives, as the implementation was challenging, requiring a good understanding of how to parse multiple parameters with multiple words for each parameter, and consideration of the abstraction of said parameters.</p>
 </li>
 <li>
-<p>Credits: <em>{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}</em></p>
+<p>Credits: <em>Extended from the FindPerson command in the initial AB3</em></p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: added a history command that allows the user to navigate to previous commands using up/down keys.</p>
+<p><strong>Major enhancement</strong>: Implemented <strong>initial Incident GUI layout</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Summary: Modified the GUI for a new panel for displaying Incidents and the relevant information in the initial implementation.</p>
 </li>
 <li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
+<p>Highlights: This enhancement required an in-depth understanding of the GUI design and the JavaFX library, as well as great familiarity with the initial Incident class. Further abstraction of the Incident class was also executed to ensure SLAP principlese were adhered to.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#=undefined&amp;search=yoshi275">View on RepoSense</a>]</p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Project management:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
 </li>
 </ul>
-</div>
-</li>
-<li>
-<p>Enhancements to existing features:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
-</li>
-<li>
-<p>Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Documentation:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Did cosmetic tweaks to existing contents of the User Guide: <a href="https://github.com">#14</a></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Community:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com">#12</a>, <a href="https://github.com">#32</a>, <a href="https://github.com">#19</a>, <a href="https://github.com">#42</a></p>
-</li>
-<li>
-<p>Contributed to forum discussions (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>, <a href="https://github.com">4</a>)</p>
-</li>
-<li>
-<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
-</li>
-<li>
-<p>Some parts of the history feature I added was adopted by several other class mates (<a href="https://github.com">1</a>, <a href="https://github.com">2</a>)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Tools:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Integrated a third party library (Natty) to the project (<a href="https://github.com">#42</a>)</p>
-</li>
-<li>
-<p>Integrated a new Github plugin (CircleCI) to the team repo</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><em>{you can add/remove categories in the list above}</em></p>
 </div>
 </div>
 </div>
@@ -137,13 +75,186 @@
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="decrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#decrypting-data-files-code-coming-in-v2-0-code">Decrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="listing-all-incidents-code-list-i-code"><a class="link" href="#listing-all-incidents-code-list-i-code">Listing all incidents: <code>list-i</code></a></h3>
 <div class="paragraph">
-<p>Decrypts the incident manager data file.<br>
-Format: <code>decrypt PASSWORD</code></p>
+<p>Shows a list of all incidents in the Incident Manager<br>
+Format: <code>list-i</code></p>
 </div>
 <div class="paragraph">
-<p>Data files will be encrypted by default. Users can decrypt the file with the command above.</p>
+<p>Example usage and expected outcome:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/listIncidentsCommand.png" alt="listIncidentsCommand">
+</div>
+</div>
+<div class="ulist">
+<div class="title">Fig X. The <code>list-i</code> command returns all incidents within the system.</div>
+<ul>
+<li>
+<p>The listing returns all incidents, inclusive of all incomplete drafts and complete drafts and submitted incident reports</p>
+</li>
+<li>
+<p>Adding any keywords or parameters will result in an error. Only <code>list-i</code> is allowed.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="locating-an-incident-report-using-incident-id-operator-name-or-description-keyword-code-find-i-code"><a class="link" href="#locating-an-incident-report-using-incident-id-operator-name-or-description-keyword-code-find-i-code">Locating an incident report using incident ID, operator name or description keyword: <code>find-i</code></a></h3>
+<div class="paragraph">
+<p>Finds incidents containing the relevant specified parameters.
+Possible Parameters: <code>id/</code>, <code>op/</code>, <code>desc/</code>, <code>self</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Different Parameters</strong></p>
+</div>
+<div class="paragraph">
+<p><strong>By Operator Name</strong><br>
+Format: <code>find-i op/&lt;OPERATOR KEYWORD [MORE_KEYWORDS]&gt;</code><br>
+Lists all incidents whereby the operator name contains any of the given keywords</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Accepts multiple search terms for the parameter, searching for any match with any search term</p>
+</li>
+<li>
+<p>Example of Successful Single Operator Search and Expected Outcome:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/findIncidentsCommandWithOperatorParameter.png" alt="findIncidentsCommandWithOperatorParameter">
+</div>
+</div>
+<div class="ulist">
+<div class="title">Fig X. The <code>find-i</code> command has been called with one word under parameter <code>op\</code>, returning all incidents whereby the operator name matches <code>alex</code> (case-insensitive)</div>
+<ul>
+<li>
+<p>Example of Successful Multiple Operator Search and Expected Outcome:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/findIncidentsCommandWithOperatorsParameter.png" alt="findIncidentsCommandWithOperatorsParameter">
+</div>
+</div>
+<div class="paragraph">
+<div class="title">Fig X. The <code>find-i</code> command has been called multiple words under parameter <code>op\</code>, returning all incidents whereby the operator name matches <code>irfan</code> or <code>bernice</code> (case-insensitive)</div>
+<p><strong>By Description</strong><br>
+Format: <code>find-i desc/&lt;DESCRIPTION KEYWORD [MORE_KEYWORDS]&#8230;&#8203;&gt;</code><br>
+Lists all incidents whereby the incident description contains any the given keywords</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Example of Successful Usage and Expected Outcome:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/findIncidentsCommandWithDescriptionParameter.png" alt="findIncidentsCommandWithDescriptionParameter">
+</div>
+</div>
+<div class="paragraph">
+<div class="title">Fig X. The <code>find-i</code> command has been called with parameter <code>desc\</code>, returning all incidents whereby the description contains either keyword <code>fire</code> or <code>arson</code></div>
+<p><strong>By ID</strong><br>
+Format: <code>find-i id/KEYWORD</code><br>
+Lists all incidents whereby the incident ID is an exact match with the given keyword</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Requires an exact ID match, only accepts one ID</p>
+</li>
+<li>
+<p>Example of Successful Usage and Expected Outcome:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/findIncidentsCommandWithIdParameter.png" alt="findIncidentsCommandWithIdParameter">
+</div>
+</div>
+<div class="paragraph">
+<div class="title">Fig X. The <code>find-i</code> command has been called with parameter <code>id\</code>, returning all incidents whereby the ID matches <code>0620150001</code> exactly</div>
+<p><strong>Self-Search</strong><br>
+Format: <code>find-i self</code><br>
+Lists all incidents whereby the operator name matches the logged-in user&#8217;s name.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Example of Successful Usage and Expected Outcome:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/findIncidentsCommandWithSelfParameter.png" alt="findIncidentsCommandWithSelfParameter">
+</div>
+</div>
+<div class="ulist">
+<div class="title">Fig X. Executing <code>find-i self</code> lists all completed drafts ready for submission</div>
+<ul>
+<li>
+<p>Requires an exact name match with the logged-in user&#8217;s name</p>
+</li>
+</ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case insensitive. e.g <code>dave</code> will match <code>Dave</code></p>
+</li>
+<li>
+<p>The search returns all incidents found regardless of state (incomplete and complete drafts, submitted incidents)</p>
+</li>
+<li>
+<p>Multiple words can be taken for the operator and description parameter. The command returns all incidents which contains at least one of the words within the parameter</p>
+</li>
+<li>
+<p>The ID parameter requires an exact match</p>
+</li>
+<li>
+<p>Multiple parameters can be searched, returning incidents whereby all parameters match</p>
+</li>
+<li>
+<p>Only full words/IDs will be matched e.g. <code>Fir</code> will not match <code>Fire</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>ID Match: <code>find-i id/0920160001</code><br>
+Returns Incident #0920160001</p>
+</li>
+<li>
+<p>Multiple Parameters: <code>find-i op/Dave desc/fire</code><br>
+Returns any incidents whereby the operator&#8217;s name contains 'Dave' and the description contains 'fire'</p>
+</li>
+<li>
+<p>Multi-word Parameter Search: <code>find-i op/Alex Bernice</code><br>
+Returns any incidents whereby the operator&#8217;s name contains either 'Alex' or 'Bernice'</p>
+</li>
+<li>
+<p>Self-Search: <code>find-i self</code><br>
+Returns any incidents whereby the operator&#8217;s name matches the logged-in operator&#8217;s name</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -161,14 +272,192 @@ Format: <code>decrypt PASSWORD</code></p>
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="sect1">
-<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">PROJECT: PowerPointLabs</a></h2>
-<div class="sectionbody">
-<hr>
+<div class="sect2">
+<h3 id="incident-search-feature"><a class="link" href="#incident-search-feature">Incident Search feature</a></h3>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
 <div class="paragraph">
-<p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
+<p>The incident search mechanism features a set of different types of searches that a user could utilise to list out all related incidents, inclusive of incomplete drafts, complete drafts and completed reports. Further documentation on the commands available in this set can be found in the User Guide. The types of searches are as listed:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Unfiltered - Displays all incidents in <code>Model</code><br>
+eg. <code>list-i</code></p>
+</li>
+<li>
+<p>ID - Displays all incidents with exact matches in <code>IncidentId incidentId</code> in <code>Incident incident</code>, within <code>Model</code><br>
+eg. <code>find-i id/0620150001</code></p>
+</li>
+<li>
+<p>Description - Displays all incidents with keyword(s) contained within the <code>Description description</code> in <code>Incident incident</code>, within <code>Model</code>+
+eg. <code>find-i desc/traffic</code></p>
+</li>
+<li>
+<p>Operator - Displays all incidents with keyword(s) contained within the name of the <code>Person operator</code> in <code>Incident incident</code>, within <code>Model</code><br>
+eg. <code>find-i op/bill</code></p>
+</li>
+<li>
+<p>Operator - Displays all incidents with  the name of the <code>Person operator</code> in <code>Incident incident</code> matching the logged-in user&#8217;s name exactly, within <code>Model</code><br>
+eg. <code>find-i self</code></p>
+</li>
+</ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Each parameter in <code>find-i</code> search commands can be combined in any order and quantity, returning only results that abide by all filtering by each parameter used</p>
+</li>
+<li>
+<p>Search by keywords is case-insensitive</p>
+</li>
+<li>
+<p>Each parameter in <code>find-i</code> accepts multiple keywords, and searches for matches containing any of these keywords</p>
+</li>
+</ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 15:10:52 UTC</div></div></div></body></html>
+</div>
+<div class="paragraph">
+<p>The incident search mechanism is facilitated by <code>ModelManager</code>, which implements abstract class <code>Model</code>. It contains a <code>FilteredList&lt;Incidents&gt; filteredIncidents</code>, which internally stores the list of displayed incidents in the GUI. Additionally, it implements the following key method:
+* <code>updateFilteredIncidentsList(Predicate&lt;Incident&gt; predicate)</code> - Updates the stored filtered incidents list with the new predicate</p>
+</div>
+<div class="paragraph">
+<p>There are two possible commands within this set of searches. Firstly, we will consider when the user calls the command <code>list-i</code> in the application.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the <code>list-i</code> command works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ListIncidentsSequenceDiagram.png" alt="ListIncidentsSequenceDiagram">
+</div>
+</div>
+<div class="paragraph">
+<p>As indicated in the diagram, the <code>LogicManager</code> instantiates a <code>ListIncidentsCommand</code> upon running command <code>execute(list-i)</code>. It then calls <code>ListIncidentsCommand#execute()</code>, which runs <code>Model#updateFilteredIncidentList</code> with the predicate <code>PREDICATE_SHOW_ALL_INCIDENTS</code>. This <code>Predicate&lt;Incident&gt;</code> always evaluates to true. This <code>Predicate&lt;Incident&gt;</code> is passed to <code>FilteredList&lt;Incident&gt; filteredList</code>, as a parameter to run the method <code>setPredicate()</code>. This updates the list of visible incidents. <code>CommandResult commandResult</code> is also returned to the <code>LogicManager</code> to log the success/failure of the method.</p>
+</div>
+<div class="paragraph">
+<p>Next, we will look at an example in which the user calls <code>search</code> to look for incidents written by an operator whose name contains <code>Alex</code>.</p>
+</div>
+<div class="paragraph">
+<p>The execution of this method is a little more complex.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the <code>search</code> command identifies the keyword and flag, and returns related incidents:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SearchIncidentsSequenceDiagram.png" alt="SearchIncidentsSequenceDiagram">
+</div>
+</div>
+<div class="paragraph">
+<p>The key difference is the utility of the <code>SearchIncidentsCommandParser</code> to parse the keyword after tag <code>op\</code> in the command. It creates a <code>NameKeywordsPredicate</code> using the String "Alex", which is returned to be used in constructing a new instance of <code>SearchIncidentsCommand</code>, stored as a <code>Predicate&lt;Incident&gt; predicate</code>. From there, the process is similar, in that <code>SearchIncidentsCommand#execute()</code> is run, causing the Model to run <code>Model#updateFilteredIncidentList(predicate)</code> using the predicate stored in <code>SearchIncidentsCommand</code>. Upon updating the list similar to the <code>incidents</code> listing command above, <code>SearchIncidentsCommand</code> also calls <code>Model#getFilteredIncidentList()</code> to return <code>ObservableList&lt;Incident&gt;</code>. It obtains the size of this list, and returns it in <code>CommandResult commandResult</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-incident-search-keyword-is-inputted"><a class="link" href="#aspect-how-incident-search-keyword-is-inputted">Aspect: How incident search keyword is inputted</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Current choice:</strong> Parse user input after flag (eg. <code>op\</code> or <code>desc\</code>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: Have to parse keyword from command and flag, user has to follow style of flag for successful search.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative:</strong> Prompt user for search input</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Separates command from keyword for ease of reading and parsing.</p>
+</li>
+<li>
+<p>Cons: Difficult to implement multi-command execution.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-listing-all-incidents-is-called"><a class="link" href="#aspect-how-listing-all-incidents-is-called">Aspect: How listing all incidents is called</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Current choice:</strong> Utilise separate command <code>incidents</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Intuitive to use.</p>
+</li>
+<li>
+<p>Cons: Similar code under different command.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative:</strong> Utilise <code>search</code> command (eg. <code>search unfiltered</code>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Less overlap in code.</p>
+</li>
+<li>
+<p>Cons: Unintuitive to the user as no search is being made, even more keywords to remember.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-predicate-is-added-to-code-searchincidentscommand-code"><a class="link" href="#aspect-how-predicate-is-added-to-code-searchincidentscommand-code">Aspect: How predicate is added to <code>SearchIncidentsCommand</code></a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Current choice:</strong> <code>SearchIncidentsCommandParser</code> class calls <code>Model</code> to create a new Predicate based on search string.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Abstracts the creation and management of predicates to the <code>Model</code>.</p>
+</li>
+<li>
+<p>Cons: Requires greater level of coupling between classes.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative:</strong> <code>SearchIncidentsCommand</code> or <code>SearchIncidentsCommandParser</code> directly create Predicate based on search string.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Less dependencies within the parser class.</p>
+</li>
+<li>
+<p>Cons: Breaks abstraction flow.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 15:23:01 UTC</div></div></div></body></html>
