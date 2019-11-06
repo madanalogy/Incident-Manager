@@ -868,7 +868,7 @@ Format: <code>list-i</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>The listing returns all incidents, inclusive of all drafts and submitted incident reports</p>
+<p>The listing returns all incidents, inclusive of all incomplete drafts and complete drafts and submitted incident reports</p>
 </li>
 <li>
 <p>Adding any keywords or parameters will result in an error. Only <code>list-i</code> is allowed.</p>
@@ -889,6 +889,7 @@ Format: <code>list-i</code></p>
 <div class="sect2">
 <h3 id="locating-an-incident-report-using-incident-id-operator-name-or-description-keyword-code-find-i-code"><a class="link" href="#locating-an-incident-report-using-incident-id-operator-name-or-description-keyword-code-find-i-code">3.14. Locating an incident report using incident ID, operator name or description keyword: <code>find-i</code></a></h3>
 <div class="paragraph">
+<div class="title">Fig X. The <code>list-i</code> command returns all incidents within the system.</div>
 <p>Finds incidents containing the relevant specified parameters.
 Possible Parameters: <code>id/</code>, <code>op/</code>, <code>desc/</code>, <code>self</code></p>
 </div>
@@ -916,6 +917,7 @@ Lists all incidents whereby the operator name contains any of the given keywords
 </div>
 </div>
 <div class="ulist">
+<div class="title">Fig X. The <code>find-i</code> command has been called with one word under parameter <code>op\</code>, returning all incidents whereby the operator name matches <code>alex</code> (case-insensitive)</div>
 <ul>
 <li>
 <p>Example of Successful Multiple Operator Search and Expected Outcome:</p>
@@ -928,6 +930,7 @@ Lists all incidents whereby the operator name contains any of the given keywords
 </div>
 </div>
 <div class="paragraph">
+<div class="title">Fig X. The <code>find-i</code> command has been called multiple words under parameter <code>op\</code>, returning all incidents whereby the operator name matches <code>irfan</code> or <code>bernice</code> (case-insensitive)</div>
 <p><strong>By Description</strong><br>
 Format: <code>find-i desc/&lt;DESCRIPTION KEYWORD [MORE_KEYWORDS]&#8230;&#8203;&gt;</code><br>
 Lists all incidents whereby the incident description contains any the given keywords</p>
@@ -945,6 +948,7 @@ Lists all incidents whereby the incident description contains any the given keyw
 </div>
 </div>
 <div class="paragraph">
+<div class="title">Fig X. The <code>find-i</code> command has been called with parameter <code>desc\</code>, returning all incidents whereby the description contains either keyword <code>fire</code> or <code>arson</code></div>
 <p><strong>By ID</strong><br>
 Format: <code>find-i id/KEYWORD</code><br>
 Lists all incidents whereby the incident ID is an exact match with the given keyword</p>
@@ -965,6 +969,7 @@ Lists all incidents whereby the incident ID is an exact match with the given key
 </div>
 </div>
 <div class="paragraph">
+<div class="title">Fig X. The <code>find-i</code> command has been called with parameter <code>id\</code>, returning all incidents whereby the ID matches <code>0620150001</code> exactly</div>
 <p><strong>Self-Search</strong><br>
 Format: <code>find-i self</code><br>
 Lists all incidents whereby the operator name matches the logged-in user&#8217;s name.</p>
@@ -972,7 +977,7 @@ Lists all incidents whereby the operator name matches the logged-in user&#8217;s
 <div class="ulist">
 <ul>
 <li>
-<p>Requires an exact name match</p>
+<p>Requires an exact name match with the logged-in user&#8217;s name</p>
 </li>
 <li>
 <p>Example of Successful Usage and Expected Outcome:</p>
@@ -986,19 +991,26 @@ Lists all incidents whereby the operator name matches the logged-in user&#8217;s
 </div>
 <div class="sidebarblock">
 <div class="content">
+<div class="title">Fig X. Executing <code>find-i self</code> lists all completed drafts ready for submission</div>
 <div class="ulist">
 <ul>
 <li>
 <p>The search is case insensitive. e.g <code>dave</code> will match <code>Dave</code></p>
 </li>
 <li>
-<p>Multiple words can be taken for the operator and description parameter</p>
+<p>The search returns all incidents found regardless of state (incomplete and complete drafts, submitted incidents)</p>
+</li>
+<li>
+<p>Multiple words can be taken for the operator and description parameter. The command returns all incidents which contains at least one of the words within the parameter</p>
+</li>
+<li>
+<p>The ID parameter requires an exact match</p>
 </li>
 <li>
 <p>Multiple parameters can be searched, returning incidents whereby all parameters match</p>
 </li>
 <li>
-<p>Only full words will be matched e.g. <code>Fir</code> will not match <code>Fire</code></p>
+<p>Only full words/IDs will be matched e.g. <code>Fir</code> will not match <code>Fire</code></p>
 </li>
 </ul>
 </div>
@@ -1593,4 +1605,4 @@ e.g. <code>find-v ds/1 2 3</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 05:15:48 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 08:28:31 UTC</div></div></div></body></html>
