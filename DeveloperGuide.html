@@ -976,16 +976,16 @@ with predicate <code>Incident::isDraft</code>. This <code>ListIncidentsCommand</
 </li>
 </ul>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="images/FillCommandWithParamsSequenceDiagram.png" alt="FillCommandWithParamsSequenceDiagram" width="800">
-</div>
-</div>
 <div class="paragraph">
 <p>In this sequence diagram, the helper methods within <code>FillCommand</code> are omitted for clarity.</p>
 </div>
 <div class="paragraph">
 <p>The <code>SubmitCommand</code> functions similarly, with one crucial difference. As no Incident fields are to be updated, the specified incident is simply retrieved, and its fields are copied into a new <code>Incident</code> object with a <code>SUBMITTED_REPORT</code> status.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FillCommandWithParamsSequenceDiagram.png" alt="FillCommandWithParamsSequenceDiagram" width="800">
+</div>
 </div>
 </div>
 </div>
@@ -1013,17 +1013,7 @@ with predicate <code>Incident::isDraft</code>. This <code>ListIncidentsCommand</
 </div>
 </li>
 <li>
-<p>Cons:<br></p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Might be potentially confusing to user as <code>FillCommand</code> is performing a function of listing that is extraneous to the function of filling.</p>
-</li>
-<li>
-<p>This mode might be redundant <strong>if</strong> the user follows a strict incident management workflow where any newly generated incident is promptly filled and submitted without it remaining in the system as a draft.</p>
-</li>
-</ol>
-</div>
+<p>Con: 1. Might be potentially confusing to user as <code>FillCommand</code> is performing a function of listing that is extraneous to the function of filling.</p>
 </li>
 </ul>
 </div>
@@ -1046,7 +1036,7 @@ with predicate <code>Incident::isDraft</code>. This <code>ListIncidentsCommand</
 </div>
 </li>
 <li>
-<p>Con:<br></p>
+<p>Cons:<br></p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1066,24 +1056,10 @@ with predicate <code>Incident::isDraft</code>. This <code>ListIncidentsCommand</
 <div class="ulist">
 <ul>
 <li>
-<p>Pro:<br></p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Most appropriate use of abstraction and single responsibility principle, which are crucial OOP concepts.</p>
-</li>
-</ol>
-</div>
+<p>Pro: 1. Most appropriate use of abstraction and single responsibility principle, which are crucial OOP concepts.</p>
 </li>
 <li>
-<p>Con:<br></p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User needs to either remember an additional command word or type a longer <code>list-i</code> command by specifying the filter predicate, which reduces user convenience.</p>
-</li>
-</ol>
-</div>
+<p>Con: 1. User needs to either remember an additional command word or type a longer <code>list-i</code> command by specifying the filter predicate, which reduces user convenience.</p>
 </li>
 </ul>
 </div>
@@ -1113,14 +1089,7 @@ with predicate <code>Incident::isDraft</code>. This <code>ListIncidentsCommand</
 </div>
 </li>
 <li>
-<p>Con:<br></p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User is unable to fill <code>callerNumber</code> independently of <code>description</code> unless they first submit the incident report and then use the <code>edit</code> command.</p>
-</li>
-</ol>
-</div>
+<p>Con: 1. User is unable to fill <code>callerNumber</code> independently of <code>description</code> unless they first submit the incident report and then use the <code>edit</code> command.</p>
 </li>
 </ul>
 </div>
@@ -1143,14 +1112,7 @@ with predicate <code>Incident::isDraft</code>. This <code>ListIncidentsCommand</
 </div>
 </li>
 <li>
-<p>Con:<br></p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Less adaptable and modular. If new fields are added to the incident report, then the user might want to enter / replace those fields by executing repeated fill commands in parameter mode without committing the report into the system and possibly alerting their supervisors and/or relevant agencies with incomplete / likely to change information.</p>
-</li>
-</ol>
-</div>
+<p>Con: 1. Less adaptable and modular. If new fields are added to the incident report, then the user might want to enter / replace those fields by executing repeated fill commands without committing the report into the system with incomplete / likely to change information.</p>
 </li>
 </ul>
 </div>
@@ -1160,24 +1122,10 @@ with predicate <code>Incident::isDraft</code>. This <code>ListIncidentsCommand</
 <div class="ulist">
 <ul>
 <li>
-<p>Pro:<br></p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Satisfies the cons of the two approaches above as it is versatile enough to allow the user to independently fill different incident report fields as well as adaptable enough to accommodate extra fields.</p>
-</li>
-</ol>
-</div>
+<p>Pro: 1. Satisfies the cons of the two approaches above as it is versatile enough to allow the user to independently fill different incident report fields as well as adaptable enough to accommodate extra fields.</p>
 </li>
 <li>
-<p>Con:<br></p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Harder to implement as we would need more elaborate methods to parse the variable arguments.</p>
-</li>
-</ol>
-</div>
+<p>Con: 1 . Harder to implement as we would need more elaborate methods to parse the variable arguments.</p>
 </li>
 </ul>
 </div>
@@ -2257,4 +2205,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-08 17:58:05 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 02:22:49 UTC</div></div></div></body></html>

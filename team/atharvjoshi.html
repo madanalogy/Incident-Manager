@@ -82,7 +82,7 @@ The implementation too was challenging as it required brainstorming a seamless w
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">_Given below is one of the sections I contributed to the User Guide. It showcases my ability to write documentation targeting end-users.</p></td>
 </tr>
 </tbody>
 </table>
@@ -90,18 +90,6 @@ The implementation too was challenging as it required brainstorming a seamless w
 <h3 id="filling-a-draft-incident-report-code-fill-code"><a class="link" href="#filling-a-draft-incident-report-code-fill-code">Filling a draft incident report: <code>fill</code></a></h3>
 <div class="paragraph">
 <p>Fills a draft incident report if relevant parameters are specified, otherwise lists all draft reports ready for filling.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The user can only fill the draft incident reports that have been created by them.
-</td>
-</tr>
-</table>
 </div>
 <div class="paragraph">
 <p>This command works in two modes:</p>
@@ -117,13 +105,9 @@ Lists all draft incident reports ready to be filled.</p>
 <ul>
 <li>
 <p>This command lists both incomplete and complete drafts.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>If no drafts exist, a relevant message is displayed in the GUI result panel while the GUI incident panel view remains unchanged.</p>
 </li>
-</ul>
-</div>
+<li>
+<p>If no drafts exist, a message is displayed and the Incident list remains unchanged.</p>
 </li>
 </ul>
 </div>
@@ -132,15 +116,13 @@ Lists all draft incident reports ready to be filled.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Usage and Outcome:
-Usage: <code>fill</code>
-Outcome:</p>
+<p>Outcome of <code>fill</code>:</p>
 </li>
 </ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/fillCommandNoParamsAfterScreenshot.png" alt="fillCommandNoParamsAfterScreenshot" width="600">
+<img src="../images/fillCommandNoParamsAfterScreenshot.png" alt="fillCommandNoParamsAfterScreenshot" width="500">
 </div>
 </div>
 <div class="sidebarblock">
@@ -150,6 +132,18 @@ Outcome:</p>
 Format: <code>fill [INDEX] [p/CALLER_NUMBER] [desc/DESCRIPTION]</code><br>
 Fills the draft incident report corresponding to the specified index with the phone number of the caller who reported the incident and the description of the incident.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The user can only fill the draft incident reports that have been created by them.
+</td>
+</tr>
+</table>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -157,16 +151,12 @@ Fills the draft incident report corresponding to the specified index with the ph
 </li>
 <li>
 <p>Both incomplete and complete drafts can be filled.</p>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>Fields of complete drafts will be overwritten.</p>
 </li>
 <li>
 <p>Executing this command changes incident <code>status</code> to 'Complete Draft'.</p>
-</li>
-</ul>
-</div>
 </li>
 <li>
 <p>Both <code>CALLER_NUMBER</code> and <code>DESCRIPTION</code> fields must be specified while executing this command.</p>
@@ -181,123 +171,17 @@ Fills the draft incident report corresponding to the specified index with the ph
 <div class="ulist">
 <ul>
 <li>
-<p>Usage and outcome:
-Usage: <code>fill 1 p/90309049 desc/Traffic accident reported at FKU hospital junction</code><br>
-Outcome:</p>
+<p>Outcome of <code>fill 1 p/90309049 desc/Traffic accident reported at FKU hospital junction</code>:</p>
 </li>
 </ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/fillCommandWithParamsAfterScreenshot.png" alt="fillCommandWithParamsAfterScreenshot" width="600">
+<img src="../images/fillCommandWithParamsAfterScreenshot.png" alt="fillCommandWithParamsAfterScreenshot" width="500">
 </div>
 </div>
 <div class="paragraph">
 <p>Using <code>fill</code> in both modes one after the other thus enables convenient listing and filling of target incident reports.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="submitting-a-completed-draft-report-code-submit-code"><a class="link" href="#submitting-a-completed-draft-report-code-submit-code">Submitting a completed draft report: <code>submit</code></a></h3>
-<div class="paragraph">
-<p>Submits a completed draft incident report if relevant parameters are specified, otherwise lists all completed drafts ready for submission.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The user can only submit the completed incident reports that have been created by them.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Similar to <code>fill</code>, this command also works in two modes:</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p><strong>1. No parameter mode</strong><br>
-Format: <code>submit</code><br>
-Lists all completed draft incident reports ready for submission.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>This command only lists complete drafts.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>If no complete drafts exist, a relevant message is displayed in the GUI result panel while the GUI incident panel view remains unchanged.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Usage and outcome:
-Usage: <code>submit</code>
-Outcome:</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/submitCommandNoParamsAfterScreenshot.png" alt="submitCommandNoParamsAfterScreenshot" width="600">
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p><strong>2. Parameter mode</strong><br>
-Format: <code>submit [INDEX]</code><br>
-Submits the completed draft incident report corresponding to the specified index.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Index must be assigned <strong>with reference to the currently shown list of incidents</strong> on the GUI incident panel.</p>
-</li>
-<li>
-<p>Only complete drafts can be submitted.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Executing this command changes incident <code>status</code> to <code>SUBMITTED_REPORT</code>.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>The newly submitted draft will now appear at the top of the list of incidents in the GUI incident panel view.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Usage and outcome:
-Usage: <code>submit 1</code>
-Outcome:</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/submitCommandWithParamsAfterScreenshot.png" alt="submitCommandWithParamsAfterScreenshot" width="600">
-</div>
-</div>
-<div class="paragraph">
-<p>Using <code>submit</code> in both modes right after using <code>fill</code> thus enables convenient submitting of newly filled complete incident report drafts.</p>
 </div>
 </div>
 </div>
@@ -384,16 +268,16 @@ with predicate <code>Incident::isDraft</code>. This <code>ListIncidentsCommand</
 </li>
 </ul>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/FillCommandWithParamsSequenceDiagram.png" alt="FillCommandWithParamsSequenceDiagram" width="800">
-</div>
-</div>
 <div class="paragraph">
 <p>In this sequence diagram, the helper methods within <code>FillCommand</code> are omitted for clarity.</p>
 </div>
 <div class="paragraph">
 <p>The <code>SubmitCommand</code> functions similarly, with one crucial difference. As no Incident fields are to be updated, the specified incident is simply retrieved, and its fields are copied into a new <code>Incident</code> object with a <code>SUBMITTED_REPORT</code> status.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/FillCommandWithParamsSequenceDiagram.png" alt="FillCommandWithParamsSequenceDiagram" width="800">
+</div>
 </div>
 </div>
 </div>
@@ -421,17 +305,7 @@ with predicate <code>Incident::isDraft</code>. This <code>ListIncidentsCommand</
 </div>
 </li>
 <li>
-<p>Cons:<br></p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Might be potentially confusing to user as <code>FillCommand</code> is performing a function of listing that is extraneous to the function of filling.</p>
-</li>
-<li>
-<p>This mode might be redundant <strong>if</strong> the user follows a strict incident management workflow where any newly generated incident is promptly filled and submitted without it remaining in the system as a draft.</p>
-</li>
-</ol>
-</div>
+<p>Con: 1. Might be potentially confusing to user as <code>FillCommand</code> is performing a function of listing that is extraneous to the function of filling.</p>
 </li>
 </ul>
 </div>
@@ -454,7 +328,7 @@ with predicate <code>Incident::isDraft</code>. This <code>ListIncidentsCommand</
 </div>
 </li>
 <li>
-<p>Con:<br></p>
+<p>Cons:<br></p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -474,24 +348,10 @@ with predicate <code>Incident::isDraft</code>. This <code>ListIncidentsCommand</
 <div class="ulist">
 <ul>
 <li>
-<p>Pro:<br></p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Most appropriate use of abstraction and single responsibility principle, which are crucial OOP concepts.</p>
-</li>
-</ol>
-</div>
+<p>Pro: 1. Most appropriate use of abstraction and single responsibility principle, which are crucial OOP concepts.</p>
 </li>
 <li>
-<p>Con:<br></p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User needs to either remember an additional command word or type a longer <code>list-i</code> command by specifying the filter predicate, which reduces user convenience.</p>
-</li>
-</ol>
-</div>
+<p>Con: 1. User needs to either remember an additional command word or type a longer <code>list-i</code> command by specifying the filter predicate, which reduces user convenience.</p>
 </li>
 </ul>
 </div>
@@ -521,14 +381,7 @@ with predicate <code>Incident::isDraft</code>. This <code>ListIncidentsCommand</
 </div>
 </li>
 <li>
-<p>Con:<br></p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User is unable to fill <code>callerNumber</code> independently of <code>description</code> unless they first submit the incident report and then use the <code>edit</code> command.</p>
-</li>
-</ol>
-</div>
+<p>Con: 1. User is unable to fill <code>callerNumber</code> independently of <code>description</code> unless they first submit the incident report and then use the <code>edit</code> command.</p>
 </li>
 </ul>
 </div>
@@ -551,14 +404,7 @@ with predicate <code>Incident::isDraft</code>. This <code>ListIncidentsCommand</
 </div>
 </li>
 <li>
-<p>Con:<br></p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Less adaptable and modular. If new fields are added to the incident report, then the user might want to enter / replace those fields by executing repeated fill commands in parameter mode without committing the report into the system and possibly alerting their supervisors and/or relevant agencies with incomplete / likely to change information.</p>
-</li>
-</ol>
-</div>
+<p>Con: 1. Less adaptable and modular. If new fields are added to the incident report, then the user might want to enter / replace those fields by executing repeated fill commands without committing the report into the system with incomplete / likely to change information.</p>
 </li>
 </ul>
 </div>
@@ -568,24 +414,10 @@ with predicate <code>Incident::isDraft</code>. This <code>ListIncidentsCommand</
 <div class="ulist">
 <ul>
 <li>
-<p>Pro:<br></p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Satisfies the cons of the two approaches above as it is versatile enough to allow the user to independently fill different incident report fields as well as adaptable enough to accommodate extra fields.</p>
-</li>
-</ol>
-</div>
+<p>Pro: 1. Satisfies the cons of the two approaches above as it is versatile enough to allow the user to independently fill different incident report fields as well as adaptable enough to accommodate extra fields.</p>
 </li>
 <li>
-<p>Con:<br></p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Harder to implement as we would need more elaborate methods to parse the variable arguments.</p>
-</li>
-</ol>
-</div>
+<p>Con: 1 . Harder to implement as we would need more elaborate methods to parse the variable arguments.</p>
 </li>
 </ul>
 </div>
@@ -644,4 +476,4 @@ This might be an acceptable issue it encourages users to completely fill a new i
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-08 17:58:05 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 02:22:49 UTC</div></div></div></body></html>
