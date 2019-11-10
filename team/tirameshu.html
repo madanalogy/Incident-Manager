@@ -98,264 +98,6 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
-<div class="sectionbody">
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 100%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
-</tr>
-</tbody>
-</table>
-<div class="sect2">
-<h3 id="create-new-incident-code-new-code"><a class="link" href="#create-new-incident-code-new-code">Create New Incident: <code>new</code></a></h3>
-<div class="paragraph">
-<p>This command works in two ways:</p>
-</div>
-<div class="paragraph">
-<p><strong>1. auto/Y</strong><br>
-Format: <code>new dist/DISTRICT auto/Y</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>An available vehicle in the given district will be automatically dispatched to the incident site.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>If no vehicle is available, the vehicle pane will be blank, and a relevant message is displayed.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>After the new incident is successfully created, the vehicle pane will show all vehicles in the given district.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The draft incident only has three fields filled: operator, district and vehicle dispatched.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-Valid district numbers are from 1 to 28!
-</td>
-</tr>
-</table>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Example usage:</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/newCommandAutoYBeforeSS.png" alt="newCommandAutoYBeforeSS">
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Expected outcome: In this case, there is no vehicle available in district 1.</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/newCommandAutoYAfterSS.png" alt="newCommandAutoYAfterSS">
-</div>
-</div>
-<div class="paragraph">
-<p><strong>2. auto/N</strong><br>
-Format: <code>new dist/DISTRICT auto/N</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>A list of available vehicles in the given district will be shown.</p>
-</li>
-<li>
-<p>A message will also appear to prompt user to also include the index of the chosen vehicle.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>If no vehicle is available, the vehicle pane will be blank, and a relevant message is displayed.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>After the new incident is successfully created, the vehicle pane will show all vehicles in the given district.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Example usage:</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/newCommandAutoNPromptSS.png" alt="newCommandAutoNPromptSS">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/newCommandAutoNAfterPromptSS.png" alt="newCommandAutoNAfterPromptSS">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/newCommandAutoNAfterSS.png" alt="newCommandAutoNAfterSS">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If multiple flags of the same prefix is provided by user, the command will take the last valid parameter of each prefix.<br>
-For example <code>new dist/1 dist/2 dist/3 auto/Y auto/N</code> is equivalent to <code>new dist/3 auto/N</code>.<br>
-Rationale: user need not waste time backspacing if an input was keyed in wrongly.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-For manual dispatchment of vehicle, the index of the chosen vehicle must be from the list of vehicles available in the given district, which is only displayed when <code>new dist/DISTRICT auto/N</code> is used.
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="finding-a-vehicle-code-find-v-code"><a class="link" href="#finding-a-vehicle-code-find-v-code">Finding a Vehicle: <code>find-v</code></a></h3>
-<div class="paragraph">
-<p>Finds a vehicle by its district number, vehicle number or vehicle type.</p>
-</div>
-<div class="paragraph">
-<p>The command works in three ways:</p>
-</div>
-<div class="paragraph">
-<p><strong>1. Find by district</strong>
-Format: <code>find-v dist/DISTRICT [MORE DISTRICTS]</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>User can input multiple districts to search for vehicles in.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Example usage:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/findVDsBeforeSS.png" alt="findVDsBeforeSS">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/findVDsAfterSS.png" alt="findVDsAfterSS">
-</div>
-</div>
-<div class="paragraph">
-<p><strong>2. Find by vehicle number</strong>
-Format: <code>find-v vnum/NUMBER</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>The number need not be an exact match of any vehicle number; any vehicle with input number in its vehicle number will be returned.<br></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Example usage:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/findVVnumBeforeSS.png" alt="findVVnumBeforeSS">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/findVVnumAfterSS.png" alt="findVVnumAfterSS">
-</div>
-</div>
-<div class="paragraph">
-<p><strong>3. Find by vehicle type</strong>
-Format: <code>find-v vtype/VEHICLE TYPE</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>The vehicle type keyword must match the actual vehicle type exactly.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Example usage:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/findVVtypeBeforeSS.png" alt="findVVtypeBeforeSS">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/findVVtypeAfterSS.png" alt="findVVtypeAfterSS">
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all spread">
@@ -373,8 +115,10 @@ Format: <code>find-v vtype/VEHICLE TYPE</code></p>
 <div class="sect3">
 <h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
 <div class="paragraph">
-<p>The incident draft creation mechanism is facilitated by the New Command. It creates a new draft incident report based on district of incident, optional automatic vehicle dispatchment.
-If created successfully, the draft incident only has three fields filled: operator, district and vehicle dispatched.</p>
+<p>The incident draft creation mechanism is facilitated by the New Command. It creates a new draft incident report based on district of incident, optional automatic vehicle dispatchment. As of now, when there is no vehicle available in the district of incident, a new report cannot be generated.</p>
+</div>
+<div class="paragraph">
+<p>If created successfully, the draft incident only has three fields filled: operator, district and vehicle dispatched.</p>
 </div>
 <div class="paragraph">
 <p>There are two ways to use the New Command:
@@ -392,21 +136,24 @@ If created successfully, the draft incident only has three fields filled: operat
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/NewDraftSequenceDiagramAuto.png" alt="NewDraftSequenceDiagramAuto">
+<img src="../images/NewDraftSequenceDiagramAuto.png" alt="NewDraftSequenceDiagramAuto" width="500">
 </div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="manual-vehicle-dispatchment"><a class="link" href="#manual-vehicle-dispatchment">Manual Vehicle Dispatchment:</a></h4>
 <div class="paragraph">
-<p>User needs to key in the index of vehicle based on the list of available vehicle in given district to dispatch. Note that this list can only be obtained with the input <code>new dist/DISTRICT auto/N</code>, and not based on the list of vehicles currently displayed. If no index is provided, or the index is not valid, an exception will be thrown and user will be prompted to provide a valid index.</p>
+<p>User first obtains list of vehicles available in specified district with <code>new dist/DISTRICT auto/n</code>, which prompts user for index of vehicle to dispatch. Note that this list can only be obtained with the input <code>new dist/DISTRICT auto/N</code>, and not based on the list of vehicles currently displayed.</p>
 </div>
 <div class="paragraph">
-<p>Below is a sequence diagram of a successful case:</p>
+<p>User then inputs the index of vehicle based on the list of available vehicle in given district to dispatch. If no index is provided, or the index is not valid, an exception will be thrown and user will be prompted to provide a valid index.</p>
+</div>
+<div class="paragraph">
+<p>Below is an activity diagram illustrating the above:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/NewDraftSequenceDiagramManual.png" alt="NewDraftSequenceDiagramManual">
+<img src="../images/DraftingActivityDiagram.png" alt="DraftingActivityDiagram" width="500">
 </div>
 </div>
 </div>
@@ -414,10 +161,46 @@ If created successfully, the draft incident only has three fields filled: operat
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-incident-draft-creation-executes"><a class="link" href="#aspect-how-incident-draft-creation-executes">Aspect: How incident draft creation executes</a></h5>
+<div class="paragraph">
+<p>For auto vehicle assignment:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Current Choice:</strong> Auto assignment of vehicles</p>
+<p><strong>Current Choice:</strong> Taking first vehicle on list of available vehicles in district.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement</p>
+</li>
+<li>
+<p>Cons: May not be the vehicle nearest to the incident site in real life, thus may not be optimal.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative:</strong> Add details to location of vehicles to actually allocate the vehicle closest to the incident site.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Optimal efficiency in dispatching vehicles.</p>
+</li>
+<li>
+<p>Cons: Difficult to implement; we do not have enough time.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Fro manual vehicle assignment:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Current Choice:</strong> Throw exception to prompt user to enter index of vehicle to dispatch.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -425,29 +208,29 @@ If created successfully, the draft incident only has three fields filled: operat
 <div class="ulist">
 <ul>
 <li>
-<p>Reduces number of steps of execution.</p>
+<p>User need not key in the entire new command again, only need to add the relevant prefix and index.</p>
 </li>
 <li>
-<p>User need not waste time on decision making; an available vehicle will be dispatched directly, and if no vehicles are available, user will be notified as well.</p>
+<p>Easy to implement.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Cons: User does not get to choose vehicle to dispatch, especially if vehicle of a specific type is wanted.</p>
+<p>Cons: May not seem logical to throw an exception for this.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative:</strong> Manual assignment of vehicles</p>
+<p><strong>Alternative:</strong> Show prompt message as a command result instead of exception message.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: User is able to choose vehicle to dispatch, especially if a specific vehicle type is wanted.</p>
+<p>Pros: Logically seems to make more sense.</p>
 </li>
 <li>
-<p>Cons: More number of steps, potentially a waste of time.</p>
+<p>Cons: User has to retype the entire command, potentially a waste of time.</p>
 </li>
 </ul>
 </div>
@@ -619,4 +402,261 @@ If created successfully, the draft incident only has three fields filled: operat
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 14:50:58 UTC</div></div></div></body></html>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="create-new-incident-code-new-code"><a class="link" href="#create-new-incident-code-new-code">Create New Incident: <code>new</code></a></h3>
+<div class="paragraph">
+<p>When new incidents are reported, vehicles are to be dispatched to the incident site. As of now, when there is no vehicle available in the district of incident, a new report cannot be generated.</p>
+</div>
+<div class="paragraph">
+<p>This command works in two ways:</p>
+</div>
+<div class="paragraph">
+<p><strong>1. auto/Y</strong><br>
+Format: <code>new dist/DISTRICT auto/Y</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>An available vehicle in the given district will be automatically dispatched to the incident site.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If no vehicle is available, the vehicle pane will be blank, and a relevant message is displayed.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>After the new incident is successfully created, the vehicle pane will show all vehicles in the given district.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The draft incident only has three fields filled: operator, district and vehicle dispatched.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Valid district numbers are from 1 to 28!
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Example usage:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/newCommandAutoYBeforeSS.png" alt="newCommandAutoYBeforeSS" width="500">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Expected outcome: In this case, there is no vehicle available in district 1.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/newCommandAutoYAfterSS.png" alt="newCommandAutoYAfterSS" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>2. auto/N</strong><br>
+Format: <code>new dist/DISTRICT auto/N v/INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>A list of available vehicles in the given district will be shown.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>INDEX</code> is the index of the chosen vehicle, based on the list of available vehicles in the district.</p>
+</li>
+<li>
+<p>If <code>v/INDEX</code> is not included, a message will appear to prompt user to also include the index of the chosen vehicle.</p>
+</li>
+<li>
+<p>If no vehicle is available, the vehicle pane will be blank, and a relevant message is displayed.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>After the new incident is successfully created, the vehicle pane will show all vehicles in the given district.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Example usage:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/newCommandAutoNPromptSS.png" alt="newCommandAutoNPromptSS" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Once user adds <code>v/1</code>, a new incident will be drafted.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If multiple flags of the same prefix is provided by user, the command will take the last valid parameter of each prefix.<br>
+For example <code>new dist/1 dist/2 dist/3 auto/Y auto/N</code> is equivalent to <code>new dist/3 auto/N</code>.<br>
+Rationale: user need not waste time backspacing if an input was keyed in wrongly.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+For manual dispatchment of vehicle, the index of the chosen vehicle must be from the list of vehicles available in the given district, which is only displayed when <code>new dist/DISTRICT auto/N</code> is used.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="finding-a-vehicle-code-find-v-code"><a class="link" href="#finding-a-vehicle-code-find-v-code">Finding a Vehicle: <code>find-v</code></a></h3>
+<div class="paragraph">
+<p>Finds a vehicle by its district number, vehicle number or vehicle type.</p>
+</div>
+<div class="paragraph">
+<p>The command works in three ways:</p>
+</div>
+<div class="paragraph">
+<p><strong>1. Find by district</strong>
+Format: <code>find-v dist/DISTRICT [MORE DISTRICTS]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>User can input multiple districts to search for vehicles in.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example usage:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/findVDsBeforeSS.png" alt="findVDsBeforeSS" width="500">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/findVDsAfterSS.png" alt="findVDsAfterSS" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>2. Find by vehicle number</strong>
+Format: <code>find-v vnum/NUMBER</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The number need not be an exact match of any vehicle number; any vehicle with input number in its vehicle number will be returned.<br></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example usage:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/findVVnumBeforeSS.png" alt="findVVnumBeforeSS" width="500">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/findVVnumAfterSS.png" alt="findVVnumAfterSS" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>3. Find by vehicle type</strong>
+Format: <code>find-v vtype/VEHICLE TYPE</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The vehicle type keyword must match the actual vehicle type exactly.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example usage:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/findVVtypeBeforeSS.png" alt="findVVtypeBeforeSS" width="500">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/findVVtypeAfterSS.png" alt="findVVtypeAfterSS" width="500">
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 17:43:20 UTC</div></div></div></body></html>

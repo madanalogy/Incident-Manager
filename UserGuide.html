@@ -38,7 +38,7 @@
 <li><a href="#exiting-the-program-code-exit-code">3.23. Exiting the program : <code>exit</code></a></li>
 <li><a href="#saving-the-data">3.24. Saving the data</a></li>
 <li><a href="#decrypting-data-files-code-coming-in-v2-0-code">3.25. Decrypting data files <code>[coming in v2.0]</code></a></li>
-<li><a href="#creating-new-incidents-even-when-no-vehicle-is-available-in-the-given-district-code-comin-in-v2-0-code">3.26. Creating new incidents even when no vehicle is available in the given district. <code>[comin in v2.0]</code></a></li>
+<li><a href="#creating-new-incidents-even-when-no-vehicle-is-available-in-the-given-district-code-coming-in-v2-0-code">3.26. Creating new incidents even when no vehicle is available in the given district. <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -494,6 +494,9 @@ Deletes the 1st account in the results of the <code>find</code> command.</p>
 <div class="sect2">
 <h3 id="create-new-incident-code-new-code"><a class="link" href="#create-new-incident-code-new-code">3.10. Create New Incident: <code>new</code></a></h3>
 <div class="paragraph">
+<p>When new incidents are reported, vehicles are to be dispatched to the incident site. As of now, when there is no vehicle available in the district of incident, a new report cannot be generated.</p>
+</div>
+<div class="paragraph">
 <p>This command works in two ways:</p>
 </div>
 <div class="paragraph">
@@ -549,7 +552,7 @@ Valid district numbers are from 1 to 28!
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/newCommandAutoYBeforeSS.png" alt="newCommandAutoYBeforeSS">
+<img src="images/newCommandAutoYBeforeSS.png" alt="newCommandAutoYBeforeSS" width="500">
 </div>
 </div>
 <div class="ulist">
@@ -561,12 +564,12 @@ Valid district numbers are from 1 to 28!
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/newCommandAutoYAfterSS.png" alt="newCommandAutoYAfterSS">
+<img src="images/newCommandAutoYAfterSS.png" alt="newCommandAutoYAfterSS" width="500">
 </div>
 </div>
 <div class="paragraph">
 <p><strong>2. auto/N</strong><br>
-Format: <code>new dist/DISTRICT auto/N</code></p>
+Format: <code>new dist/DISTRICT auto/N v/INDEX</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -574,11 +577,14 @@ Format: <code>new dist/DISTRICT auto/N</code></p>
 <ul>
 <li>
 <p>A list of available vehicles in the given district will be shown.</p>
-</li>
-<li>
-<p>A message will also appear to prompt user to also include the index of the chosen vehicle.</p>
 <div class="ulist">
 <ul>
+<li>
+<p><code>INDEX</code> is the index of the chosen vehicle, based on the list of available vehicles in the district.</p>
+</li>
+<li>
+<p>If <code>v/INDEX</code> is not included, a message will appear to prompt user to also include the index of the chosen vehicle.</p>
+</li>
 <li>
 <p>If no vehicle is available, the vehicle pane will be blank, and a relevant message is displayed.</p>
 </li>
@@ -601,18 +607,11 @@ Format: <code>new dist/DISTRICT auto/N</code></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/newCommandAutoNPromptSS.png" alt="newCommandAutoNPromptSS">
+<img src="images/newCommandAutoNPromptSS.png" alt="newCommandAutoNPromptSS" width="500">
 </div>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="images/newCommandAutoNAfterPromptSS.png" alt="newCommandAutoNAfterPromptSS">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/newCommandAutoNAfterSS.png" alt="newCommandAutoNAfterSS">
-</div>
+<div class="paragraph">
+<p>Once user adds <code>v/1</code>, a new incident will be drafted.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1316,14 +1315,6 @@ Format: <code>list-v</code></p>
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p>Example usage and expected outcome:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/listVSS.png" alt="listVSS">
-</div>
-</div>
 </div>
 <div class="sect2">
 <h3 id="finding-a-vehicle-code-find-v-code"><a class="link" href="#finding-a-vehicle-code-find-v-code">3.21. Finding a Vehicle: <code>find-v</code></a></h3>
@@ -1353,12 +1344,12 @@ Format: <code>find-v dist/DISTRICT [MORE DISTRICTS]</code></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/findVDsBeforeSS.png" alt="findVDsBeforeSS">
+<img src="images/findVDsBeforeSS.png" alt="findVDsBeforeSS" width="500">
 </div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/findVDsAfterSS.png" alt="findVDsAfterSS">
+<img src="images/findVDsAfterSS.png" alt="findVDsAfterSS" width="500">
 </div>
 </div>
 <div class="paragraph">
@@ -1381,12 +1372,12 @@ Format: <code>find-v vnum/NUMBER</code></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/findVVnumBeforeSS.png" alt="findVVnumBeforeSS">
+<img src="images/findVVnumBeforeSS.png" alt="findVVnumBeforeSS" width="500">
 </div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/findVVnumAfterSS.png" alt="findVVnumAfterSS">
+<img src="images/findVVnumAfterSS.png" alt="findVVnumAfterSS" width="500">
 </div>
 </div>
 <div class="paragraph">
@@ -1409,12 +1400,12 @@ Format: <code>find-v vtype/VEHICLE TYPE</code></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/findVVtypeBeforeSS.png" alt="findVVtypeBeforeSS">
+<img src="images/findVVtypeBeforeSS.png" alt="findVVtypeBeforeSS" width="500">
 </div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/findVVtypeAfterSS.png" alt="findVVtypeAfterSS">
+<img src="images/findVVtypeAfterSS.png" alt="findVVtypeAfterSS" width="500">
 </div>
 </div>
 </div>
@@ -1491,7 +1482,7 @@ Format: <code>decrypt PASSWORD</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="creating-new-incidents-even-when-no-vehicle-is-available-in-the-given-district-code-comin-in-v2-0-code"><a class="link" href="#creating-new-incidents-even-when-no-vehicle-is-available-in-the-given-district-code-comin-in-v2-0-code">3.26. Creating new incidents even when no vehicle is available in the given district. <code>[comin in v2.0]</code></a></h3>
+<h3 id="creating-new-incidents-even-when-no-vehicle-is-available-in-the-given-district-code-coming-in-v2-0-code"><a class="link" href="#creating-new-incidents-even-when-no-vehicle-is-available-in-the-given-district-code-coming-in-v2-0-code">3.26. Creating new incidents even when no vehicle is available in the given district. <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p>User can choose to create an incident pending vehicle dispatchment.
 Format: <code>new dist/DISTRICT auto/Y r/pending</code></p>
@@ -1546,7 +1537,8 @@ e.g. <code>find-a James Jake</code></p>
 e.g. <code>delete-a 3</code></p>
 </li>
 <li>
-<p><strong>New</strong> <code>new dist/DISTRICT auto/Y</code></p>
+<p><strong>New</strong> : <code>new dist/DISTRICT auto/[Y/N] [v/INDEX]</code><br>
+e.g. <code>new dist/1 auto/n v/1</code></p>
 </li>
 <li>
 <p><strong>Fill</strong></p>
@@ -1593,4 +1585,4 @@ e.g. <code>find-v dist/1 2 3</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 14:50:58 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 17:43:20 UTC</div></div></div></body></html>
