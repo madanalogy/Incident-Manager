@@ -86,6 +86,247 @@
 </div>
 </div>
 <div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="incident-edit-feature"><a class="link" href="#incident-edit-feature">Incident Edit feature</a></h3>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<div class="paragraph">
+<p>The incident edit mechanism is facilitated by <code>EditCommand</code> class. Validity of user input is checked when <code>execute()</code> is called and an exception is thrown if invalid.
+The user can choose to put in any number of fields for editing. There are 2 ways to use the “edit-I” command: 1. ‘edit-I’ without any inputs will filter the incident list to display all incidents available for editing 2. ‘edit-I’ with fields identified for editing.</p>
+</div>
+<div class="paragraph">
+<p>An exception will be thrown under these 2 conditions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>index.getZeroBased() &gt;= listOfIncidents.size()</code></p>
+</li>
+<li>
+<p><code>!incidentToEdit.equals(editedIncident) &amp;&amp; model.hasIncident(editedIncident)</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Below is an activity diagram to illustrate the process that the user may go through</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/EditCommandActivity.png" alt="EditCommandActivity" width="300">
+</div>
+</div>
+<div class="paragraph">
+<p>EditIncidentCommand` class makes use of <code>EditIncident</code> object to create a new
+<code>Incident</code> object with the fields identified by user as well as the untouched
+fields from the original incident. This new <code>Incident</code> will replace the original
+<code>Incident</code> object in the incident list.</p>
+</div>
+<div class="paragraph">
+<p>Below is a sequence diagram to illustrate how the command executes:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/EditIncidentCommand.png" alt="EditIncidentCommand" width="300">
+</div>
+</div>
+<div class="paragraph">
+<p>The command can only be used by admin accounts or accounts that created/filled/submitted
+the incident report. This is to prevent sabotage or accidental edits from operators who
+may not be familiar with the incident.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-incident-edit-executes"><a class="link" href="#aspect-how-incident-edit-executes">Aspect: How incident edit executes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Current Choice: A new incident object with edited fields is created and used to replace the old incident object in the list.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: This reduces direct changes to incident objects, hence <code>EditIncidentCommand</code> does not have access to <code>Incident</code> internal structure. This helps reduce content coupling between the 2 classes and also makes the program easier to test.</p>
+</li>
+<li>
+<p>Cons: A new <code>Incident</code> object is created every time user input is valid, hence may require more memory to run. It also requires the usage of the “EditIncident” class, increasing the complexity of the codebase.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Alternative: Direct edit of the attributes of incident to be modified</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to implement. Less objects created and less classes involved in the function.</p>
+</li>
+<li>
+<p>Cons: High coupling since <code>EditIncidentCommand</code> will need to have access to internal details of <code>Incident</code> class in order to directly modify the contents of the object. This will cause the system to be harder to test and maintain.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="vehicle-management"><a class="link" href="#vehicle-management">Vehicle Management</a></h3>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
+<div class="paragraph">
+<p>These are the commands available to the user related to vehicle management:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Changing the details of a vehicle: <code>edit-v</code></p>
+</li>
+<li>
+<p>Adding a new vehicle: <code>add-v</code></p>
+</li>
+<li>
+<p>Deleting a vehicle: <code>delete-v</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Only vehicles with the status <code>Avaliable</code> are valid for editing or deleting. This is to prevent removing or changing the details of a vehicle that is currently being dispatched.
+</td>
+</tr>
+</table>
+</div>
+<hr>
+<div class="ulist">
+<ul>
+<li>
+<p>Only accounts with admin access are eligible to delete vehicles</p>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="editing-vehicles-code-edit-v-code"><a class="link" href="#editing-vehicles-code-edit-v-code">Editing Vehicles: <code>edit-v</code></a></h4>
+<div class="paragraph">
+<p>Implementation of <code>edit-v</code> is similar to <code>edit-i</code> where <code>EditVehicleCommand</code> makes use of <code>EditVehicle</code> class to create a new <code>Vehicle</code> object with the modified fields and replaces the original object. Design considerations are also similar to that of <code>edit-i</code>.
+Below is a sequence diagram to illustrate the process and classes involved in the <code>edit-v</code> command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/editVehicleCommand.png" alt="editVehicleCommand" width="300">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="adding-and-deleting-vehicles-code-add-v-code-code-delete-v-code"><a class="link" href="#adding-and-deleting-vehicles-code-add-v-code-code-delete-v-code">Adding and Deleting Vehicles: <code>add-v</code>/<code>delete-v</code></a></h4>
+<div class="sect4">
+<h5 id="design-considerations-adding-vehicles"><a class="link" href="#design-considerations-adding-vehicles">Design Considerations: Adding vehicles</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Current Choice: new Vehicle object is created in the parser and <code>AddVehicleCommand</code> takes a <code>Vehicle</code> object in the constructor.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: compliant with principle of data abstraction since <code>AddVehicleCommand</code> only receives a vehicle object that needs to be added and does not need to know how the object is created.</p>
+</li>
+<li>
+<p>Cons: Vehicle object needs to be created in the parser. Increases coupling of parser and vehicle model.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Alternative: <code>AddVehicleCommand</code> takes in the fields from parser and creates the <code>Vehicle</code> object in the <code>execute()</code> method of <code>AddVehicleCommand</code> class</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Vehicle object does not need to be created in the parser.</p>
+</li>
+<li>
+<p>Cons: Constructor for <code>AddVehicleCommand</code> and <code>Vehicle</code> will be highly similar and almost overlap in functionality. The parameters for creating a vehicle will have to be passed twice.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Below is a sequence diagram to illustrate add-v:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/addVehicleCommand.png" alt="addVehicleCommand" width="300">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="design-considerations-deleting-vehicles"><a class="link" href="#design-considerations-deleting-vehicles">Design Considerations: Deleting vehicles</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Current Choice: Vehicle object is taken from the list in model and <code>DeleteVehicleCommand</code> takes in the <code>Vehicle</code> object to be deleted and identifies it from the list using the signatures of the object.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Reduces coupling. By passing a vehicle object instead of the index will mean that <code>DeleteVehicleCommand</code> need not know the state of the filtered vehicle list.</p>
+</li>
+<li>
+<p>Cons: Requires the vehicle list in to be unique and the signatures of <code>Vehicle</code> objects need to be specific. Methods from <code>ModelManager</code> needs to be access from both <code>DeleteVehicleCommandParser</code> and <code>EditVehicleParser</code>. Increases coupling.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Alternative: <code>DeleteVehicleCommand</code> can take in the index of the vehicle to be deleted and delete from the list by identifying the vehicle using the index.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier implementation</p>
+</li>
+<li>
+<p>Cons: DeleteVehicleCommand needs to know the state of the filtered list. Increases coupling.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Below is a sequence diagram to illustrate delete-v:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/deleteVehicleCommand.png" alt="deleteVehicleCommand" width="300">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all spread">
@@ -325,245 +566,4 @@ A valid index is a positive integer and points to a vehicle displayed in the veh
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
-<div class="sectionbody">
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 100%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
-</tr>
-</tbody>
-</table>
-<div class="sect2">
-<h3 id="incident-edit-feature"><a class="link" href="#incident-edit-feature">Incident Edit feature</a></h3>
-<div class="sect3">
-<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
-<div class="paragraph">
-<p>The incident edit mechanism is facilitated by <code>EditCommand</code> class. Validity of user input is checked when <code>execute()</code> is called and an exception is thrown if invalid.
-The user can choose to put in any number of fields for editing. There are 2 ways to use the “edit-I” command: 1. ‘edit-I’ without any inputs will filter the incident list to display all incidents available for editing 2. ‘edit-I’ with fields identified for editing.</p>
-</div>
-<div class="paragraph">
-<p>An exception will be thrown under these 2 conditions:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>index.getZeroBased() &gt;= listOfIncidents.size()</code></p>
-</li>
-<li>
-<p><code>!incidentToEdit.equals(editedIncident) &amp;&amp; model.hasIncident(editedIncident)</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Below is an activity diagram to illustrate the process that the user may go through</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/EditCommandActivity.png" alt="EditCommandActivity" width="500">
-</div>
-</div>
-<div class="paragraph">
-<p>EditIncidentCommand` class makes use of <code>EditIncident</code> object to create a new
-<code>Incident</code> object with the fields identified by user as well as the untouched
-fields from the original incident. This new <code>Incident</code> will replace the original
-<code>Incident</code> object in the incident list.</p>
-</div>
-<div class="paragraph">
-<p>Below is a sequence diagram to illustrate how the command executes:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/EditIncidentCommand.png" alt="EditIncidentCommand" width="500">
-</div>
-</div>
-<div class="paragraph">
-<p>The command can only be used by admin accounts or accounts that created/filled/submitted
-the incident report. This is to prevent sabotage or accidental edits from operators who
-may not be familiar with the incident.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
-<div class="sect4">
-<h5 id="aspect-how-incident-edit-executes"><a class="link" href="#aspect-how-incident-edit-executes">Aspect: How incident edit executes</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p>Current Choice: A new incident object with edited fields is created and used to replace the old incident object in the list.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: This reduces direct changes to incident objects, hence <code>EditIncidentCommand</code> does not have access to <code>Incident</code> internal structure. This helps reduce content coupling between the 2 classes and also makes the program easier to test.</p>
-</li>
-<li>
-<p>Cons: A new <code>Incident</code> object is created every time user input is valid, hence may require more memory to run. It also requires the usage of the “EditIncident” class, increasing the complexity of the codebase.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Alternative: Direct edit of the attributes of incident to be modified</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easier to implement. Less objects created and less classes involved in the function.</p>
-</li>
-<li>
-<p>Cons: High coupling since <code>EditIncidentCommand</code> will need to have access to internal details of <code>Incident</code> class in order to directly modify the contents of the object. This will cause the system to be harder to test and maintain.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="vehicle-management"><a class="link" href="#vehicle-management">Vehicle Management</a></h3>
-<div class="sect3">
-<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
-<div class="paragraph">
-<p>These are the commands available to the user related to vehicle management:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Changing the details of a vehicle: <code>edit-v</code></p>
-</li>
-<li>
-<p>Adding a new vehicle: <code>add-v</code></p>
-</li>
-<li>
-<p>Deleting a vehicle: <code>delete-v</code></p>
-</li>
-</ul>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Only vehicles with the status <code>Avaliable</code> are valid for editing or deleting. This is to prevent removing or changing the details of a vehicle that is currently being dispatched.
-</td>
-</tr>
-</table>
-</div>
-<hr>
-<div class="ulist">
-<ul>
-<li>
-<p>Only accounts with admin access are eligible to delete vehicles</p>
-</li>
-</ul>
-</div>
-<hr>
-</div>
-<div class="sect3">
-<h4 id="editing-vehicles-code-edit-v-code"><a class="link" href="#editing-vehicles-code-edit-v-code">Editing Vehicles: <code>edit-v</code></a></h4>
-<div class="paragraph">
-<p>Implementation of <code>edit-v</code> is similar to <code>edit-i</code> where <code>EditVehicleCommand</code> makes use of <code>EditVehicle</code> class to create a new <code>Vehicle</code> object with the modified fields and replaces the original object. Design considerations are also similar to that of <code>edit-i</code>.
-Below is a sequence diagram to illustrate the process and classes involved in the <code>edit-v</code> command:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/editVehicleCommand.png" alt="editVehicleCommand" width="500">
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="adding-and-deleting-vehicles-code-add-v-code-code-delete-v-code"><a class="link" href="#adding-and-deleting-vehicles-code-add-v-code-code-delete-v-code">Adding and Deleting Vehicles: <code>add-v</code>/<code>delete-v</code></a></h4>
-<div class="sect4">
-<h5 id="design-considerations-adding-vehicles"><a class="link" href="#design-considerations-adding-vehicles">Design Considerations: Adding vehicles</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p>Current Choice: new Vehicle object is created in the parser and <code>AddVehicleCommand</code> takes a <code>Vehicle</code> object in the constructor.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: compliant with principle of data abstraction since <code>AddVehicleCommand</code> only receives a vehicle object that needs to be added and does not need to know how the object is created.</p>
-</li>
-<li>
-<p>Cons: Vehicle object needs to be created in the parser. Increases coupling of parser and vehicle model.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Alternative: <code>AddVehicleCommand</code> takes in the fields from parser and creates the <code>Vehicle</code> object in the <code>execute()</code> method of <code>AddVehicleCommand</code> class</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Vehicle object does not need to be created in the parser.</p>
-</li>
-<li>
-<p>Cons: Constructor for <code>AddVehicleCommand</code> and <code>Vehicle</code> will be highly similar and almost overlap in functionality. The parameters for creating a vehicle will have to be passed twice.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Below is a sequence diagram to illustrate add-v:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/addVehicleCommand.png" alt="addVehicleCommand" width="500">
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="design-considerations-deleting-vehicles"><a class="link" href="#design-considerations-deleting-vehicles">Design Considerations: Deleting vehicles</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p>Current Choice: Vehicle object is taken from the list in model and <code>DeleteVehicleCommand</code> takes in the <code>Vehicle</code> object to be deleted and identifies it from the list using the signatures of the object.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Reduces coupling. By passing a vehicle object instead of the index will mean that <code>DeleteVehicleCommand</code> need not know the state of the filtered vehicle list.</p>
-</li>
-<li>
-<p>Cons: Requires the vehicle list in to be unique and the signatures of <code>Vehicle</code> objects need to be specific. Methods from <code>ModelManager</code> needs to be access from both <code>DeleteVehicleCommandParser</code> and <code>EditVehicleParser</code>. Increases coupling.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Alternative: <code>DeleteVehicleCommand</code> can take in the index of the vehicle to be deleted and delete from the list by identifying the vehicle using the index.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easier implementation</p>
-</li>
-<li>
-<p>Cons: DeleteVehicleCommand needs to know the state of the filtered list. Increases coupling.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Below is a sequence diagram to illustrate delete-v:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/deleteVehicleCommand.png" alt="deleteVehicleCommand" width="500">
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 14:04:05 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 14:18:55 UTC</div></div></div></body></html>
