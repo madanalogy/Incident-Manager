@@ -25,15 +25,13 @@
 <li><a href="#access-control-feature">3.1. Access Control feature</a></li>
 <li><a href="#account-management-feature">3.2. Account Management feature</a></li>
 <li><a href="#incident-draft-creation-feature">3.3. Incident Draft Creation feature</a></li>
-<li><a href="#automatic-vehicle-dispatchment">3.4. Automatic Vehicle Dispatchment:</a></li>
-<li><a href="#manual-vehicle-dispatchment">3.5. Manual Vehicle Dispatchment:</a></li>
-<li><a href="#incident-filling-and-submission-feature">3.6. Incident Filling and Submission feature</a></li>
-<li><a href="#incident-search-feature">3.7. Incident Search feature</a></li>
-<li><a href="#incident-edit-feature">3.8. Incident Edit feature</a></li>
-<li><a href="#vehicle-management">3.9. Vehicle Management</a></li>
-<li><a href="#vehicle-search-feature">3.10. Vehicle Search feature</a></li>
-<li><a href="#logging">3.11. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.12. Configuration</a></li>
+<li><a href="#incident-filling-and-submission-feature">3.4. Incident Filling and Submission feature</a></li>
+<li><a href="#incident-search-feature">3.5. Incident Search feature</a></li>
+<li><a href="#incident-edit-feature">3.6. Incident Edit feature</a></li>
+<li><a href="#vehicle-management">3.7. Vehicle Management</a></li>
+<li><a href="#vehicle-search-feature">3.8. Vehicle Search feature</a></li>
+<li><a href="#logging">3.9. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.10. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a></li>
@@ -50,8 +48,11 @@
 <li><a href="#launch-and-shutdown">G.1. Launch and Shutdown</a></li>
 <li><a href="#deleting-a-person">G.2. Deleting a person</a></li>
 <li><a href="#saving-data">G.3. Saving data</a></li>
-<li><a href="#filling-an-incident-report">G.4. Filling an incident report</a></li>
-<li><a href="#submitting-an-incident-report">G.5. Submitting an incident report</a></li>
+<li><a href="#creating-an-incident-report">G.4. Creating an incident report</a></li>
+<li><a href="#filling-an-incident-report">G.5. Filling an incident report</a></li>
+<li><a href="#submitting-an-incident-report">G.6. Submitting an incident report</a></li>
+<li><a href="#finding-vehicles">G.7. Finding vehicles</a></li>
+<li><a href="#listing-vehicles">G.8. Listing vehicles</a></li>
 </ul>
 </li>
 </ul>
@@ -827,17 +828,19 @@ Users are restricted from accessing commands affecting objects not on display. T
 <div class="sect2">
 <h3 id="incident-draft-creation-feature"><a class="link" href="#incident-draft-creation-feature">3.3. Incident Draft Creation feature</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.3.1. Proposed Implementation</a></h4>
+<h4 id="implementation-4"><a class="link" href="#implementation-4">3.3.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The incident draft creation mechanism is facilitated by the New Command. It creates a new draft incident report based on district of incident, optional automatic vehicle dispatchment.
-There are two ways to use the New Command:
+If created successfully, the draft incident only has three fields filled: operator, district and vehicle dispatched.</p>
+</div>
+<div class="paragraph">
+<p>There are two ways to use the New Command:
 1. Auto dispatchment
 2. Manual dispatchment, which requires user to provide a valid index that selects a vehicle</p>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="automatic-vehicle-dispatchment"><a class="link" href="#automatic-vehicle-dispatchment">3.4. Automatic Vehicle Dispatchment:</a></h3>
+<div class="sect3">
+<h4 id="automatic-vehicle-dispatchment"><a class="link" href="#automatic-vehicle-dispatchment">3.3.2. Automatic Vehicle Dispatchment:</a></h4>
 <div class="paragraph">
 <p>Vehicle will be automatically assigned to the incident draft if any is available in the district. If no vehicle is available, an exception will be thrown.</p>
 </div>
@@ -850,8 +853,8 @@ There are two ways to use the New Command:
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="manual-vehicle-dispatchment"><a class="link" href="#manual-vehicle-dispatchment">3.5. Manual Vehicle Dispatchment:</a></h3>
+<div class="sect3">
+<h4 id="manual-vehicle-dispatchment"><a class="link" href="#manual-vehicle-dispatchment">3.3.3. Manual Vehicle Dispatchment:</a></h4>
 <div class="paragraph">
 <p>User needs to key in the index of vehicle based on the list of available vehicle in given district to dispatch. Note that this list can only be obtained with the input <code>new dist/DISTRICT auto/N</code>, and not based on the list of vehicles currently displayed. If no index is provided, or the index is not valid, an exception will be thrown and user will be prompted to provide a valid index.</p>
 </div>
@@ -863,8 +866,9 @@ There are two ways to use the New Command:
 <img src="images/NewDraftSequenceDiagramManual.png" alt="NewDraftSequenceDiagramManual">
 </div>
 </div>
+</div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.5.1. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.4. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-incident-draft-creation-executes"><a class="link" href="#aspect-how-incident-draft-creation-executes">Aspect: How incident draft creation executes</a></h5>
 <div class="ulist">
@@ -911,9 +915,9 @@ There are two ways to use the New Command:
 </div>
 </div>
 <div class="sect2">
-<h3 id="incident-filling-and-submission-feature"><a class="link" href="#incident-filling-and-submission-feature">3.6. Incident Filling and Submission feature</a></h3>
+<h3 id="incident-filling-and-submission-feature"><a class="link" href="#incident-filling-and-submission-feature">3.4. Incident Filling and Submission feature</a></h3>
 <div class="sect3">
-<h4 id="implementation-4"><a class="link" href="#implementation-4">3.6.1. Implementation</a></h4>
+<h4 id="implementation-5"><a class="link" href="#implementation-5">3.4.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The incident filling and submission subroutines are facilitated by the <code>fill</code> and <code>submit</code> commands respectively.
 In the IMS, each incident can have one of three statuses - <code>INCOMPLETE_DRAFT</code>, <code>COMPLETE_DRAFT</code>, and <code>SUBMITTED REPORT</code>.
@@ -993,7 +997,7 @@ with predicate <code>Incident::isDraft</code>. This <code>ListIncidentsCommand</
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.6.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-incident-code-fill-code-and-code-submit-code-commands-execute-in-no-parameter-mode"><a class="link" href="#aspect-how-incident-code-fill-code-and-code-submit-code-commands-execute-in-no-parameter-mode">Aspect: How incident <code>fill</code> and <code>submit</code> commands execute in no parameter mode</a></h5>
 <div class="ulist">
@@ -1138,14 +1142,14 @@ with predicate <code>Incident::isDraft</code>. This <code>ListIncidentsCommand</
 </div>
 </div>
 <div class="sect3">
-<h4 id="known-issues-2"><a class="link" href="#known-issues-2">3.6.3. Known Issues</a></h4>
+<h4 id="known-issues-2"><a class="link" href="#known-issues-2">3.4.3. Known Issues</a></h4>
 <div class="paragraph">
 <p>A user cannot independently fill the various incident report fields unless they first submit the incident report.
 This might be an acceptable issue it encourages users to completely fill a new incident report before submitting it, which reduces the likelihood of finding incomplete drafts in the system.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="activity-diagram-summarising-incident-creation-filling-and-submission-features"><a class="link" href="#activity-diagram-summarising-incident-creation-filling-and-submission-features">3.6.4. Activity diagram summarising Incident creation, filling, and submission features</a></h4>
+<h4 id="activity-diagram-summarising-incident-creation-filling-and-submission-features"><a class="link" href="#activity-diagram-summarising-incident-creation-filling-and-submission-features">3.4.4. Activity diagram summarising Incident creation, filling, and submission features</a></h4>
 <div class="imageblock">
 <div class="content">
 <img src="images/IncidentReportingActivityDiagram.png" alt="IncidentReportingActivityDiagram">
@@ -1157,9 +1161,9 @@ This might be an acceptable issue it encourages users to completely fill a new i
 </div>
 </div>
 <div class="sect2">
-<h3 id="incident-search-feature"><a class="link" href="#incident-search-feature">3.7. Incident Search feature</a></h3>
+<h3 id="incident-search-feature"><a class="link" href="#incident-search-feature">3.5. Incident Search feature</a></h3>
 <div class="sect3">
-<h4 id="implementation-5"><a class="link" href="#implementation-5">3.7.1. Implementation</a></h4>
+<h4 id="implementation-6"><a class="link" href="#implementation-6">3.5.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The incident search mechanism features a set of different types of searches that a user could utilise to list out all related incidents, inclusive of incomplete drafts, complete drafts and completed reports. Further documentation on the commands available in this set can be found in the User Guide. The types of searches are as listed:</p>
 </div>
@@ -1241,7 +1245,7 @@ eg. <code>find-i self</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.7.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-incident-search-keyword-is-inputted"><a class="link" href="#aspect-how-incident-search-keyword-is-inputted">Aspect: How incident search keyword is inputted</a></h5>
 <div class="ulist">
@@ -1344,9 +1348,9 @@ eg. <code>find-i self</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="incident-edit-feature"><a class="link" href="#incident-edit-feature">3.8. Incident Edit feature</a></h3>
+<h3 id="incident-edit-feature"><a class="link" href="#incident-edit-feature">3.6. Incident Edit feature</a></h3>
 <div class="sect3">
-<h4 id="implementation-6"><a class="link" href="#implementation-6">3.8.1. Implementation</a></h4>
+<h4 id="implementation-7"><a class="link" href="#implementation-7">3.6.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The incident edit mechanism is facilitated by <code>EditCommand</code> class. Validity of user input is checked when <code>execute()</code> is called and an exception is thrown if invalid.
 The user can choose to put in any number of fields for editing. There are 2 ways to use the “edit-I” command: 1. ‘edit-I’ without any inputs will filter the incident list to display all incidents available for editing 2. ‘edit-I’ with fields identified for editing.</p>
@@ -1393,7 +1397,7 @@ may not be familiar with the incident.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.8.2. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.6.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-incident-edit-executes"><a class="link" href="#aspect-how-incident-edit-executes">Aspect: How incident edit executes</a></h5>
 <div class="ulist">
@@ -1430,9 +1434,9 @@ may not be familiar with the incident.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="vehicle-management"><a class="link" href="#vehicle-management">3.9. Vehicle Management</a></h3>
+<h3 id="vehicle-management"><a class="link" href="#vehicle-management">3.7. Vehicle Management</a></h3>
 <div class="sect3">
-<h4 id="implementation-7"><a class="link" href="#implementation-7">3.9.1. Implementation</a></h4>
+<h4 id="implementation-8"><a class="link" href="#implementation-8">3.7.1. Implementation</a></h4>
 <div class="paragraph">
 <p>These are the commands available to the user related to vehicle management:</p>
 </div>
@@ -1463,7 +1467,7 @@ Only vehicles with the status <code>Avaliable</code> are valid for editing or de
 </div>
 </div>
 <div class="sect3">
-<h4 id="editing-vehicles-code-edit-v-code"><a class="link" href="#editing-vehicles-code-edit-v-code">3.9.2. Editing Vehicles: <code>edit-v</code></a></h4>
+<h4 id="editing-vehicles-code-edit-v-code"><a class="link" href="#editing-vehicles-code-edit-v-code">3.7.2. Editing Vehicles: <code>edit-v</code></a></h4>
 <div class="paragraph">
 <p>Implementation of <code>edit-v</code> is similar to <code>edit-i</code> where <code>EditVehicleCommand</code> makes use of <code>EditVehicle</code> class to create a new <code>Vehicle</code> object with the modified fields and replaces the original object. Design considerations are also similar to that of <code>edit-i</code>.
 Below is a sequence diagram to illustrate the process and classes involved in the <code>edit-v</code> command:</p>
@@ -1475,7 +1479,7 @@ Below is a sequence diagram to illustrate the process and classes involved in th
 </div>
 </div>
 <div class="sect3">
-<h4 id="adding-and-deleting-vehicles-code-add-v-code-code-delete-v-code"><a class="link" href="#adding-and-deleting-vehicles-code-add-v-code-code-delete-v-code">3.9.3. Adding and Deleting Vehicles: <code>add-v</code>/<code>delete-v</code></a></h4>
+<h4 id="adding-and-deleting-vehicles-code-add-v-code-code-delete-v-code"><a class="link" href="#adding-and-deleting-vehicles-code-add-v-code-code-delete-v-code">3.7.3. Adding and Deleting Vehicles: <code>add-v</code>/<code>delete-v</code></a></h4>
 <div class="sect4">
 <h5 id="design-considerations-adding-vehicles"><a class="link" href="#design-considerations-adding-vehicles">Design Considerations: Adding vehicles</a></h5>
 <div class="ulist">
@@ -1561,9 +1565,9 @@ Below is a sequence diagram to illustrate the process and classes involved in th
 </div>
 </div>
 <div class="sect2">
-<h3 id="vehicle-search-feature"><a class="link" href="#vehicle-search-feature">3.10. Vehicle Search feature</a></h3>
+<h3 id="vehicle-search-feature"><a class="link" href="#vehicle-search-feature">3.8. Vehicle Search feature</a></h3>
 <div class="sect3">
-<h4 id="implementation-8"><a class="link" href="#implementation-8">3.10.1. Implementation</a></h4>
+<h4 id="implementation-9"><a class="link" href="#implementation-9">3.8.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The vehicle search mechanism features a set of different types of searches that a user could utilise. Further documentation on the commands available in this set can be found within the link:https://ay1920s1-cs2103-t11-1.github.io/main/UserGuide.html. The types of searches are as listed:</p>
 </div>
@@ -1595,7 +1599,7 @@ Below is a sequence diagram to illustrate the process and classes involved in th
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.10.2. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">3.8.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-vehicle-search-keyword-is-inputted"><a class="link" href="#aspect-how-vehicle-search-keyword-is-inputted">Aspect: How vehicle search keyword is inputted</a></h5>
 <div class="ulist">
@@ -1722,14 +1726,14 @@ Below is a sequence diagram to illustrate the process and classes involved in th
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.11. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.9. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.12, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.10, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1760,7 +1764,7 @@ Below is a sequence diagram to illustrate the process and classes involved in th
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.12. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.10. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2345,7 +2349,98 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="filling-an-incident-report"><a class="link" href="#filling-an-incident-report">G.4. Filling an incident report</a></h3>
+<h3 id="creating-an-incident-report"><a class="link" href="#creating-an-incident-report">G.4. Creating an incident report</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Attempting to execute <code>new</code> without logging in.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User not logged in.</p>
+</li>
+<li>
+<p>Test case: <code>new dist/1 auto/y</code><br>
+Expected: Message "Only Register, Login, Exit, and Help commands are available. Please login to access other commands. See help page for more information."</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>new</code> with valid inputs and successful auto vehicle dispatchment</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User must be logged in, and there must be at least one available vehicle in the given district.</p>
+</li>
+<li>
+<p>Test case: <code>new dist/1 auto/y</code><br>
+Expected: Message "New incident drafted!" with the newly drafted incident appears at the top of the incident pane. All vehicles in district 1 will be listed in the vehicle pane, and the vehicle dispatched will change it availability from "AVAILABLE" to "BUSY".</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>new</code> with no inputs for manual vehicle dispatchment</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User must be logged in.</p>
+</li>
+<li>
+<p>Test case: <code>new dist/1 auto/n</code><br>
+Expected: User prompted to fill in index of vehicle to dispatch with message "Please include the index of the vehicle you would like to assign, with the district prefix! eg new l/1 auto/n v/1 Note that the index must be a positive integer!"</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>new</code> with valid inputs for manual vehicle dispatchment</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User must be logged in.</p>
+</li>
+<li>
+<p>Test case: <code>new dist/1 auto/n v/1</code><br>
+Expected: Message "New incident drafted!" with the newly drafted incident appears at the top of the incident pane. All vehicles in district 1 will be listed in the vehicle pane, and the vehicle dispatched will change it availability from "AVAILABLE" to "BUSY".</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>new</code> with invalid inputs for manual vehicle dispatchment</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User must be logged in.</p>
+</li>
+<li>
+<p>Test case: <code>new dist/1 auto/n v/1.2</code><br>
+Expected: Message "The index must be a positive integer!"</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>new</code> with no vehicle available for dispatchment.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User must be logged in, and no vehicle is available in the district.</p>
+</li>
+<li>
+<p>Test case: <code>new dist/28 auto/y</code><br>
+Expected: Message "No vehicle available in this district!", for both auto and manual dispatchment.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="filling-an-incident-report"><a class="link" href="#filling-an-incident-report">G.5. Filling an incident report</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2440,7 +2535,7 @@ Expected: Message "No drafts present in the system" shown while the incident pan
 </div>
 </div>
 <div class="sect2">
-<h3 id="submitting-an-incident-report"><a class="link" href="#submitting-an-incident-report">G.5. Submitting an incident report</a></h3>
+<h3 id="submitting-an-incident-report"><a class="link" href="#submitting-an-incident-report">G.6. Submitting an incident report</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2515,5 +2610,117 @@ Expected: Message "Invalid command format!" is displayed along with command usag
 </ol>
 </div>
 </div>
+<div class="sect2">
+<h3 id="finding-vehicles"><a class="link" href="#finding-vehicles">G.7. Finding vehicles</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Attempting to execute <code>find-v</code> without logging in.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User not logged in.</p>
+</li>
+<li>
+<p>Test case: <code>find-v dist/1</code><br>
+Expected: Message "Only Register, Login, Exit, and Help commands are available. Please login to access other commands. See help page for more information."</p>
+</li>
+</ol>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 03:08:48 UTC</div></div></div></body></html>
+</li>
+<li>
+<p>Executing <code>find-v</code> with a single district keyword.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User must be logged in, and there are vehicles in the district specified.</p>
+</li>
+<li>
+<p>Test case: <code>find-v dist/1</code><br>
+Expected: Message "3 vehicles listed!", and vehicles in the given district will be listed in the vehicle pane.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>find-v</code> with multiple district keywords.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User must be logged in, and there are vehicles in the districts specified.</p>
+</li>
+<li>
+<p>Test case: <code>find-v dist/1 2 3</code><br>
+Expected: Message "10 vehicles listed!", and vehicles in the given districts will be listed in the vehicle pane.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>find-v</code> with a single vehicle type keyword.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User must be logged in, the vehicle type must match exactly, and must be either "Ambulance" or "Patrol car", though case insensitive.</p>
+</li>
+<li>
+<p>Test case: <code>find-v vtype/ambuLANce</code><br>
+Expected: Message "15 vehicles listed!", and vehicles of <code>Ambulance</code> type will be listed in the vehicle pane.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>find-v</code> with a single character/ number of a vehicle number as keyword.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User must be logged in, and there must be at least one vehicle with vehicle number containing this keyword.</p>
+</li>
+<li>
+<p>Test case: <code>find-v vnum/2</code><br>
+Expected: Message "27 vehicles listed!", and vehicles with vehicle numbers containing "2" will be listed in the vehicle pane.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-vehicles"><a class="link" href="#listing-vehicles">G.8. Listing vehicles</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Attempting to execute <code>list-v</code> without logging in.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User not logged in.</p>
+</li>
+<li>
+<p>Test case: <code>list-v</code><br>
+Expected: Message "Only Register, Login, Exit, and Help commands are available. Please login to access other commands. See help page for more information."</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>list-v</code>.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User must be logged in.</p>
+</li>
+<li>
+<p>Test case: <code>list-v</code><br>
+Expected: Message "Listed all vehicles", and all vehicles in database will be listed in the vehicle pane.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 03:46:59 UTC</div></div></div></body></html>
