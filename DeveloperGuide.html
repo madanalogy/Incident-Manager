@@ -26,7 +26,7 @@
 <li><a href="#account-management-feature">3.2. Account Management feature</a></li>
 <li><a href="#incident-draft-creation-feature">3.3. Incident Draft Creation feature</a></li>
 <li><a href="#incident-filling-and-submission-feature">3.4. Incident Filling and Submission feature</a></li>
-<li><a href="#incident-search-feature">3.5. Incident Search feature</a></li>
+<li><a href="#incident-finding-and-listing-feature">3.5. Incident Finding and Listing feature</a></li>
 <li><a href="#incident-edit-feature">3.6. Incident Edit feature</a></li>
 <li><a href="#vehicle-management">3.7. Vehicle Management</a></li>
 <li><a href="#vehicle-search-feature">3.8. Vehicle Search feature</a></li>
@@ -51,11 +51,13 @@
 <li><a href="#creating-an-incident-report">G.4. Creating an incident report</a></li>
 <li><a href="#filling-an-incident-report">G.5. Filling an incident report</a></li>
 <li><a href="#submitting-an-incident-report">G.6. Submitting an incident report</a></li>
-<li><a href="#editing-submitted-incidents">G.7. Editing Submitted Incidents</a></li>
-<li><a href="#adding-vehicles">G.8. Adding vehicles</a></li>
-<li><a href="#finding-vehicles">G.9. Finding vehicles</a></li>
-<li><a href="#listing-vehicles">G.10. Listing vehicles</a></li>
-<li><a href="#deleting-vehicles">G.11. Deleting vehicles</a></li>
+<li><a href="#finding-incidents">G.7. Finding incidents</a></li>
+<li><a href="#listing-incidents">G.8. Listing incidents</a></li>
+<li><a href="#editing-submitted-incidents">G.9. Editing submitted incidents</a></li>
+<li><a href="#adding-vehicles">G.10. Adding vehicles</a></li>
+<li><a href="#finding-vehicles">G.11. Finding vehicles</a></li>
+<li><a href="#listing-vehicles">G.12. Listing vehicles</a></li>
+<li><a href="#deleting-vehicles">G.13. Deleting vehicles</a></li>
 </ul>
 </li>
 </ul>
@@ -1183,18 +1185,24 @@ This might be an acceptable issue it encourages users to completely fill a new i
 </div>
 </div>
 <div class="sect2">
-<h3 id="incident-search-feature"><a class="link" href="#incident-search-feature">3.5. Incident Search feature</a></h3>
+<h3 id="incident-finding-and-listing-feature"><a class="link" href="#incident-finding-and-listing-feature">3.5. Incident Finding and Listing feature</a></h3>
 <div class="sect3">
 <h4 id="implementation-6"><a class="link" href="#implementation-6">3.5.1. Implementation</a></h4>
 <div class="paragraph">
-<p>The incident search mechanism features a set of different types of searches that a user could utilise to list out all related incidents, inclusive of incomplete drafts, complete drafts and completed reports. Further documentation on the commands available in this set can be found in the User Guide. The types of searches are as listed:</p>
+<p>The incident search mechanism features a set of different types of searches that a user could utilise to list out all related incidents, regardless of status of report. Further documentation on the commands available in this set can be found in the User Guide. It is facilitated by the List Incidents Command and the Find Incidents Command. To differentiate the reports by statuses, the Incident Filling and Submission feature cover these capabilities already, as mentioned earlier.</p>
 </div>
-<div class="ulist">
-<ul>
+<div class="sect4">
+<h5 id="overview-of-running-find-incidents-and-list-incidents-commands"><a class="link" href="#overview-of-running-find-incidents-and-list-incidents-commands">Overview of Running Find Incidents and List Incidents commands</a></h5>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p>Unfiltered - Displays all incidents in <code>Model</code><br>
+<p>Listing all - Displays all incidents in <code>Model</code>, taking in no parameters<br>
 eg. <code>list-i</code></p>
 </li>
+<li>
+<p>Finding based on parameters- Displays all incidents in <code>Model</code> based on matching parameters indicated<br></p>
+<div class="ulist">
+<ul>
 <li>
 <p>ID - Displays all incidents with exact matches in <code>IncidentId incidentId</code> in <code>Incident incident</code>, within <code>Model</code><br>
 eg. <code>find-i id/0620150001</code></p>
@@ -1213,63 +1221,152 @@ eg. <code>find-i self</code></p>
 </li>
 </ul>
 </div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Activity Diagram for illustration:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FindIncidentsCommandActivityDiagram.png" alt="FindIncidentsCommandActivityDiagram">
+</div>
+</div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Each parameter in <code>find-i</code> search commands can be combined in any order and quantity, returning only results that abide by all filtering by each parameter used</p>
+<p><code>list-i</code> does not take any parameters, and returns errors if parameters are added to the command</p>
 </li>
 <li>
-<p>Search by keywords is case-insensitive</p>
+<p>Search by keywords is case-insensitive for convenience and ease of use</p>
 </li>
 <li>
-<p>Each parameter in <code>find-i</code> accepts multiple keywords, and searches for matches containing any of these keywords</p>
+<p>Each parameter in <code>find-i</code> search commands can be combined in any order and quantity, returning only results that return a match in all predicates indicated</p>
+</li>
+<li>
+<p>Each parameter in <code>find-i</code> accepts multiple keywords, and searches for matches containing any or all of these keywords</p>
+</li>
+<li>
+<p><code>find-i</code> can take in multiple parameters of the same prefix, taking only the last valid parameter of each prefix</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p>The incident search mechanism is facilitated by <code>ModelManager</code>, which implements abstract class <code>Model</code>. It contains a <code>FilteredList&lt;Incidents&gt; filteredIncidents</code>, which internally stores the list of displayed incidents in the GUI. Additionally, it implements the following key method:
-* <code>updateFilteredIncidentsList(Predicate&lt;Incident&gt; predicate)</code> - Updates the stored filtered incidents list with the new predicate</p>
 </div>
-<div class="paragraph">
-<p>There are two possible commands within this set of searches. Firstly, we will consider when the user calls the command <code>list-i</code> in the application.</p>
+<div class="sect4">
+<h5 id="overview-of-implementation-of-find-incidents-and-list-incidents-commands"><a class="link" href="#overview-of-implementation-of-find-incidents-and-list-incidents-commands">Overview of Implementation of Find Incidents and List Incidents commands</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>The incident search mechanism is facilitated by <code>ModelManager</code>, which implements abstract class <code>Model</code>.</p>
+</li>
+<li>
+<p><code>ModelManager</code> contains a <code>FilteredList&lt;Incidents&gt; filteredIncidents</code>, which internally stores the list of displayed incidents in the GUI.</p>
+</li>
+<li>
+<p><code>filteredIncidents</code> implements the following key methods utilised in the List Incidents and Find Incidents command:<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>updateFilteredIncidentsList(Predicate&lt;Incident&gt; predicate)</code> - Updates the stored filtered incidents list with the new predicate<br></p>
+</li>
+<li>
+<p><code>getFilteredIncidentsList()</code> - Returns full list of all incidents</p>
+</li>
+</ul>
 </div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="implementation-of-list-incidents-command"><a class="link" href="#implementation-of-list-incidents-command">Implementation of List Incidents Command</a></h5>
 <div class="paragraph">
-<p>The following sequence diagram shows how the <code>list-i</code> command works:</p>
+<p>The following sequence diagram shows how the <code>list-i</code> command works when <code>list-i</code> is called:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/ListIncidentsSequenceDiagram.png" alt="ListIncidentsSequenceDiagram">
 </div>
+<div class="title">Figure 9. Sequence Diagram of the List Incidents Command running <code>list-i</code></div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>LogicManager</code> passes the command to <code>IncidentManagerParser</code> when running command <code>execute("list-i")</code>, which instantiates a <code>ListIncidentsCommand</code> with <code>Predicate&lt;Incident&gt; PREDICATE_SHOW_ALL_INCIDENTS</code> that returns all incidents regardless of state.</p>
+</li>
+<li>
+<p>The <code>LogicManager</code> then calls <code>ListIncidentsCommand#execute()</code>, which runs <code>ListIncidentsCommand#handleAllIncidents()</code>, a private method within <code>ListIncidentsCommand</code>.</p>
+</li>
+<li>
+<p><code>handleAllIncidents()</code> runs <code>Model#updateFilteredIncidentList()</code> with <code>Predicate&lt;Incident&gt; PREDICATE_SHOW_ALL_INCIDENTS</code>, which always evaluates to true.</p>
+</li>
+<li>
+<p>This <code>Predicate&lt;Incident&gt;</code> is passed to <code>FilteredList&lt;Incident&gt; filteredList</code>, as a parameter to run the method <code>filteredList#setPredicate()</code>.</p>
+</li>
+<li>
+<p>The list of visible incidents is updated.</p>
+</li>
+<li>
+<p><code>CommandResult commandResult</code> is returned to the <code>LogicManager</code> to log the success/failure of the method.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="implementation-of-find-incidents-command"><a class="link" href="#implementation-of-find-incidents-command">Implementation of Find Incidents Command</a></h5>
+<div class="paragraph">
+<p>Next, we will look at an example in which the user calls <code>find-i</code> to look for incidents written by an operator whose name contains <code>Alex</code>.</p>
 </div>
 <div class="paragraph">
-<p>As indicated in the diagram, the <code>LogicManager</code> instantiates a <code>ListIncidentsCommand</code> upon running command <code>execute(list-i)</code>. It then calls <code>ListIncidentsCommand#execute()</code>, which runs <code>Model#updateFilteredIncidentList</code> with the predicate <code>PREDICATE_SHOW_ALL_INCIDENTS</code>. This <code>Predicate&lt;Incident&gt;</code> always evaluates to true. This <code>Predicate&lt;Incident&gt;</code> is passed to <code>FilteredList&lt;Incident&gt; filteredList</code>, as a parameter to run the method <code>setPredicate()</code>. This updates the list of visible incidents. <code>CommandResult commandResult</code> is also returned to the <code>LogicManager</code> to log the success/failure of the method.</p>
-</div>
-<div class="paragraph">
-<p>Next, we will look at an example in which the user calls <code>search</code> to look for incidents written by an operator whose name contains <code>Alex</code>.</p>
-</div>
-<div class="paragraph">
-<p>The execution of this method is a little more complex.</p>
-</div>
-<div class="paragraph">
-<p>The following sequence diagram shows how the <code>search</code> command identifies the keyword and flag, and returns related incidents:</p>
+<p>The execution of this method is a little more complex. The following sequence diagram shows how the <code>find-i</code> command identifies the keyword and flag, and returns related incidents:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/SearchIncidentsSequenceDiagram.png" alt="SearchIncidentsSequenceDiagram">
+<img src="images/FindIncidentsSequenceDiagram.png" alt="FindIncidentsSequenceDiagram">
 </div>
+<div class="title">Figure 10. Sequence Diagram of the List Incidents Command running <code>find-i op/alex desc/pmd</code></div>
 </div>
 <div class="paragraph">
-<p>The key difference is the utility of the <code>SearchIncidentsCommandParser</code> to parse the keyword after tag <code>op\</code> in the command. It creates a <code>NameKeywordsPredicate</code> using the String "Alex", which is returned to be used in constructing a new instance of <code>SearchIncidentsCommand</code>, stored as a <code>Predicate&lt;Incident&gt; predicate</code>. From there, the process is similar, in that <code>SearchIncidentsCommand#execute()</code> is run, causing the Model to run <code>Model#updateFilteredIncidentList(predicate)</code> using the predicate stored in <code>SearchIncidentsCommand</code>. Upon updating the list similar to the <code>incidents</code> listing command above, <code>SearchIncidentsCommand</code> also calls <code>Model#getFilteredIncidentList()</code> to return <code>ObservableList&lt;Incident&gt;</code>. It obtains the size of this list, and returns it in <code>CommandResult commandResult</code>.</p>
+<p>The key steps are as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>IncidentManagerParser</code> passes the arguments to <code>FindIncidentsCommandParser</code> to parse the keywords after the prefixes <code>desc/</code> and <code>op/</code> in the command.</p>
+</li>
+<li>
+<p><code>FindIncidentsCommandParser</code> utilises <code>ParserUtil</code> to parse out the keywords, in this case "pmd" for the description prefix and "alex" for the operator name prefix</p>
+</li>
+<li>
+<p><code>FindIncidentsCommandParser</code> creates a new instance of <code>DescriptionKeywordsPredicate</code> to be added to <code>List&lt;Predicate&lt;Incident&gt;&gt; predicateArr</code></p>
+</li>
+<li>
+<p>It does the same for <code>NameKeywordsPredicate</code> and any other valid search parameters identified</p>
+</li>
+<li>
+<p>A new instance of <code>FindIncidentsCommand</code> is passed the new <code>List&lt;Predicate&lt;Incident&gt;&gt; predicateArr</code>, combining the predicates using <code>combinePredicates()</code> to account for all predicates in the <code>List</code></p>
+</li>
+<li>
+<p>As before, the <code>LogicManager</code> calls <code>FindIncidentsCommand#execute()</code>, which causes the Model to run <code>Model#updateFilteredIncidentList(predicate)</code> using the combined predicate stored in <code>FindIncidentsCommand</code>.</p>
+</li>
+<li>
+<p>This filters and updates the list in <code>FilteredList&lt;Incident&gt; filteredList</code>, by running <code>filteredList#setPredicate(predicate)</code> with the passed combined predicate.</p>
+</li>
+<li>
+<p>Upon updating the list similar to the List Command above, <code>FindIncidentsCommand</code> also calls <code>Model#getFilteredIncidentList()</code> to return <code>ObservableList&lt;Incident&gt;</code>. It obtains the size of this list, and returns it in <code>CommandResult commandResult</code>.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-how-incident-search-keyword-is-inputted"><a class="link" href="#aspect-how-incident-search-keyword-is-inputted">Aspect: How incident search keyword is inputted</a></h5>
+<h5 id="aspect-how-user-keys-in-code-find-i-code-keywords"><a class="link" href="#aspect-how-user-keys-in-code-find-i-code-keywords">Aspect: How user keys in <code>find-i</code> keywords</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1306,20 +1403,20 @@ eg. <code>find-i self</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Current choice:</strong> Utilise separate command <code>incidents</code></p>
+<p><strong>Current choice:</strong> Utilise separate command <code>list-i</code></p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros: Intuitive to use.</p>
 </li>
 <li>
-<p>Cons: Similar code under different command.</p>
+<p>Cons: Similar code under different command, leading to code reuse.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative:</strong> Utilise <code>search</code> command (eg. <code>search unfiltered</code>)</p>
+<p><strong>Alternative:</strong> Utilise <code>find-i</code> command (eg. <code>find-i unfiltered</code>)</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1335,15 +1432,132 @@ eg. <code>find-i self</code></p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-how-predicate-is-added-to-code-searchincidentscommand-code"><a class="link" href="#aspect-how-predicate-is-added-to-code-searchincidentscommand-code">Aspect: How predicate is added to <code>SearchIncidentsCommand</code></a></h5>
+<h5 id="aspect-whether-the-search-only-returns-full-word-matches"><a class="link" href="#aspect-whether-the-search-only-returns-full-word-matches">Aspect: Whether the search only returns full word matches</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Current choice:</strong> <code>SearchIncidentsCommandParser</code> class calls <code>Model</code> to create a new Predicate based on search string.</p>
+<p><strong>Current choice:</strong> Search only returns full word matches</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Abstracts the creation and management of predicates to the <code>Model</code>.</p>
+<p>Pros: Intuitive to use.</p>
+</li>
+<li>
+<p>Cons: Unable to return similar words eg. search for "desc/fire" does not return description containing "fires"</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative:</strong> Search returns all keyword-containing matches</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Able to account for similar words to be returned.</p>
+</li>
+<li>
+<p>Cons: Unintuitive to return certain longer words from certain searches eg. "desc/the" returns descriptions containing "weather"<br>
+Faster search as code is less inefficient</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-multiple-keywords-with-the-same-prefixes-are-processed"><a class="link" href="#aspect-how-multiple-keywords-with-the-same-prefixes-are-processed">Aspect: How multiple keywords with the same prefixes are processed</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Current choice:</strong> Keywords are read as an array into <code>Predicate&lt;Incident&gt;</code> to be fed into a stream to search for any match with any of the keywords</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Requires lesser code. Abstraction of checking matches in keywords remains within the <code>Predicate&lt;Incident&gt;</code> class<br>
+Able to separate the handling of multiple keywords with the same prefixes, in <code>Predicate&lt;Incident&gt;</code>, with the handling of different prefixes, done in <code>FindIncidentsCommand</code></p>
+</li>
+<li>
+<p>Cons: More difficult to implement</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative:</strong> Every new predicate takes in a keyword and returns all results with exact matches, to be combined in <code>FindIncidentsCommand</code> as separate predicates</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to implement</p>
+</li>
+<li>
+<p>Cons: May lead to confusing implementation of the <code>combinePredicates()</code> function for returning results which have all prefixes fulfilled, but only require at least one match in keywords fulfilled for each prefix</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-multiple-different-prefixes-are-processed"><a class="link" href="#aspect-how-multiple-different-prefixes-are-processed">Aspect: How multiple different prefixes are processed</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Current choice:</strong> <code>FindIncidentsCommandParser</code> checks for the presence of every possible prefix and creates a new <code>Predicate&lt;Incident&gt;</code> to be added to <code>predicateArr</code> to be combined in <code>FindCommandParser</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Intuitive to use, majorly improves the Find Incidents Command<br>
+Utilises Inheritance and Polymorphism principles from OOP to combine the <code>DescriptionKeywordsPredicate</code> and <code>NameKeywordsPredicate</code> and <code>IdKeywordsPredicate</code>, inherited from <code>Predicate&lt;Incident&gt;</code> class, all stored in <code>predicateArr</code></p>
+</li>
+<li>
+<p>Cons:
+Challenging to implement.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative:</strong> <code>FindIncidentsCommandParser</code> returns a new <code>FindCommand</code> for every prefix identified</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Less complicated</p>
+</li>
+<li>
+<p>Cons: More code needed<br>
+Does not follow the <code>Command</code> interface abstracted from, in that multiple <code>FindCommands</code> will run <code>execute()</code> at each time, returning multiple <code>CommandResults</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative:</strong> Do not allow multiple different prefixes to be processed</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement, less challenging.</p>
+</li>
+<li>
+<p>Cons: Very limited capabilities of Find Incidents Command if multiple parameters cannot be accepted at once.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-predicate-is-added-to-code-findincidentscommand-code"><a class="link" href="#aspect-how-predicate-is-added-to-code-findincidentscommand-code">Aspect: How predicate is added to <code>FindIncidentsCommand</code></a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Current choice:</strong> <code>FindIncidentsCommand</code> class calls <code>Model</code> to create a new Predicate based on search string.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Abstracts the creation and management of predicates to the <code>Model</code>. Maintains Separation of Concerns principle.</p>
 </li>
 <li>
 <p>Cons: Requires greater level of coupling between classes.</p>
@@ -1352,14 +1566,14 @@ eg. <code>find-i self</code></p>
 </div>
 </li>
 <li>
-<p><strong>Alternative:</strong> <code>SearchIncidentsCommand</code> or <code>SearchIncidentsCommandParser</code> directly create Predicate based on search string.</p>
+<p><strong>Alternative:</strong> <code>FindIncidentsCommand</code> or <code>FindIncidentsCommand</code> directly create Predicate based on search string.</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros: Less dependencies within the parser class.</p>
 </li>
 <li>
-<p>Cons: Breaks abstraction flow.</p>
+<p>Cons: Breaks Model-View-Controller pattern.</p>
 </li>
 </ul>
 </div>
@@ -2639,7 +2853,298 @@ Expected: Message "Invalid command format!" is displayed along with command usag
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-submitted-incidents"><a class="link" href="#editing-submitted-incidents">G.7. Editing Submitted Incidents</a></h3>
+<h3 id="finding-incidents"><a class="link" href="#finding-incidents">G.7. Finding incidents</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Attempting to execute <code>find-i</code> without logging in.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User not logged in.</p>
+</li>
+<li>
+<p>Test case: <code>find-i desc/district</code><br>
+Expected: Message "Only Register, Login, Exit, and Help commands are available. Please login to access other commands. See help page for more information."</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Attempting to execute <code>find-i</code> with a single blank description keyword.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User must be logged in.<br>
+Incident pane must be visible in GUI.</p>
+</li>
+<li>
+<p>Test case: <code>find-i desc/</code><br>
+Expected: Message "Description can take any values, and it should not be blank."</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Attempting to execute <code>find-i</code> with a single blank incident ID keyword.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User must be logged in.<br>
+Incident pane must be visible in GUI.</p>
+</li>
+<li>
+<p>Test case: <code>find-i id/</code><br>
+Expected: Message "Incident ID should only contain numerical digits and should not be blank."</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Attempting to execute <code>find-i</code> with a single blank operator keyword.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User must be logged in.<br>
+Incident pane must be visible in GUI.</p>
+</li>
+<li>
+<p>Test case: <code>find-i op/</code><br>
+Expected: Message "Names should only contain alphanumeric characters and spaces, and it should not be blank."</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>find-i</code> with a single description keyword.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User must be logged in, and there are incidents in the incident pane, with matching descriptions.<br>
+Incident pane must be visible in GUI.</p>
+</li>
+<li>
+<p>Test case: `find-i desc/cRAsH   `<br>
+Expected: Message "2 incidents listed!", and incidents whereby the description contains the given keyword will be listed in the incidents pane.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>find-i</code> with multiple description keywords.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User must be logged in, and there are incidents in the incident pane, with matching descriptions.<br>
+Incident pane must be visible in GUI.</p>
+</li>
+<li>
+<p>Test case: `find-i desc/CrAsh   catS   `<br>
+Expected: Message "3 incidents listed!", and incidents whereby the description contain any of the given keywords will be listed in the incidents pane.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>find-i</code> with a single operator keyword.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User must be logged in, and there are incidents in the incident pane, with matching operator names.<br>
+Incident pane must be visible in GUI.</p>
+</li>
+<li>
+<p>Test case: <code>find-i op/yeoh</code><br>
+Expected: Message "6 incidents listed!", and incidents whereby the involved operator&#8217;s name contains the given keyword will be listed in the incidents pane.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>find-i</code> with multiple operator keywords.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User must be logged in, and there are incidents in the incident pane, with matching operator names.<br>
+Incident pane must be visible in GUI.</p>
+</li>
+<li>
+<p>Test case: <code>find-i op/yeoh aHMad</code><br>
+Expected: Message "8 incidents listed!", and incidents whereby the involved operator&#8217;s name contains any of the given keywords will be listed in the incidents pane.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>find-i</code> with a single id keyword.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User must be logged in, and there are incidents in the incident pane, with matching operator names.<br>
+Incident pane must be visible in GUI.</p>
+</li>
+<li>
+<p>Test case: <code>find-i id/0420180001</code><br>
+Expected: Message "1 incident listed!", and incidents whereby the ID matches the given keyword exactly will be listed in the incidents pane.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>find-i</code> with self-search.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User must be logged in, and there are incidents in the incident pane with the operator name matching the name of the logged-in operator.<br>
+Incident pane must be visible in GUI.</p>
+</li>
+<li>
+<p>Test case: <code>find-i self</code><br>
+Expected: Message "6 incidents listed!", and incidents whereby the involved operator&#8217;s name matches the logged-in operator&#8217;s name exactly will be listed in the incidents pane.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>find-i</code> with multiple different parameters.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User must be logged in, and there are incidents in the incident pane, with all parameters matching the keywords given.<br>
+Incident pane must be visible in GUI.</p>
+</li>
+<li>
+<p>Test case: <code>find-i self desc/pmd id/0520140001</code><br>
+Expected: Message "1 incident listed!", and the incidents whereby all the parameters match the given keywords for each parameter will be listed in the incidents pane.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>find-i</code> with multiple same parameters.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User must be logged in, and there are incidents in the incident pane, with all parameters matching the keywords given.<br>
+Incident pane must be visible in GUI.</p>
+</li>
+<li>
+<p>Test case: <code>find-i desc/cats desc crash</code><br>
+Expected: Message "2 incidents listed!", and the incidents whereby all the parameters match the given keywords for the last usage of the same parameter will be listed in the incidents pane.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Attempting to execute <code>find-i</code> with irrelevant parameters.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User must be logged in.<br>
+Incident pane must be visible in GUI.</p>
+</li>
+<li>
+<p>Test case: <code>find-i test</code><br>
+Expected: Error message "Invalid command format!<br>
+find-i: Searches all incidents for which ID matches exactly, or description contains any of the specified description keywords, or operator name matches any of the specified operator keywords or logged-in operator&#8217;s name<br>
+Parameters:<br>
+id/&lt;ID&gt;<br>
+op/&lt;OPERATOR KEYWORD [MORE_KEYWORDS]&gt;<br>
+desc/&lt;DESCRIPTION KEYWORD [MORE_KEYWORDS]&#8230;&#8203;&gt;<br>
+self<br>
+Example: find-i op/alex yeoh desc/6 self"</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Attempting to execute <code>find-i</code> without displaying the incident pane.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User mut be logged in.<br>
+Incident pane must not be visible in GUI.</p>
+</li>
+<li>
+<p>Test case: <code>find-i</code><br>
+Expected: Message "Please swap the interface to access the command from this suite.<br>
+See help page for more information."</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-incidents"><a class="link" href="#listing-incidents">G.8. Listing incidents</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Attempting to execute <code>list-i</code> without logging in.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User not logged in.</p>
+</li>
+<li>
+<p>Test case: <code>list-i</code><br>
+Expected: Message "Only Register, Login, Exit, and Help commands are available. Please login to access other commands. See help page for more information."</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Attempting to execute <code>list-i</code> with irrelevant parameters.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User must be logged in.<br>
+Incident pane must be visible in GUI.</p>
+</li>
+<li>
+<p>Test case: <code>list-i test message</code><br>
+Expected: Message "Please do not enter irrelevant prefixes/ fields!"</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>list-i</code> with no parameters.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User must be logged in.<br>
+Incident pane must be visible in GUI.</p>
+</li>
+<li>
+<p>Test case: <code>list-i</code><br>
+Expected: Message "Listed all incidents", and all incidents in database will be listed in the incident pane</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Attempting to execute <code>list-i</code> without displaying the incident pane.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User mut be logged in.<br>
+Incident pane must not be visible in GUI.</p>
+</li>
+<li>
+<p>Test case: <code>list-i</code><br>
+Expected: Message "Please swap the interface to access the command from this suite.<br>
+See help page for more information."</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editing-submitted-incidents"><a class="link" href="#editing-submitted-incidents">G.9. Editing submitted incidents</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2698,7 +3203,7 @@ Expected: Message "Only the admin and the operator who filled in this report can
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-vehicles"><a class="link" href="#adding-vehicles">G.8. Adding vehicles</a></h3>
+<h3 id="adding-vehicles"><a class="link" href="#adding-vehicles">G.10. Adding vehicles</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2741,7 +3246,7 @@ Expected: Message "Invalid vehicle number! All vehicle numbers must follow the f
 </div>
 </div>
 <div class="sect2">
-<h3 id="finding-vehicles"><a class="link" href="#finding-vehicles">G.9. Finding vehicles</a></h3>
+<h3 id="finding-vehicles"><a class="link" href="#finding-vehicles">G.11. Finding vehicles</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2818,7 +3323,7 @@ Expected: Message "27 vehicles listed!", and vehicles with vehicle numbers conta
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-vehicles"><a class="link" href="#listing-vehicles">G.10. Listing vehicles</a></h3>
+<h3 id="listing-vehicles"><a class="link" href="#listing-vehicles">G.12. Listing vehicles</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2853,7 +3358,7 @@ Expected: Message "Listed all vehicles", and all vehicles in database will be li
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-vehicles"><a class="link" href="#deleting-vehicles">G.11. Deleting vehicles</a></h3>
+<h3 id="deleting-vehicles"><a class="link" href="#deleting-vehicles">G.13. Deleting vehicles</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2917,4 +3422,4 @@ Expected: Message "You must be an admin to perform this operation. Please see he
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 04:44:55 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 05:53:32 UTC</div></div></div></body></html>
