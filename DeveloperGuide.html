@@ -46,18 +46,20 @@
 <li><a href="#instructions-for-manual-testing">Appendix G: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">G.1. Launch and Shutdown</a></li>
-<li><a href="#deleting-a-person">G.2. Deleting a person</a></li>
-<li><a href="#saving-data">G.3. Saving data</a></li>
-<li><a href="#creating-an-incident-report">G.4. Creating an incident report</a></li>
-<li><a href="#filling-an-incident-report">G.5. Filling an incident report</a></li>
-<li><a href="#submitting-an-incident-report">G.6. Submitting an incident report</a></li>
-<li><a href="#finding-incidents">G.7. Finding incidents</a></li>
-<li><a href="#listing-incidents">G.8. Listing incidents</a></li>
-<li><a href="#editing-submitted-incidents">G.9. Editing submitted incidents</a></li>
-<li><a href="#adding-vehicles">G.10. Adding vehicles</a></li>
-<li><a href="#finding-vehicles">G.11. Finding vehicles</a></li>
-<li><a href="#listing-vehicles">G.12. Listing vehicles</a></li>
-<li><a href="#deleting-vehicles">G.13. Deleting vehicles</a></li>
+<li><a href="#saving-data">G.2. Saving data</a></li>
+<li><a href="#access-control">G.3. Access Control</a></li>
+<li><a href="#account-management-user">G.4. Account Management (User)</a></li>
+<li><a href="#account-management-admin">G.5. Account Management (Admin)</a></li>
+<li><a href="#creating-an-incident-report">G.6. Creating an incident report</a></li>
+<li><a href="#filling-an-incident-report">G.7. Filling an incident report</a></li>
+<li><a href="#submitting-an-incident-report">G.8. Submitting an incident report</a></li>
+<li><a href="#finding-incidents">G.9. Finding incidents</a></li>
+<li><a href="#listing-incidents">G.10. Listing incidents</a></li>
+<li><a href="#editing-submitted-incidents">G.11. Editing submitted incidents</a></li>
+<li><a href="#adding-vehicles">G.12. Adding vehicles</a></li>
+<li><a href="#finding-vehicles">G.13. Finding vehicles</a></li>
+<li><a href="#listing-vehicles">G.14. Listing vehicles</a></li>
+<li><a href="#deleting-vehicles">G.15. Deleting vehicles</a></li>
 </ul>
 </li>
 </ul>
@@ -2545,7 +2547,326 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person"><a class="link" href="#deleting-a-person">G.2. Deleting a person</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">G.2. Saving data</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Dealing with missing/corrupted data files</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>A missing data file will load the application with sample data similar to the first launch.</p>
+</li>
+<li>
+<p>If a data file is corrupted, please delete the file and re-launch the application.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="access-control"><a class="link" href="#access-control">G.3. Access Control</a></h3>
+<div class="paragraph">
+<p>This section details general testing for access control.</p>
+</div>
+<div class="sect3">
+<h4 id="system-access-restrictions"><a class="link" href="#system-access-restrictions">G.3.1. System Access Restrictions</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Restriction of commands prior to login.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Application launched successfully. No user logged in.</p>
+</li>
+<li>
+<p>Test Case: <code>help</code><br>
+Expected: Pop-up box with link to user guide shows.</p>
+</li>
+<li>
+<p>Test Case: <code>logout</code><br>
+Expected: Error message is shown indicating that user must be logged in.</p>
+</li>
+<li>
+<p>Only the following commands are available prior to login: <code>help</code>, <code>register</code>, <code>login</code>, <code>exit</code>. Execution of any other command (prior to login) will display the same error message as above.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Registering a new account</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Application launched successfully. No user logged in.</p>
+</li>
+<li>
+<p>Test Case: <code>register n/Tester p/12345678 e/test@nus u/Test-1 w/password t/New</code><br>
+Expected: New account is NOT registered. Error message is shown indicating that you must be a logged in admin to include tags.</p>
+</li>
+<li>
+<p>Test Case: <code>register n/Tester p/12345678 e/test@nus u/Test-1 w/password</code><br>
+Expected: New account is registered.</p>
+</li>
+<li>
+<p>Other incorrect commands to try:</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Missing argument prefix (all prefixes are mandatory except <code>t/</code>)</p>
+</li>
+<li>
+<p>Incorrect name syntax (e.g. <code>n/T35t@-R</code>)</p>
+</li>
+<li>
+<p>Incorrect phone syntax (e.g. <code>p/num</code>)</p>
+</li>
+<li>
+<p>Incorrect email syntax (e.g. <code>e/test.com</code>)</p>
+</li>
+<li>
+<p>Incorrect username syntax (e.g. <code>u/_Test</code>)</p>
+</li>
+<li>
+<p>Incorrect password syntax (e.g. <code>w/123</code>)</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Logging in with the provided sample admin account.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Application launched successfully. No user logged in. Sample admin account not deleted.</p>
+</li>
+<li>
+<p>Test Case: <code>login u/Agent01 w/password</code><br>
+Expected: Login success. Interface swaps to incident view. Status bar reflects username of logged in account.</p>
+</li>
+<li>
+<p>Test Case: <code>login u/Agent01 w/p</code><br>
+Expected: Login failure. Generic error message is shown indicating either an invalid username or password (the error message is intentionally generic so as to deter malicious intent).</p>
+</li>
+<li>
+<p>Other incorrect commands to try: <code>login u/Agent</code> displays command usage error message (due to missing argument prefix).</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Logging out</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User is logged in.</p>
+</li>
+<li>
+<p>Test Case: <code>logout</code><br>
+Expected: Logout success. Interface shows the account management view. Status bar reflects that no user is logged in.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="interface-command-restrictions"><a class="link" href="#interface-command-restrictions">G.3.2. Interface Command Restrictions</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Swapping interfaces to access corresponding command suites</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User is logged in.</p>
+</li>
+<li>
+<p>Test Case: <code>swap</code><br>
+Expected: Changes to account management interface if on incident interface, and vice versa.</p>
+</li>
+<li>
+<p>Corresponding Restrictions:</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Account Management Suite (must be in account management view to execute): <code>register</code>, <code>update</code>, <code>list-a</code>, <code>find-a</code>, <code>delete-a</code></p>
+</li>
+<li>
+<p>Incident Management Suite (must be in incident management view to execute): <code>new</code>, <code>fill</code>, <code>submit</code>, <code>list-i</code>, <code>find-i</code>, <code>edit-i</code>, <code>list-v</code>, <code>find-v</code>, <code>edit-v</code>, <code>add-v</code>, <code>delete-v</code></p>
+</li>
+<li>
+<p>All other commands can be executed irrespective of interface view (subject to any prevailing login restrictions).</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="account-management-user"><a class="link" href="#account-management-user">G.4. Account Management (User)</a></h3>
+<div class="paragraph">
+<p>This section details commands available to regular users (non-Admin).</p>
+</div>
+<div class="sect3">
+<h4 id="updating-own-account"><a class="link" href="#updating-own-account">G.4.1. Updating Own Account</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Updating own account details and/or information</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Logged in. In Account Management View.</p>
+</li>
+<li>
+<p>Test Case: <code>update p/98765432</code><br>
+Expected: Successful update of phone number for account of user logged in.</p>
+</li>
+<li>
+<p>Test Case: <code>update u/Test-2</code><br>
+Expected: Successful update of username for account of user logged in. Status bar is updated with new username and reflects the time of the update.</p>
+</li>
+<li>
+<p>Test Case: `update  `<br>
+Expected: Error message indicating that no fields have been edited.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="listing-accounts-with-optional-tag-search"><a class="link" href="#listing-accounts-with-optional-tag-search">G.4.2. Listing Accounts (with optional Tag search)</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Listing all accounts</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Logged in. In Account Management View.</p>
+</li>
+<li>
+<p>Test Case: <code>list-a</code><br>
+Expected: Lists all accounts</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Listing accounts whose tags match given keyword(s)</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Logged in. In Account Management View.</p>
+</li>
+<li>
+<p>Test Case: <code>list-a admin</code><br>
+Expected: Lists all accounts with the admin tag</p>
+</li>
+<li>
+<p>Test Case: <code>list-a admin OC</code><br>
+Expected: Lists all accounts with the admin tag AND the OC tag. Accounts that only have either one of the keywords are not shown.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="finding-accounts-based-on-name-username"><a class="link" href="#finding-accounts-based-on-name-username">G.4.3. Finding Accounts based on Name/Username</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Finding accounts whose name or username matches given keyword(s)</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Logged in. In Account Management View.</p>
+</li>
+<li>
+<p>Test Case: <code>find-a alex ahmed</code><br>
+Expected: Account view will show all accounts matching either alex OR ahmed in their username or name.</p>
+</li>
+<li>
+<p>Test Case: `find-a `<br>
+Expected: Command usage error message shown. This command requires at least one keyword.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="account-management-admin"><a class="link" href="#account-management-admin">G.5. Account Management (Admin)</a></h3>
+<div class="paragraph">
+<p>This section details additional commands and command parameters available to administrators. Suffice to say, non admins cannot execute the following tests.</p>
+</div>
+<div class="sect3">
+<h4 id="updating-other-accounts"><a class="link" href="#updating-other-accounts">G.5.1. Updating Other Accounts</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Updating other accounts after a successful <code>find-a</code> or <code>list-a</code> command.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Logged in. In Account Management View. Logged in user is an admin. There are accounts in the account management view (either after using <code>find-a</code> or <code>list-a</code>).</p>
+</li>
+<li>
+<p>Test Case: <code>update 2 n/Someone</code><br>
+Expected: If there is a second person on the list, updates their name.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="add-tags-when-registering-and-updating"><a class="link" href="#add-tags-when-registering-and-updating">G.5.2. Add Tags when Registering and Updating</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adding tags during registration process or when performing update operation.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Logged in. In Account Management View. Logged in user is an admin. Add any additional prerequisites necessary for either the <code>register</code> or <code>update</code> command as previously covered.</p>
+</li>
+<li>
+<p>Test Case: <code>update 2 t/admin</code><br>
+Expected: If there is a second person on the list, updates their tag to include the admin tag. This makes that account an admin account.</p>
+</li>
+<li>
+<p>Test Case: <code>register n/Tester p/12345678 e/test@nus u/Test-1 w/password t/Admin</code><br>
+Expected: Registers a new admin account. New account with admin tag is populated at the bottom of the accounts list.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="deleting-a-person"><a class="link" href="#deleting-a-person">G.5.3. Deleting a person</a></h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2553,18 +2874,18 @@ Expected: The most recent window size and location is retained.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list.</p>
+<p>Prerequisites: Logged in. In Account Management View. Logged in user is an admin. List all persons using the <code>list-a</code> command.</p>
 </li>
 <li>
-<p>Test case: <code>delete 1</code><br>
-Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.</p>
+<p>Test case: <code>delete-a 1</code><br>
+Expected: First contact is deleted from the list. Details of the deleted account shown in the status message.</p>
 </li>
 <li>
-<p>Test case: <code>delete 0</code><br>
-Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.</p>
+<p>Test case: <code>delete-a 0</code><br>
+Expected: No account is deleted. Error details shown in the status message.</p>
 </li>
 <li>
-<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
+<p>Other incorrect commands to try: <code>delete-a</code>, <code>delete-a x</code> (where x is larger than the list size), <code>delete-a i</code> (where i is the index of the account currently logged in).<br>
 Expected: Similar to previous.</p>
 </li>
 </ol>
@@ -2573,25 +2894,9 @@ Expected: Similar to previous.</p>
 </ol>
 </div>
 </div>
-<div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">G.3. Saving data</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Dealing with missing/corrupted data files</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p><em>{explain how to simulate a missing/corrupted file and the expected behavior}</em></p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
 </div>
 <div class="sect2">
-<h3 id="creating-an-incident-report"><a class="link" href="#creating-an-incident-report">G.4. Creating an incident report</a></h3>
+<h3 id="creating-an-incident-report"><a class="link" href="#creating-an-incident-report">G.6. Creating an incident report</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2682,7 +2987,7 @@ Expected: Message "No vehicle available in this district!", for both auto and ma
 </div>
 </div>
 <div class="sect2">
-<h3 id="filling-an-incident-report"><a class="link" href="#filling-an-incident-report">G.5. Filling an incident report</a></h3>
+<h3 id="filling-an-incident-report"><a class="link" href="#filling-an-incident-report">G.7. Filling an incident report</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2777,7 +3082,7 @@ Expected: Message "No drafts present in the system" shown while the incident pan
 </div>
 </div>
 <div class="sect2">
-<h3 id="submitting-an-incident-report"><a class="link" href="#submitting-an-incident-report">G.6. Submitting an incident report</a></h3>
+<h3 id="submitting-an-incident-report"><a class="link" href="#submitting-an-incident-report">G.8. Submitting an incident report</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2853,7 +3158,7 @@ Expected: Message "Invalid command format!" is displayed along with command usag
 </div>
 </div>
 <div class="sect2">
-<h3 id="finding-incidents"><a class="link" href="#finding-incidents">G.7. Finding incidents</a></h3>
+<h3 id="finding-incidents"><a class="link" href="#finding-incidents">G.9. Finding incidents</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3077,7 +3382,7 @@ See help page for more information."</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-incidents"><a class="link" href="#listing-incidents">G.8. Listing incidents</a></h3>
+<h3 id="listing-incidents"><a class="link" href="#listing-incidents">G.10. Listing incidents</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3144,7 +3449,7 @@ See help page for more information."</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-submitted-incidents"><a class="link" href="#editing-submitted-incidents">G.9. Editing submitted incidents</a></h3>
+<h3 id="editing-submitted-incidents"><a class="link" href="#editing-submitted-incidents">G.11. Editing submitted incidents</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3203,7 +3508,7 @@ Expected: Message "Only the admin and the operator who filled in this report can
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-vehicles"><a class="link" href="#adding-vehicles">G.10. Adding vehicles</a></h3>
+<h3 id="adding-vehicles"><a class="link" href="#adding-vehicles">G.12. Adding vehicles</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3246,7 +3551,7 @@ Expected: Message "Invalid vehicle number! All vehicle numbers must follow the f
 </div>
 </div>
 <div class="sect2">
-<h3 id="finding-vehicles"><a class="link" href="#finding-vehicles">G.11. Finding vehicles</a></h3>
+<h3 id="finding-vehicles"><a class="link" href="#finding-vehicles">G.13. Finding vehicles</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3323,7 +3628,7 @@ Expected: Message "27 vehicles listed!", and vehicles with vehicle numbers conta
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-vehicles"><a class="link" href="#listing-vehicles">G.12. Listing vehicles</a></h3>
+<h3 id="listing-vehicles"><a class="link" href="#listing-vehicles">G.14. Listing vehicles</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3358,7 +3663,7 @@ Expected: Message "Listed all vehicles", and all vehicles in database will be li
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-vehicles"><a class="link" href="#deleting-vehicles">G.13. Deleting vehicles</a></h3>
+<h3 id="deleting-vehicles"><a class="link" href="#deleting-vehicles">G.15. Deleting vehicles</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3422,4 +3727,4 @@ Expected: Message "You must be an admin to perform this operation. Please see he
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 12:09:56 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 12:39:00 UTC</div></div></div></body></html>
