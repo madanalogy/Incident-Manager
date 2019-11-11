@@ -51,8 +51,11 @@
 <li><a href="#creating-an-incident-report">G.4. Creating an incident report</a></li>
 <li><a href="#filling-an-incident-report">G.5. Filling an incident report</a></li>
 <li><a href="#submitting-an-incident-report">G.6. Submitting an incident report</a></li>
-<li><a href="#finding-vehicles">G.7. Finding vehicles</a></li>
-<li><a href="#listing-vehicles">G.8. Listing vehicles</a></li>
+<li><a href="#editing-submitted-incidents">G.7. Editing Submitted Incidents</a></li>
+<li><a href="#adding-vehicles">G.8. Adding vehicles</a></li>
+<li><a href="#finding-vehicles">G.9. Finding vehicles</a></li>
+<li><a href="#listing-vehicles">G.10. Listing vehicles</a></li>
+<li><a href="#deleting-vehicles">G.11. Deleting vehicles</a></li>
 </ul>
 </li>
 </ul>
@@ -2661,7 +2664,109 @@ Expected: Message "Invalid command format!" is displayed along with command usag
 </div>
 </div>
 <div class="sect2">
-<h3 id="finding-vehicles"><a class="link" href="#finding-vehicles">G.7. Finding vehicles</a></h3>
+<h3 id="editing-submitted-incidents"><a class="link" href="#editing-submitted-incidents">G.7. Editing Submitted Incidents</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Attempting to execute <code>edit-i</code> without logging in</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User not logged in.</p>
+</li>
+<li>
+<p>Test case: <code>edit-i</code><br>
+Expected: Message "Only Register, Login, Exit and Help commands are availble. Please login to access other commands. See help page for more information."</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>edit-i</code> without any keywords</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>edit-i</code><br>
+Expected: Message "Listed all submitted incident reports that can be edited."</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>edit-i</code> with some keywords when logged into admin account</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>edit-i 1 dist/21</code><br>
+Expected: Message "Edited Incident: Incident #[ID]"</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>edit-i</code> with all keywords when logged into admin account</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>edit-i 1 dist/22 p/91234567 desc/This is an incident description.</code><br>
+Expected: Message "Edited Incident: Incident #[ID]"</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>edit-i</code> on incident not created by logged in non admin account.
+..Test case <code>edit-i 1</code><br>
+Expected: Message "Only the admin and the operator who filled in this report can edit the report."</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-vehicles"><a class="link" href="#adding-vehicles">G.8. Adding vehicles</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Attempting to execute <code>add-v</code> without logging in.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User not logged in.</p>
+</li>
+<li>
+<p>Test case: <code>add-v</code><br>
+Expected: Message "Only Register, Login, Exit, and Help commands are available. Please login to access other commands. See help page for more information."</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing 'add-v' with all valid inputs</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case : <code>add-v dist/2 vnum/SFD1356S vtype/Ambulance a/available</code><br>
+Expected: Message "New vehicle added: Ambulance Vehicle Number: SFD1356S District: 2 Availability: AVAILABLE"</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>add-v</code> with invalid vnum</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>add-v dist/2 vnum/1234 vtype/Patrol Car a/available</code><br>
+Expected: Message "Invalid vehicle number! All vehicle numbers must follow the format: ABC1234D"</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="finding-vehicles"><a class="link" href="#finding-vehicles">G.9. Finding vehicles</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2738,7 +2843,7 @@ Expected: Message "27 vehicles listed!", and vehicles with vehicle numbers conta
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-vehicles"><a class="link" href="#listing-vehicles">G.8. Listing vehicles</a></h3>
+<h3 id="listing-vehicles"><a class="link" href="#listing-vehicles">G.10. Listing vehicles</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2772,5 +2877,69 @@ Expected: Message "Listed all vehicles", and all vehicles in database will be li
 </ol>
 </div>
 </div>
+<div class="sect2">
+<h3 id="deleting-vehicles"><a class="link" href="#deleting-vehicles">G.11. Deleting vehicles</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Attempting to execute <code>delete-v</code> without logging in</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: User not logged in.</p>
+</li>
+<li>
+<p>Test case: <code>delete-v</code><br>
+Expected: Message "Only Register, Login, Exit, and Help commands are available. Please login to access other commands. See help page for more information."</p>
+</li>
+</ol>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 01:00:27 UTC</div></div></div></body></html>
+</li>
+<li>
+<p>Executing <code>delete-v</code> with an admin account and dispatched vehicle</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>delete-v 1</code><br>
+Expected: Message "You cannot delete a vehicle that is currently dispatched."</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>delete-v</code> with an admin account and non dispatched vehicle</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case:</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>edit-v 1 available</code></p>
+</li>
+<li>
+<p><code>delete-v 1</code><br>
+Expected: Message "Deleted Vehicle Patrol Car Vehicle Number: SFD3204V District: 1 Availability: AVAILABLE"</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Executing <code>delete-v</code> with a non admin account</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>delete-v 1</code><br>
+Expected: Message "You must be an admin to perform this operation. Please see help page for more info."</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 02:51:01 UTC</div></div></div></body></html>
