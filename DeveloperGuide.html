@@ -1366,106 +1366,6 @@ eg. <code>find-i self</code></p>
 <div class="sect3">
 <h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-how-user-keys-in-code-find-i-code-keywords"><a class="link" href="#aspect-how-user-keys-in-code-find-i-code-keywords">Aspect: How user keys in <code>find-i</code> keywords</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Current choice:</strong> Parse user input after flag (eg. <code>op\</code> or <code>desc\</code>)</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to implement.</p>
-</li>
-<li>
-<p>Cons: Have to parse keyword from command and flag, user has to follow style of flag for successful search.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative:</strong> Prompt user for search input</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Separates command from keyword for ease of reading and parsing.</p>
-</li>
-<li>
-<p>Cons: Difficult to implement multi-command execution.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-how-listing-all-incidents-is-called"><a class="link" href="#aspect-how-listing-all-incidents-is-called">Aspect: How listing all incidents is called</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Current choice:</strong> Utilise separate command <code>list-i</code></p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Intuitive to use.</p>
-</li>
-<li>
-<p>Cons: Similar code under different command, leading to code reuse.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative:</strong> Utilise <code>find-i</code> command (eg. <code>find-i unfiltered</code>)</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Less overlap in code.</p>
-</li>
-<li>
-<p>Cons: Unintuitive to the user as no search is being made, even more keywords to remember.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-whether-the-search-only-returns-full-word-matches"><a class="link" href="#aspect-whether-the-search-only-returns-full-word-matches">Aspect: Whether the search only returns full word matches</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Current choice:</strong> Search only returns full word matches</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Intuitive to use.</p>
-</li>
-<li>
-<p>Cons: Unable to return similar words eg. search for "desc/fire" does not return description containing "fires"</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative:</strong> Search returns all keyword-containing matches</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Able to account for similar words to be returned.</p>
-</li>
-<li>
-<p>Cons: Unintuitive to return certain longer words from certain searches eg. "desc/the" returns descriptions containing "weather"<br>
-Faster search as code is less inefficient</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
 <h5 id="aspect-how-multiple-keywords-with-the-same-prefixes-are-processed"><a class="link" href="#aspect-how-multiple-keywords-with-the-same-prefixes-are-processed">Aspect: How multiple keywords with the same prefixes are processed</a></h5>
 <div class="ulist">
 <ul>
@@ -1574,6 +1474,106 @@ Does not follow the <code>Command</code> interface abstracted from, in that mult
 </li>
 <li>
 <p>Cons: Breaks Model-View-Controller pattern.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-user-keys-in-code-find-i-code-keywords"><a class="link" href="#aspect-how-user-keys-in-code-find-i-code-keywords">Aspect: How user keys in <code>find-i</code> keywords</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Current choice:</strong> Parse user input after flag (eg. <code>op\</code> or <code>desc\</code>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: Have to parse keyword from command and flag, user has to follow style of flag for successful search.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative:</strong> Prompt user for search input</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Separates command from keyword for ease of reading and parsing.</p>
+</li>
+<li>
+<p>Cons: Difficult to implement multi-command execution.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-listing-all-incidents-is-called"><a class="link" href="#aspect-how-listing-all-incidents-is-called">Aspect: How listing all incidents is called</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Current choice:</strong> Utilise separate command <code>list-i</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Intuitive to use.</p>
+</li>
+<li>
+<p>Cons: Similar code under different command, leading to code reuse.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative:</strong> Utilise <code>find-i</code> command (eg. <code>find-i unfiltered</code>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Less overlap in code.</p>
+</li>
+<li>
+<p>Cons: Unintuitive to the user as no search is being made, even more keywords to remember.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-whether-the-search-only-returns-full-word-matches"><a class="link" href="#aspect-whether-the-search-only-returns-full-word-matches">Aspect: Whether the search only returns full word matches</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Current choice:</strong> Search only returns full word matches</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Intuitive to use.</p>
+</li>
+<li>
+<p>Cons: Unable to return similar words eg. search for "desc/fire" does not return description containing "fires"</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative:</strong> Search returns all keyword-containing matches</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Able to account for similar words to be returned.</p>
+</li>
+<li>
+<p>Cons: Unintuitive to return certain longer words from certain searches eg. "desc/the" returns descriptions containing "weather"<br>
+Faster search as code is less inefficient</p>
 </li>
 </ul>
 </div>
@@ -3422,4 +3422,4 @@ Expected: Message "You must be an admin to perform this operation. Please see he
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 06:04:26 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 08:09:08 UTC</div></div></div></body></html>

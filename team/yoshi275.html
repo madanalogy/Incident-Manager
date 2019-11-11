@@ -39,7 +39,7 @@
 </div>
 </li>
 <li>
-<p><strong>Major enhancement</strong>: Implemented <strong>initial Incident GUI layout</strong></p>
+<p><strong>Major enhancement</strong>: Implemented <strong>initial Incident GUI layout</strong> [<a href="https://github.com/AY1920S1-CS2103-T11-1/main/pull/59">#59</a>]</p>
 <div class="ulist">
 <ul>
 <li>
@@ -56,6 +56,19 @@
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Add Netlify bot to repo and add badge to README [<a href="https://github.com/AY1920S1-CS2103-T11-1/main/pull/18">#18</a>]</p>
+</li>
+<li>
+<p>Remove irrelevant Developer Guide sections [<a href="https://github.com/AY1920S1-CS2103-T11-1/main/pull/128">#128</a>]</p>
+</li>
+<li>
+<p>Make minor aesthetic and usability edits to the GUI [<a href="https://github.com/AY1920S1-CS2103-T11-1/main/pull/289">#289</a>]</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -81,15 +94,10 @@
 Format: <code>list-i</code></p>
 </div>
 <div class="paragraph">
-<p>Example usage and expected outcome:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/listIncidentsCommand.png" alt="listIncidentsCommand">
-</div>
+<p>Example usage of the <code>list-i</code> command returning all incidents within the system:
+image::listIncidentsCommand.png[width="500"]</p>
 </div>
 <div class="ulist">
-<div class="title">Fig X. The <code>list-i</code> command returns all incidents within the system.</div>
 <ul>
 <li>
 <p>The listing returns all incidents, inclusive of all incomplete drafts and complete drafts and submitted incident reports</p>
@@ -120,30 +128,28 @@ Lists all incidents whereby the operator name contains any of the given keywords
 <p>Accepts multiple search terms for the parameter, searching for any match with any search term</p>
 </li>
 <li>
-<p>Example of Successful Single Operator Search and Expected Outcome:</p>
+<p>Example of the <code>find-i</code> command with one word under parameter <code>op/</code>, returning all incidents whereby the operator name matches <code>alex</code> (case-insensitive):</p>
 </li>
 </ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/findIncidentsCommandWithOperatorParameter.png" alt="findIncidentsCommandWithOperatorParameter">
+<img src="../images/findIncidentsCommandWithOperatorParameter.png" alt="findIncidentsCommandWithOperatorParameter" width="500">
 </div>
 </div>
 <div class="ulist">
-<div class="title">Fig X. The <code>find-i</code> command has been called with one word under parameter <code>op\</code>, returning all incidents whereby the operator name matches <code>alex</code> (case-insensitive)</div>
 <ul>
 <li>
-<p>Example of Successful Multiple Operator Search and Expected Outcome:</p>
+<p>Example of the <code>find-i</code> command with multiple words under parameter <code>op/</code>, returning all incidents whereby the operator name matches <code>irfan</code> or <code>bernice</code> (case-insensitive):</p>
 </li>
 </ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/findIncidentsCommandWithOperatorsParameter.png" alt="findIncidentsCommandWithOperatorsParameter">
+<img src="../images/findIncidentsCommandWithOperatorsParameter.png" alt="findIncidentsCommandWithOperatorsParameter" width="500">
 </div>
 </div>
 <div class="paragraph">
-<div class="title">Fig X. The <code>find-i</code> command has been called multiple words under parameter <code>op\</code>, returning all incidents whereby the operator name matches <code>irfan</code> or <code>bernice</code> (case-insensitive)</div>
 <p><strong>By Description</strong><br>
 Format: <code>find-i desc/&lt;DESCRIPTION KEYWORD [MORE_KEYWORDS]&#8230;&#8203;&gt;</code><br>
 Lists all incidents whereby the incident description contains any the given keywords</p>
@@ -151,17 +157,16 @@ Lists all incidents whereby the incident description contains any the given keyw
 <div class="ulist">
 <ul>
 <li>
-<p>Example of Successful Usage and Expected Outcome:</p>
+<p>Example of the <code>find-i</code> command with parameter <code>desc/</code>, returning all incidents whereby the description contains either keyword <code>fire</code> or <code>arson</code>:</p>
 </li>
 </ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/findIncidentsCommandWithDescriptionParameter.png" alt="findIncidentsCommandWithDescriptionParameter">
+<img src="../images/findIncidentsCommandWithDescriptionParameter.png" alt="findIncidentsCommandWithDescriptionParameter" width="500">
 </div>
 </div>
 <div class="paragraph">
-<div class="title">Fig X. The <code>find-i</code> command has been called with parameter <code>desc\</code>, returning all incidents whereby the description contains either keyword <code>fire</code> or <code>arson</code></div>
 <p><strong>By ID</strong><br>
 Format: <code>find-i id/KEYWORD</code><br>
 Lists all incidents whereby the incident ID is an exact match with the given keyword</p>
@@ -172,17 +177,16 @@ Lists all incidents whereby the incident ID is an exact match with the given key
 <p>Requires an exact ID match, only accepts one ID</p>
 </li>
 <li>
-<p>Example of Successful Usage and Expected Outcome:</p>
+<p>Example of <code>find-i</code> command with parameter <code>id/</code> returning all incidents whereby the ID matches <code>0620150001</code> exactly:</p>
 </li>
 </ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/findIncidentsCommandWithIdParameter.png" alt="findIncidentsCommandWithIdParameter">
+<img src="../images/findIncidentsCommandWithIdParameter.png" alt="findIncidentsCommandWithIdParameter" width="500">
 </div>
 </div>
 <div class="paragraph">
-<div class="title">Fig X. The <code>find-i</code> command has been called with parameter <code>id\</code>, returning all incidents whereby the ID matches <code>0620150001</code> exactly</div>
 <p><strong>Self-Search</strong><br>
 Format: <code>find-i self</code><br>
 Lists all incidents whereby the operator name matches the logged-in user&#8217;s name.</p>
@@ -190,17 +194,16 @@ Lists all incidents whereby the operator name matches the logged-in user&#8217;s
 <div class="ulist">
 <ul>
 <li>
-<p>Example of Successful Usage and Expected Outcome:</p>
+<p>Example of executing <code>find-i self</code> to list all incidents:</p>
 </li>
 </ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/findIncidentsCommandWithSelfParameter.png" alt="findIncidentsCommandWithSelfParameter">
+<img src="../images/findIncidentsCommandWithSelfParameter.png" alt="findIncidentsCommandWithSelfParameter" width="500">
 </div>
 </div>
 <div class="ulist">
-<div class="title">Fig X. Executing <code>find-i self</code> lists all completed drafts ready for submission</div>
 <ul>
 <li>
 <p>Requires an exact name match with the logged-in user&#8217;s name</p>
@@ -212,7 +215,7 @@ Lists all incidents whereby the operator name matches the logged-in user&#8217;s
 <div class="ulist">
 <ul>
 <li>
-<p>The search is case insensitive. e.g <code>dave</code> will match <code>Dave</code></p>
+<p>The search is case insensitive and punctuation insensitive. e.g <code>dave</code> and <code>Dav-e</code> will match <code>Dave</code></p>
 </li>
 <li>
 <p>The search returns all incidents found regardless of state (incomplete and complete drafts, submitted incidents)</p>
@@ -255,6 +258,49 @@ Returns any incidents whereby the operator&#8217;s name contains either 'Alex' o
 Returns any incidents whereby the operator&#8217;s name matches the logged-in operator&#8217;s name</p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If multiple keywords of the same prefix are provided by user, the command will take the last valid parameter of each prefix.<br>
+For example <code>find-i desc/arson desc/fire op/alex op/charlotte</code> is equivalent to <code>find-i desc/fire op/charlotte</code>.<br>
+Rationale: user need not waste time backspacing if an input was keyed in wrongly.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="future-extensions"><a class="link" href="#future-extensions">Future Extensions</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Find Command filters search results by the following:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Incident status</p>
+</li>
+<li>
+<p>DateTime</p>
+</li>
+<li>
+<p>District number of Incident</p>
+</li>
+<li>
+<p>Vehicle Type of Vehicle involved</p>
+</li>
+<li>
+<p>Vehicle Number of Vehicle involved</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -454,106 +500,6 @@ eg. <code>find-i self</code></p>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-how-user-keys-in-code-find-i-code-keywords"><a class="link" href="#aspect-how-user-keys-in-code-find-i-code-keywords">Aspect: How user keys in <code>find-i</code> keywords</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Current choice:</strong> Parse user input after flag (eg. <code>op\</code> or <code>desc\</code>)</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to implement.</p>
-</li>
-<li>
-<p>Cons: Have to parse keyword from command and flag, user has to follow style of flag for successful search.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative:</strong> Prompt user for search input</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Separates command from keyword for ease of reading and parsing.</p>
-</li>
-<li>
-<p>Cons: Difficult to implement multi-command execution.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-how-listing-all-incidents-is-called"><a class="link" href="#aspect-how-listing-all-incidents-is-called">Aspect: How listing all incidents is called</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Current choice:</strong> Utilise separate command <code>list-i</code></p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Intuitive to use.</p>
-</li>
-<li>
-<p>Cons: Similar code under different command, leading to code reuse.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative:</strong> Utilise <code>find-i</code> command (eg. <code>find-i unfiltered</code>)</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Less overlap in code.</p>
-</li>
-<li>
-<p>Cons: Unintuitive to the user as no search is being made, even more keywords to remember.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-whether-the-search-only-returns-full-word-matches"><a class="link" href="#aspect-whether-the-search-only-returns-full-word-matches">Aspect: Whether the search only returns full word matches</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Current choice:</strong> Search only returns full word matches</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Intuitive to use.</p>
-</li>
-<li>
-<p>Cons: Unable to return similar words eg. search for "desc/fire" does not return description containing "fires"</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative:</strong> Search returns all keyword-containing matches</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Able to account for similar words to be returned.</p>
-</li>
-<li>
-<p>Cons: Unintuitive to return certain longer words from certain searches eg. "desc/the" returns descriptions containing "weather"<br>
-Faster search as code is less inefficient</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
 <h5 id="aspect-how-multiple-keywords-with-the-same-prefixes-are-processed"><a class="link" href="#aspect-how-multiple-keywords-with-the-same-prefixes-are-processed">Aspect: How multiple keywords with the same prefixes are processed</a></h5>
 <div class="ulist">
 <ul>
@@ -669,7 +615,107 @@ Does not follow the <code>Command</code> interface abstracted from, in that mult
 </ul>
 </div>
 </div>
+<div class="sect4">
+<h5 id="aspect-how-user-keys-in-code-find-i-code-keywords"><a class="link" href="#aspect-how-user-keys-in-code-find-i-code-keywords">Aspect: How user keys in <code>find-i</code> keywords</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Current choice:</strong> Parse user input after flag (eg. <code>op\</code> or <code>desc\</code>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: Have to parse keyword from command and flag, user has to follow style of flag for successful search.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative:</strong> Prompt user for search input</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Separates command from keyword for ease of reading and parsing.</p>
+</li>
+<li>
+<p>Cons: Difficult to implement multi-command execution.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-listing-all-incidents-is-called"><a class="link" href="#aspect-how-listing-all-incidents-is-called">Aspect: How listing all incidents is called</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Current choice:</strong> Utilise separate command <code>list-i</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Intuitive to use.</p>
+</li>
+<li>
+<p>Cons: Similar code under different command, leading to code reuse.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative:</strong> Utilise <code>find-i</code> command (eg. <code>find-i unfiltered</code>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Less overlap in code.</p>
+</li>
+<li>
+<p>Cons: Unintuitive to the user as no search is being made, even more keywords to remember.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-whether-the-search-only-returns-full-word-matches"><a class="link" href="#aspect-whether-the-search-only-returns-full-word-matches">Aspect: Whether the search only returns full word matches</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Current choice:</strong> Search only returns full word matches</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Intuitive to use.</p>
+</li>
+<li>
+<p>Cons: Unable to return similar words eg. search for "desc/fire" does not return description containing "fires"</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative:</strong> Search returns all keyword-containing matches</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Able to account for similar words to be returned.</p>
+</li>
+<li>
+<p>Cons: Unintuitive to return certain longer words from certain searches eg. "desc/the" returns descriptions containing "weather"<br>
+Faster search as code is less inefficient</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 06:04:26 UTC</div></div></div></body></html>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 08:09:08 UTC</div></div></div></body></html>

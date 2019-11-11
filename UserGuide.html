@@ -859,15 +859,10 @@ Function: Outputs a list of timestamps and a brief summary of changes made to th
 Format: <code>list-i</code></p>
 </div>
 <div class="paragraph">
-<p>Example usage and expected outcome:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/listIncidentsCommand.png" alt="listIncidentsCommand">
-</div>
+<p>Example usage of the <code>list-i</code> command returning all incidents within the system:
+image::listIncidentsCommand.png[width="500"]</p>
 </div>
 <div class="ulist">
-<div class="title">Fig X. The <code>list-i</code> command returns all incidents within the system.</div>
 <ul>
 <li>
 <p>The listing returns all incidents, inclusive of all incomplete drafts and complete drafts and submitted incident reports</p>
@@ -898,30 +893,28 @@ Lists all incidents whereby the operator name contains any of the given keywords
 <p>Accepts multiple search terms for the parameter, searching for any match with any search term</p>
 </li>
 <li>
-<p>Example of Successful Single Operator Search and Expected Outcome:</p>
+<p>Example of the <code>find-i</code> command with one word under parameter <code>op/</code>, returning all incidents whereby the operator name matches <code>alex</code> (case-insensitive):</p>
 </li>
 </ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/findIncidentsCommandWithOperatorParameter.png" alt="findIncidentsCommandWithOperatorParameter">
+<img src="images/findIncidentsCommandWithOperatorParameter.png" alt="findIncidentsCommandWithOperatorParameter" width="500">
 </div>
 </div>
 <div class="ulist">
-<div class="title">Fig X. The <code>find-i</code> command has been called with one word under parameter <code>op\</code>, returning all incidents whereby the operator name matches <code>alex</code> (case-insensitive)</div>
 <ul>
 <li>
-<p>Example of Successful Multiple Operator Search and Expected Outcome:</p>
+<p>Example of the <code>find-i</code> command with multiple words under parameter <code>op/</code>, returning all incidents whereby the operator name matches <code>irfan</code> or <code>bernice</code> (case-insensitive):</p>
 </li>
 </ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/findIncidentsCommandWithOperatorsParameter.png" alt="findIncidentsCommandWithOperatorsParameter">
+<img src="images/findIncidentsCommandWithOperatorsParameter.png" alt="findIncidentsCommandWithOperatorsParameter" width="500">
 </div>
 </div>
 <div class="paragraph">
-<div class="title">Fig X. The <code>find-i</code> command has been called multiple words under parameter <code>op\</code>, returning all incidents whereby the operator name matches <code>irfan</code> or <code>bernice</code> (case-insensitive)</div>
 <p><strong>By Description</strong><br>
 Format: <code>find-i desc/&lt;DESCRIPTION KEYWORD [MORE_KEYWORDS]&#8230;&#8203;&gt;</code><br>
 Lists all incidents whereby the incident description contains any the given keywords</p>
@@ -929,17 +922,16 @@ Lists all incidents whereby the incident description contains any the given keyw
 <div class="ulist">
 <ul>
 <li>
-<p>Example of Successful Usage and Expected Outcome:</p>
+<p>Example of the <code>find-i</code> command with parameter <code>desc/</code>, returning all incidents whereby the description contains either keyword <code>fire</code> or <code>arson</code>:</p>
 </li>
 </ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/findIncidentsCommandWithDescriptionParameter.png" alt="findIncidentsCommandWithDescriptionParameter">
+<img src="images/findIncidentsCommandWithDescriptionParameter.png" alt="findIncidentsCommandWithDescriptionParameter" width="500">
 </div>
 </div>
 <div class="paragraph">
-<div class="title">Fig X. The <code>find-i</code> command has been called with parameter <code>desc\</code>, returning all incidents whereby the description contains either keyword <code>fire</code> or <code>arson</code></div>
 <p><strong>By ID</strong><br>
 Format: <code>find-i id/KEYWORD</code><br>
 Lists all incidents whereby the incident ID is an exact match with the given keyword</p>
@@ -950,17 +942,16 @@ Lists all incidents whereby the incident ID is an exact match with the given key
 <p>Requires an exact ID match, only accepts one ID</p>
 </li>
 <li>
-<p>Example of Successful Usage and Expected Outcome:</p>
+<p>Example of <code>find-i</code> command with parameter <code>id/</code> returning all incidents whereby the ID matches <code>0620150001</code> exactly:</p>
 </li>
 </ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/findIncidentsCommandWithIdParameter.png" alt="findIncidentsCommandWithIdParameter">
+<img src="images/findIncidentsCommandWithIdParameter.png" alt="findIncidentsCommandWithIdParameter" width="500">
 </div>
 </div>
 <div class="paragraph">
-<div class="title">Fig X. The <code>find-i</code> command has been called with parameter <code>id\</code>, returning all incidents whereby the ID matches <code>0620150001</code> exactly</div>
 <p><strong>Self-Search</strong><br>
 Format: <code>find-i self</code><br>
 Lists all incidents whereby the operator name matches the logged-in user&#8217;s name.</p>
@@ -968,17 +959,16 @@ Lists all incidents whereby the operator name matches the logged-in user&#8217;s
 <div class="ulist">
 <ul>
 <li>
-<p>Example of Successful Usage and Expected Outcome:</p>
+<p>Example of executing <code>find-i self</code> to list all incidents:</p>
 </li>
 </ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/findIncidentsCommandWithSelfParameter.png" alt="findIncidentsCommandWithSelfParameter">
+<img src="images/findIncidentsCommandWithSelfParameter.png" alt="findIncidentsCommandWithSelfParameter" width="500">
 </div>
 </div>
 <div class="ulist">
-<div class="title">Fig X. Executing <code>find-i self</code> lists all completed drafts ready for submission</div>
 <ul>
 <li>
 <p>Requires an exact name match with the logged-in user&#8217;s name</p>
@@ -990,7 +980,7 @@ Lists all incidents whereby the operator name matches the logged-in user&#8217;s
 <div class="ulist">
 <ul>
 <li>
-<p>The search is case insensitive. e.g <code>dave</code> will match <code>Dave</code></p>
+<p>The search is case insensitive and punctuation insensitive. e.g <code>dave</code> and <code>Dav-e</code> will match <code>Dave</code></p>
 </li>
 <li>
 <p>The search returns all incidents found regardless of state (incomplete and complete drafts, submitted incidents)</p>
@@ -1033,6 +1023,49 @@ Returns any incidents whereby the operator&#8217;s name contains either 'Alex' o
 Returns any incidents whereby the operator&#8217;s name matches the logged-in operator&#8217;s name</p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If multiple keywords of the same prefix are provided by user, the command will take the last valid parameter of each prefix.<br>
+For example <code>find-i desc/arson desc/fire op/alex op/charlotte</code> is equivalent to <code>find-i desc/fire op/charlotte</code>.<br>
+Rationale: user need not waste time backspacing if an input was keyed in wrongly.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="future-extensions"><a class="link" href="#future-extensions">3.16.1. Future Extensions</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Find Command filters search results by the following:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Incident status</p>
+</li>
+<li>
+<p>DateTime</p>
+</li>
+<li>
+<p>District number of Incident</p>
+</li>
+<li>
+<p>Vehicle Type of Vehicle involved</p>
+</li>
+<li>
+<p>Vehicle Number of Vehicle involved</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1585,4 +1618,4 @@ e.g. <code>find-v dist/1 2 3</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 06:04:26 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 08:09:08 UTC</div></div></div></body></html>
